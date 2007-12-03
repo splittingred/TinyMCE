@@ -19,4 +19,3 @@ $TinyMCE->addLang('simple_chinese-gb2312','zh_cn');
 $TinyMCE->addLang('spanish','es');
 $TinyMCE->addLang('svenska','sv');
 $TinyMCE->addLang('svenska-utf8','sv');
-?>
