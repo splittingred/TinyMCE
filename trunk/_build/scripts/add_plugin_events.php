@@ -23,4 +23,3 @@ if ($pluginid= $object->get('id')) {
     unset($pluginEvent);
 }
 return $success;
-?>

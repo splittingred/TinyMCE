@@ -1,12 +1,15 @@
-/*
+<?php
+/**
  * TinyMCE RichText Editor Plugin 
- * Written By Jeff Whitfield - September 9, 2005
- * Modified On By Shaun McCormick - October 22, 2007
  *
- * Version 2.0.9
- *
- * Events: OnRichTextEditorInit, OnRichTextEditorRegister, OnInterfaceSettingsRender
- *
+ * Events:  OnRichTextEditorInit, OnRichTextEditorRegister,
+ * OnInterfaceSettingsRender
+ * 
+ * @author Jeff Whitfield 
+ * @author Shaun McCormick <splittingred@gmail.com>
+ * @created 2005/09/09
+ * @modified 2007/10/22
+ * @version 2.2.0
  */
 
 include_once $modx->config['base_path'].'assets/plugins/tinymce/tinymce.class.php';
@@ -26,7 +29,8 @@ include_once $modx->config['base_path'].'assets/plugins/tinymce/tinymce.lang.php
 $e = &$modx->Event; 
 switch ($e->name) { 
 	case 'OnRichTextEditorRegister': // register only for backend
-		$e->output('TinyMCE');
+		$output = $TinyMCE->load('OnRichTextEditorRegister');
+        $e->output($output);
 		break;
 
 	case 'OnRichTextEditorInit': 
@@ -35,7 +39,7 @@ switch ($e->name) {
 			if(isset($forfrontend)||$modx->isFrontend()){
 				$frontend_language = isset($modx->config['fe_editor_lang']) ? $modx->config['fe_editor_lang']:'';
 				
-				$html = $TinyMCE->getScript(array(
+				$html = $TinyMCE->load('OnRichTextEditorInit',array(
 					'path' => $tinyPath,
 					'element_list' => $elementList,
 					'theme' => $modx->config['tinymce_editor_theme'],
@@ -68,7 +72,7 @@ switch ($e->name) {
 				));
 				
 			} else {
-				$html = $TinyMCE->getScript(array(
+				$html = $TinyMCE->load('OnRichTextEditorInit',array(
 					'path' => $tinyPath,
 					'element_list' => $elementList,
 					'theme' => $modx->config['tinymce_editor_theme'],
@@ -104,7 +108,7 @@ switch ($e->name) {
 		break;
 
 	case 'OnInterfaceSettingsRender':		
-		$html = $TinyMCE->getSettings(array(
+		$html = $TinyMCE->load('OnInterfaceSettingsRender',array(
 			'path' => $tinyPath,
 			'displayStyle' => $displayStyle,
 		));
