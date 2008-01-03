@@ -6,13 +6,18 @@ class TinyMCE {
      * @var array $_langs A collection of languages.
      * @access private
      */
-	var $_langs;
+	var $_langs = array();
+    
+    /**
+     * @var array $config The configuration array for TinyMCE.
+     * @access private
+     */
+    var $config = array();
 
     /**#@+
      * The TinyMCE constructor.
      *
      * @param modX $modx A reference to the modX constructor.
-     * @param array $config A configuration array.
      */
 	function TinyMCE(&$modx) {
 		$this->__construct(&$modx);
@@ -24,31 +29,71 @@ class TinyMCE {
     /**#@-*/
 
     /**
+     * Loads language strings.
+     * @return array The lexicon merged with the MODx core lexicon.
+     */
+    function _loadLang() {
+        $_lang = array();
+        $f = $this->config['path'].'/lang/'.$this->config['language'].'.inc.php';
+        if (file_exists($f)) {
+            @include_once($f);
+        } else {
+            // load english strings if no other language found
+            $f = $this->config['path'].'/lang/english.inc.php';
+            @include_once($f);
+        }
+        if (!is_array($this->modx->lexicon)) $this->modx->lexicon = array();
+        $this->modx->lexicon = array_merge($this->modx->lexicon,$_lang);
+        return $this->modx->lexicon;
+    }
+    
+    /**
+     * Loads the correct event context
+     * @param string $event The event to load by
+     * @param array $config A configuration array.
+     */
+    function load($event = '',$config = array()) {
+        $config = array_merge(array(
+            'path' => dirname(__FILE__).'/',
+            'language' => $this->modx->config['manager_language'],      
+        ),$config);
+        $config = array_merge($this->modx->config,$config);
+        $this->config = $config;
+        $this->_loadLang();
+        
+        switch ($event) {
+            case 'OnRichTextEditorRegister':
+                return 'TinyMCE';
+                break;
+            case 'OnInterfaceSettingsRender':
+                return $this->getSettings();
+                break;
+            case 'OnRichTextEditorInit':
+                return $this->getScript();
+                break;
+        }
+    }
+
+    /**
      * Renders the TinyMCE settings.
      * @access public
      * @param array $config An array of configuration parameters.
      */
-	function getSettings($config) {
-		// language settings
-        $_lang = array();
-		@include_once $config['path'].'/lang/'.$this->modx->config['manager_language'].'.inc.php';
-        $this->modx->lexicon = array_merge($this->modx->lexicon,$_lang);
-
+	function getSettings() {
 		$arrThemes = array(
 			'simple' => $this->modx->lexicon['tinymce_theme_simple'],
 			'advanced' => $this->modx->lexicon['tinymce_theme_advanced'],
 			'editor' => $this->modx->lexicon['tinymce_theme_editor'],
 			'custom' => $this->modx->lexicon['tinymce_theme_custom'],
 		);
-		$config = array_merge($this->modx->config,$config);
-		$config['themes'] = $arrThemes;
-		$config['display'] = $config['use_editor'] == 1 ? $config['displayStyle'] : 'none';
-		$config['css'] = isset($config['tinymce_css_selectors']) ? htmlspecialchars($config['tinymce_css_selectors']) : '';
+		$this->config['themes'] = $arrThemes;
+		$this->config['display'] = $this->config['use_editor'] == 1 ? $this->config['displayStyle'] : 'none';
+		$this->config['css'] = isset($this->config['tinymce_css_selectors']) ? htmlspecialchars($this->config['tinymce_css_selectors']) : '';
 
-		$config['plugins'] = $config['tinymce_custom_plugins'];
-		$this->modx->smarty->assign('config',$config);
+		$this->config['plugins'] = $this->config['tinymce_custom_plugins'];
+		$this->modx->smarty->assign('config',$this->config);
 		$this->modx->smarty->assign('_lang',$this->modx->lexicon);
-		return $this->modx->smarty->fetch($config['path'].'/templates/settings.tpl');
+		return $this->modx->smarty->fetch($this->config['path'].'/templates/settings.tpl');
 	}
 
     /**
@@ -56,58 +101,55 @@ class TinyMCE {
      * @access public
      * @param array $config An array of configuration parameters.
      */
-	function getScript($config) {
-		if (!is_array($config)) $config = array();
-
-		$config = array_merge($this->modx->config,$config);
-		$theme = $config['theme'] != '' ? $config['theme'] : 'simple';
+	function getScript() {
+		$theme = $this->config['theme'] != '' ? $this->config['theme'] : 'simple';
 
 		if ($theme == 'editor' || $theme == 'custom') {
 			$tinyTheme = 'advanced';
-			if($theme == 'editor' || ($theme == 'custom' && (empty($config['plugins']) || empty($config['buttons1'])))) {
-				$config['formats'] = "p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address";
-				$config['plugins'] = "text;style,advimage,advlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media";
-				$config['buttons1'] = "undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,link,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help";
-				$config['buttons2'] = "bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops";
-				$config['buttons3'] = '';
-				$config['buttons4'] = '';
+			if($theme == 'editor' || ($theme == 'custom' && (empty($this->config['plugins']) || empty($this->config['buttons1'])))) {
+				$this->config['formats'] = "p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address";
+				$this->config['plugins'] = "text;style,advimage,advlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media";
+				$this->config['buttons1'] = "undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,link,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help";
+				$this->config['buttons2'] = "bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops";
+				$this->config['buttons3'] = '';
+				$this->config['buttons4'] = '';
 		    }
 		} else {
 			$tinyTheme = $theme;
 		}
 
-		$config['tinyTheme'] = $tinyTheme;
-		$config['theme'] = $theme;
+		$this->config['tinyTheme'] = $tinyTheme;
+		$this->config['theme'] = $theme;
 
 		// Set relative URL options
-		switch($config['path_options']){
+		switch ($this->config['path_options']) {
 			case 'rootrelative':
-				$config['relative_urls'] = false;
-				$config['remove_script_host'] = true;
+				$this->config['relative_urls'] = false;
+				$this->config['remove_script_host'] = true;
 			break;
 
 			case 'docrelative':
-				$config['relative_urls'] = true;
-				$config['document_base_url'] = $config['base_url'];
-				$config['remove_script_host'] = true;
+				$this->config['relative_urls'] = true;
+				$this->config['document_base_url'] = $this->config['base_url'];
+				$this->config['remove_script_host'] = true;
 			break;
 
 			case 'fullpathurl':
-				$config['relative_urls'] = false;
-				$config['remove_script_host'] = false;
+				$this->config['relative_urls'] = false;
+				$this->config['remove_script_host'] = false;
 			break;
 
 			default:
-				$config['relative_urls'] = true;
-				$config['document_base_url'] = $config['base_url'];
-				$config['remove_script_host'] = true;
+				$this->config['relative_urls'] = true;
+				$this->config['document_base_url'] = $this->config['base_url'];
+				$this->config['remove_script_host'] = true;
 		}
 
-		$scriptfile = ((!$config['frontend'] && $config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
+		$scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
 
 		$this->modx->smarty->assign('scriptfile',$scriptfile);
-		$this->modx->smarty->assign('config',$config);
-		$script = $this->modx->smarty->fetch($config['path'].'/templates/script.tpl');
+		$this->modx->smarty->assign('config',$this->config);
+		$script = $this->modx->smarty->fetch($this->config['path'].'/templates/script.tpl');
 
 		return $script;
 	}
