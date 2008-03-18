@@ -27,9 +27,14 @@ $sources= array (
 
 // get the source from the actual snippet in your database
 // [alternative] you could also manually create the object, grabbing the source from a file
-$c= $modx->getObject('modPlugin', array ('name' => 'TinyMCE'));
+$c= $modx->newObject('modPlugin');
+$c->set('name', 'TinyMCE');
+$c->set('description', 'TinyMCE 2.0.9rc2 plugin for MODx 0.9.7');
+$c->set('plugincode', file_get_contents($sources['root'] . 'tinymce.plugin.php'));
 $c->set('category', 0);
-$vehicle = $builder->createVehicle($c);
+
+$attributes= array(XPDO_TRANSPORT_UNIQUE_KEY => 'name');
+$vehicle = $builder->createVehicle($c, $attributes);
 $vehicle->resolve('php',array(
 	'source' => dirname(__FILE__) . '/scripts/add_plugin_events.php',
 ));
@@ -37,8 +42,8 @@ $vehicle->resolve('file',array(
     'source' => $sources['assets'] . 'plugins/tinymce',
     'target' => "return MODX_ASSETS_PATH . 'plugins/';",
 ));
-$vehicle->setUniqueKey('name');
 $builder->putVehicle($vehicle);
+
 $builder->pack();
 
 $mtime= microtime();
