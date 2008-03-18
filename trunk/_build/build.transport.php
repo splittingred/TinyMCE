@@ -22,6 +22,7 @@ $builder = new modPackageBuilder($modx);
 $builder->create('tinymce','2.0.9','rc2');
 
 $sources= array (
+    'root' => dirname(dirname(__FILE__)) . '/',
     'assets' => dirname(dirname(__FILE__)) . '/assets/'
 );
 
