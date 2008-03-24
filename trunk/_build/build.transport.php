@@ -22,8 +22,9 @@ $builder = new modPackageBuilder($modx);
 $builder->create('tinymce','2.0.9','rc2');
 
 $sources= array (
+    'assets' => dirname(dirname(__FILE__)) . '/assets/',
+    'lang' => dirname(dirname(__FILE__)) . '/lang/',
     'root' => dirname(dirname(__FILE__)) . '/',
-    'assets' => dirname(dirname(__FILE__)) . '/assets/'
 );
 
 // get the source from the actual snippet in your database
@@ -42,6 +43,10 @@ $vehicle->resolve('php',array(
 $vehicle->resolve('file',array(
     'source' => $sources['assets'] . 'plugins/tinymce',
     'target' => "return MODX_ASSETS_PATH . 'plugins/';",
+));
+$vehicle->resolve('file',array(
+    'source' => $sources['lang'],
+    'target' => "return MODX_MANAGER_PATH . 'includes/';",
 ));
 $builder->putVehicle($vehicle);
 

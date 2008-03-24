@@ -34,17 +34,8 @@ class TinyMCE {
      */
     function _loadLang() {
         $_lang = array();
-        $f = $this->config['path'].'/lang/'.$this->config['language'].'.inc.php';
-        if (file_exists($f)) {
-            @include_once($f);
-        } else {
-            // load english strings if no other language found
-            $f = $this->config['path'].'/lang/english.inc.php';
-            @include_once($f);
-        }
-        if (!is_array($this->modx->lexicon)) $this->modx->lexicon = array();
-        $this->modx->lexicon = array_merge($this->modx->lexicon,$_lang);
-        return $this->modx->lexicon;
+        $this->modx->lexicon->load('tinymce.default');
+        return $this->modx->lexicon->fetch();
     }
     
     /**
@@ -81,10 +72,10 @@ class TinyMCE {
      */
 	function getSettings() {
 		$arrThemes = array(
-			'simple' => $this->modx->lexicon['tinymce_theme_simple'],
-			'advanced' => $this->modx->lexicon['tinymce_theme_advanced'],
-			'editor' => $this->modx->lexicon['tinymce_theme_editor'],
-			'custom' => $this->modx->lexicon['tinymce_theme_custom'],
+			'simple' => $this->modx->lexicon('tinymce_theme_simple'),
+			'advanced' => $this->modx->lexicon('tinymce_theme_advanced'),
+			'editor' => $this->modx->lexicon('tinymce_theme_editor'),
+			'custom' => $this->modx->lexicon('tinymce_theme_custom'),
 		);
 		$this->config['themes'] = $arrThemes;
 		$this->config['display'] = $this->config['use_editor'] == 1 ? $this->config['displayStyle'] : 'none';
@@ -92,7 +83,7 @@ class TinyMCE {
 
 		$this->config['plugins'] = $this->config['tinymce_custom_plugins'];
 		$this->modx->smarty->assign('config',$this->config);
-		$this->modx->smarty->assign('_lang',$this->modx->lexicon);
+		$this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
 		return $this->modx->smarty->fetch($this->config['path'].'/templates/settings.tpl');
 	}
 
