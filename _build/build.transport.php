@@ -23,7 +23,7 @@ $builder->create('tinymce','2.0.9','rc2');
 
 $sources= array (
     'assets' => dirname(dirname(__FILE__)) . '/assets/',
-    'lang' => dirname(dirname(__FILE__)) . '/lang/',
+    'lang' => dirname(dirname(__FILE__)) . '/lexicon/',
     'root' => dirname(dirname(__FILE__)) . '/',
 );
 
@@ -46,7 +46,7 @@ $vehicle->resolve('file',array(
 ));
 $vehicle->resolve('file',array(
     'source' => $sources['lang'],
-    'target' => "return MODX_MANAGER_PATH . 'includes/';",
+    'target' => "return MODX_CORE_PATH;",
 ));
 $builder->putVehicle($vehicle);
 
