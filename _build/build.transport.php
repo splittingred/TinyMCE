@@ -35,7 +35,11 @@ $c->set('description', 'TinyMCE 2.0.9rc2 plugin for MODx 0.9.7');
 $c->set('plugincode', file_get_contents($sources['root'] . 'tinymce.plugin.php'));
 $c->set('category', 0);
 
-$attributes= array(XPDO_TRANSPORT_UNIQUE_KEY => 'name');
+$attributes= array(
+    XPDO_TRANSPORT_UNIQUE_KEY => 'name',
+    XPDO_TRANSPORT_PRESERVE_KEYS => true,
+    XPDO_TRANSPORT_UPDATE_OBJECT => true,
+);
 $vehicle = $builder->createVehicle($c, $attributes);
 $vehicle->resolve('php',array(
 	'source' => dirname(__FILE__) . '/scripts/add_plugin_events.php',
