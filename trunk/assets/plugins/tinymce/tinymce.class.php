@@ -33,7 +33,6 @@ class TinyMCE {
      * @return array The lexicon merged with the MODx core lexicon.
      */
     function _loadLang() {
-        $_lang = array();
         $this->modx->lexicon->addDirectory($this->config['path'].'lexicon/','tinymce');
         $this->modx->lexicon->load('tinymce:default');
         return $this->modx->lexicon->fetch();
