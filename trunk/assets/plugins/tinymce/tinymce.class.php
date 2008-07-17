@@ -7,7 +7,7 @@ class TinyMCE {
      * @access private
      */
 	var $_langs = array();
-    
+
     /**
      * @var array $config The configuration array for TinyMCE.
      * @access private
@@ -34,10 +34,11 @@ class TinyMCE {
      */
     function _loadLang() {
         $_lang = array();
-        $this->modx->lexicon->load('tinymce.default');
+        $this->modx->lexicon->addDirectory($this->config['path'].'lexicon/','tinymce');
+        $this->modx->lexicon->load('tinymce:default');
         return $this->modx->lexicon->fetch();
     }
-    
+
     /**
      * Loads the correct event context
      * @param string $event The event to load by
@@ -46,12 +47,12 @@ class TinyMCE {
     function load($event = '',$config = array()) {
         $config = array_merge(array(
             'path' => dirname(__FILE__).'/',
-            'language' => $this->modx->config['manager_language'],      
+            'language' => $this->modx->config['manager_language'],
         ),$config);
         $config = array_merge($this->modx->config,$config);
         $this->config = $config;
         $this->_loadLang();
-        
+
         switch ($event) {
             case 'OnRichTextEditorRegister':
                 return 'TinyMCE';
