@@ -1,5 +1,4 @@
 <?php
-
 $mtime = microtime();
 $mtime = explode(" ", $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -19,11 +18,10 @@ $modx->initialize('mgr');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->create('tinymce','2.0.9','rc2');
+$builder->create('tinymce','2.1.0','alpha');
 
 $sources= array (
     'assets' => dirname(dirname(__FILE__)) . '/assets/',
-    'lang' => dirname(dirname(__FILE__)) . '/lexicon/',
     'root' => dirname(dirname(__FILE__)) . '/',
 );
 
@@ -31,7 +29,7 @@ $sources= array (
 // [alternative] you could also manually create the object, grabbing the source from a file
 $c= $modx->newObject('modPlugin');
 $c->set('name', 'TinyMCE');
-$c->set('description', 'TinyMCE 2.0.9rc2 plugin for MODx 0.9.7');
+$c->set('description', 'TinyMCE 2.1.0-alpha plugin for MODx Revolution 2.0.0');
 $c->set('plugincode', file_get_contents($sources['root'] . 'tinymce.plugin.php'));
 $c->set('category', 0);
 
@@ -47,10 +45,6 @@ $vehicle->resolve('php',array(
 $vehicle->resolve('file',array(
     'source' => $sources['assets'] . 'plugins/tinymce',
     'target' => "return MODX_ASSETS_PATH . 'plugins/';",
-));
-$vehicle->resolve('file',array(
-    'source' => $sources['lang'],
-    'target' => "return MODX_CORE_PATH;",
 ));
 $builder->putVehicle($vehicle);
 
