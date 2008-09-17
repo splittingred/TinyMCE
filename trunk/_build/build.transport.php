@@ -19,6 +19,9 @@ $modx->initialize('mgr');
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
 $builder->create('tinymce','2.1.0','alpha');
+$builder->registerNamespace('tinymce',false,true);
+
+
 
 $sources= array (
     'assets' => dirname(dirname(__FILE__)) . '/assets/',
@@ -47,6 +50,24 @@ $vehicle->resolve('file',array(
     'target' => "return MODX_ASSETS_PATH . 'plugins/';",
 ));
 $builder->putVehicle($vehicle);
+
+// load lexicon strings
+$builder->buildLexicon($sources['root'].'_build/lexicon/');
+
+// load system settings
+$settings = array();
+include_once dirname(__FILE__).'/data/transport.settings.php';
+
+$attributes= array(
+    XPDO_TRANSPORT_UNIQUE_KEY => 'key',
+    XPDO_TRANSPORT_PRESERVE_KEYS => true,
+    XPDO_TRANSPORT_UPDATE_OBJECT => true,
+);
+foreach ($settings as $setting) {
+    $vehicle = $builder->createVehicle($setting,$attributes);
+    $builder->putVehicle($vehicle);
+}
+
 
 $builder->pack();
 
