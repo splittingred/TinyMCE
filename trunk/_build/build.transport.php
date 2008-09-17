@@ -13,8 +13,6 @@ require_once dirname(__FILE__) . '/build.config.php';
 require_once (MODX_CORE_PATH . 'model/modx/modx.class.php');
 $modx= new modX();
 $modx->initialize('mgr');
-//$modx->setDebug(true);
-
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
@@ -67,7 +65,6 @@ foreach ($settings as $setting) {
     $vehicle = $builder->createVehicle($setting,$attributes);
     $builder->putVehicle($vehicle);
 }
-
 
 $builder->pack();
 
