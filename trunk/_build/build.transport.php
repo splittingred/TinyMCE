@@ -16,7 +16,7 @@ $modx->initialize('mgr');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->create('tinymce','beta','2.1.0');
+$builder->create('tinymce','2.1.0','beta');
 $builder->registerNamespace('tinymce',false,true);
 
 
