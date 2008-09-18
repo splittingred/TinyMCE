@@ -105,7 +105,7 @@ function fileBrowserCallBack(field_name, url, type, win) {
 {/if}
 {literal}
 function tvOnTinyMCEChangeCallBack(i) {
-    i.oldTargetElement.onchange();
+    triggerRTEOnChange();
 }
 {/literal}
 // ]]>
