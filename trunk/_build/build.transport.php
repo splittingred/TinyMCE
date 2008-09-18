@@ -16,7 +16,7 @@ $modx->initialize('mgr');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->create('tinymce','alpha','2.1.0');
+$builder->create('tinymce','beta','2.1.0');
 $builder->registerNamespace('tinymce',false,true);
 
 
@@ -30,7 +30,7 @@ $sources= array (
 // [alternative] you could also manually create the object, grabbing the source from a file
 $c= $modx->newObject('modPlugin');
 $c->set('name', 'TinyMCE');
-$c->set('description', 'TinyMCE 2.1.0-alpha plugin for MODx Revolution 2.0.0');
+$c->set('description', 'TinyMCE 2.1.0-beta plugin for MODx Revolution');
 $c->set('plugincode', file_get_contents($sources['root'] . 'tinymce.plugin.php'));
 $c->set('category', 0);
 
