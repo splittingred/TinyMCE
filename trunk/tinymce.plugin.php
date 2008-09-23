@@ -1,51 +1,49 @@
 <?php
 /**
- * TinyMCE RichText Editor Plugin 
+ * TinyMCE RichText Editor Plugin
  *
  * Events:  OnRichTextEditorInit, OnRichTextEditorRegister,
  * OnInterfaceSettingsRender
- * 
- * @author Jeff Whitfield 
+ *
+ * @author Jeff Whitfield
  * @author Shaun McCormick <splittingred@gmail.com>
  * @created 2005/09/09
  * @modified 2007/10/22
  * @version 2.2.0
  */
-
 include_once $modx->config['base_path'].'assets/plugins/tinymce/tinymce.class.php';
 
 // Set path and base setting variables
-if(!isset($tinyPath)) { 
+if(!isset($tinyPath)) {
 	global $tinyPath;
-	$tinyPath = $modx->config['base_path'].'assets/plugins/tinymce'; 
+	$tinyPath = $modx->config['base_path'].'assets/plugins/tinymce';
 }
 $base_url = $modx->config['base_url'];
 $displayStyle = ( ($_SESSION['browser']=='mz') || ($_SESSION['browser']=='op') ) ? "table-row" : "block" ;
 
 $TinyMCE = new TinyMCE($modx);
-include_once $modx->config['base_path'].'assets/plugins/tinymce/tinymce.lang.php';
 
 // Handle event
-$e = &$modx->Event; 
-switch ($e->name) { 
+$e = &$modx->event;
+switch ($e->name) {
 	case 'OnRichTextEditorRegister': // register only for backend
 		$output = $TinyMCE->load('OnRichTextEditorRegister');
         $e->output($output);
 		break;
 
-	case 'OnRichTextEditorInit': 
+	case 'OnRichTextEditorInit':
 		if ($editor == 'TinyMCE') {
 			$elementList = implode(',',$elements);
 			if(isset($forfrontend)||$modx->isFrontend()){
-				$frontend_language = isset($modx->config['fe_editor_lang']) ? $modx->config['fe_editor_lang']:'';
-				
+				$frontend_language = isset($modx->config['fe_editor_lang']) ? $modx->config['fe_editor_lang']: $modx->config['manager_language'];
+
 				$html = $TinyMCE->load('OnRichTextEditorInit',array(
 					'path' => $tinyPath,
 					'element_list' => $elementList,
 					'theme' => $modx->config['tinymce_editor_theme'],
 					'width' => $width,
 					'height' => $height,
-					'language' => $TinyMCE->getLang($frontend_language),
+					'language' => $frontend_language,
 					'frontend' => true,
 					'base_url' => $base_url,
 					'plugins' => $modx->config['tinymce_custom_plugins'],
@@ -70,7 +68,7 @@ switch ($e->name) {
 					'advimage_styles' => NULL,
 					'advlink_styles' => NULL,
 				));
-				
+
 			} else {
 				$html = $TinyMCE->load('OnRichTextEditorInit',array(
 					'path' => $tinyPath,
@@ -78,7 +76,7 @@ switch ($e->name) {
 					'theme' => $modx->config['tinymce_editor_theme'],
 					'width' => '100%',
 					'height' => '400px',
-					'language' => $TinyMCE->getLang($modx->config['manager_language']),
+					'language' => $modx->config['manager_language'],
 					'frontend' => false,
 					'plugins' => $modx->config['tinymce_custom_plugins'],
 					'buttons1' => $modx->config['tinymce_custom_buttons1'],
@@ -106,15 +104,7 @@ switch ($e->name) {
 			$e->output($html);
 		}
 		break;
-
-	case 'OnInterfaceSettingsRender':		
-		$html = $TinyMCE->load('OnInterfaceSettingsRender',array(
-			'path' => $tinyPath,
-			'displayStyle' => $displayStyle,
-		));
-		$e->output($html);
-		break;
    default:
-      return; // stop here - this is very important. 
-      break; 
+      return; // stop here - this is very important.
+      break;
 }
