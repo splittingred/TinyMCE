@@ -3,12 +3,6 @@ if (!class_exists('TinyMCE')) {
 
 class TinyMCE {
     /**
-     * @var array $_langs A collection of languages.
-     * @access private
-     */
-	var $_langs = array();
-
-    /**
      * @var array $config The configuration array for TinyMCE.
      * @access private
      */
@@ -55,36 +49,11 @@ class TinyMCE {
             case 'OnRichTextEditorRegister':
                 return 'TinyMCE';
                 break;
-            case 'OnInterfaceSettingsRender':
-                return $this->getSettings();
-                break;
             case 'OnRichTextEditorInit':
                 return $this->getScript();
                 break;
         }
     }
-
-    /**
-     * Renders the TinyMCE settings.
-     * @access public
-     * @param array $config An array of configuration parameters.
-     */
-	function getSettings() {
-		$arrThemes = array(
-			'simple' => $this->modx->lexicon('tinymce_theme_simple'),
-			'advanced' => $this->modx->lexicon('tinymce_theme_advanced'),
-			'editor' => $this->modx->lexicon('tinymce_theme_editor'),
-			'custom' => $this->modx->lexicon('tinymce_theme_custom'),
-		);
-		$this->config['themes'] = $arrThemes;
-		$this->config['display'] = $this->config['use_editor'] == 1 ? $this->config['displayStyle'] : 'none';
-		$this->config['css'] = isset($this->config['tinymce_css_selectors']) ? htmlspecialchars($this->config['tinymce_css_selectors']) : '';
-
-		$this->config['plugins'] = $this->config['tinymce_custom_plugins'];
-		$this->modx->smarty->assign('config',$this->config);
-		$this->modx->smarty->assign('_lang',$this->modx->lexicon->fetch());
-		return $this->modx->smarty->fetch($this->config['path'].'/templates/settings.tpl');
-	}
 
     /**
      * Renders the TinyMCE script code.
@@ -142,32 +111,6 @@ class TinyMCE {
 		$script = $this->modx->smarty->fetch($this->config['path'].'/templates/script.tpl');
 
 		return $script;
-	}
-
-    /**
-     * Gets a certain language.
-     * @access public
-     * @param string $spl The lnaguage abbr to get.
-     */
-	function getLang($spl) {
-		$langSel = 'en';
-		$c = count($this->_langs);
-		for ($i=0;$i<$c;$i++) {
-			if($this->_langs[i]['lang'] == $spl){
-				$langSel = $this->_langs[i]['abbr'];
-			}
-		}
-		return $langSel;
-	}
-
-    /**
-     * Adds a language to the class.
-     * @access public
-     * @param string $lang The language name.
-     * @param string $abbr The abbreviation of the language.
-     */
-	function addLang($lang,$abbr) {
-		$this->_langs[] = array('lang' => $lang,'abbr' => $abbr);
 	}
 }
 

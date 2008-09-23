@@ -16,10 +16,8 @@ $modx->initialize('mgr');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->create('tinymce','2.1.0','beta');
+$builder->create('tinymce','2.1.0','beta-2');
 $builder->registerNamespace('tinymce',false,true);
-
-
 
 $sources= array (
     'assets' => dirname(dirname(__FILE__)) . '/assets/',
