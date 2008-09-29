@@ -3,32 +3,38 @@ $mtime = microtime();
 $mtime = explode(" ", $mtime);
 $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
-
 // get rid of time limit
 set_time_limit(0);
+
+$root = dirname(dirname(__FILE__)).'/';
+$sources= array (
+    'assets' => $root . 'assets/',
+    'root' => $root,
+    'build' => $root .'_build/',
+    'lexicon' => $root . '_build/lexicon/',
+    'resolvers' => $root . '_build/scripts/',
+    'data' => $root . '_build/data/',
+);
 
 // override with your own defines here (see build.config.sample.php)
 require_once dirname(__FILE__) . '/build.config.php';
 
-require_once (MODX_CORE_PATH . 'model/modx/modx.class.php');
+require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 $modx= new modX();
 $modx->initialize('mgr');
+echo '<pre>'; // used for nice formatting of log messages
+$modx->setLogLevel(MODX_LOG_LEVEL_INFO);
+$modx->setLogTarget('ECHO');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->create('tinymce','2.1.0','beta2');
+$builder->create('tinymce','2.1.0','beta3');
 $builder->registerNamespace('tinymce',false,true);
 
-$sources= array (
-    'assets' => dirname(dirname(__FILE__)) . '/assets/',
-    'root' => dirname(dirname(__FILE__)) . '/',
-);
-
-// get the source from the actual snippet in your database
-// [alternative] you could also manually create the object, grabbing the source from a file
+// create the plugin object
 $c= $modx->newObject('modPlugin');
 $c->set('name', 'TinyMCE');
-$c->set('description', 'TinyMCE 2.1.0-beta2 plugin for MODx Revolution');
+$c->set('description', 'TinyMCE 2.1.0-beta3 plugin for MODx Revolution');
 $c->set('plugincode', file_get_contents($sources['root'] . 'tinymce.plugin.php'));
 $c->set('category', 0);
 
@@ -39,7 +45,7 @@ $attributes= array(
 );
 $vehicle = $builder->createVehicle($c, $attributes);
 $vehicle->resolve('php',array(
-	'source' => dirname(__FILE__) . '/scripts/add_plugin_events.php',
+	'source' => $sources['resolvers'] . 'add_plugin_events.php',
 ));
 $vehicle->resolve('file',array(
     'source' => $sources['assets'] . 'plugins/tinymce',
@@ -48,11 +54,11 @@ $vehicle->resolve('file',array(
 $builder->putVehicle($vehicle);
 
 // load lexicon strings
-$builder->buildLexicon($sources['root'].'_build/lexicon/');
+$builder->buildLexicon($sources['lexicon']);
 
 // load system settings
 $settings = array();
-include_once dirname(__FILE__).'/data/transport.settings.php';
+include_once $sources['data'].'transport.settings.php';
 
 $attributes= array(
     XPDO_TRANSPORT_UNIQUE_KEY => 'key',
@@ -73,6 +79,6 @@ $tend= $mtime;
 $totalTime= ($tend - $tstart);
 $totalTime= sprintf("%2.4f s", $totalTime);
 
-echo "\nExecution time: {$totalTime}\n";
+$modx->log(MODX_LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
 
 exit ();
