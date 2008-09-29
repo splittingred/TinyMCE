@@ -18,8 +18,8 @@ $sources= array (
 
 // override with your own defines here (see build.config.sample.php)
 require_once dirname(__FILE__) . '/build.config.php';
-
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
+
 $modx= new modX();
 $modx->initialize('mgr');
 echo '<pre>'; // used for nice formatting of log messages
