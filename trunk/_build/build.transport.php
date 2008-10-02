@@ -28,7 +28,7 @@ $modx->setLogTarget('ECHO');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->create('tinymce','2.1.0','beta3');
+$builder->createPackage('tinymce','2.1.0','beta3');
 $builder->registerNamespace('tinymce',false,true);
 
 // create the plugin object
