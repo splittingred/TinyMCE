@@ -1,9 +1,12 @@
 <?php
+/**
+ * @package tinymce
+ */
 $mtime = microtime();
 $mtime = explode(" ", $mtime);
 $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
-// get rid of time limit
+/* get rid of time limit */
 set_time_limit(0);
 
 $root = dirname(dirname(__FILE__)).'/';
@@ -16,13 +19,13 @@ $sources= array (
     'data' => $root . '_build/data/',
 );
 
-// override with your own defines here (see build.config.sample.php)
+/* override with your own defines here (see build.config.sample.php) */
 require_once dirname(__FILE__) . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 
 $modx= new modX();
 $modx->initialize('mgr');
-echo '<pre>'; // used for nice formatting of log messages
+echo '<pre>'; /* used for nice formatting of log messages */
 $modx->setLogLevel(MODX_LOG_LEVEL_INFO);
 $modx->setLogTarget('ECHO');
 
@@ -31,7 +34,7 @@ $builder = new modPackageBuilder($modx);
 $builder->createPackage('tinymce','2.1.0','beta3');
 $builder->registerNamespace('tinymce',false,true);
 
-// create the plugin object
+/* create the plugin object */
 $c= $modx->newObject('modPlugin');
 $c->set('name', 'TinyMCE');
 $c->set('description', 'TinyMCE 2.1.0-beta3 plugin for MODx Revolution');
@@ -53,17 +56,17 @@ $vehicle->resolve('file',array(
 ));
 $builder->putVehicle($vehicle);
 
-// load lexicon strings
+/* load lexicon strings */
 $builder->buildLexicon($sources['lexicon']);
 
-// load system settings
+/* load system settings */
 $settings = array();
 include_once $sources['data'].'transport.settings.php';
 
 $attributes= array(
     XPDO_TRANSPORT_UNIQUE_KEY => 'key',
     XPDO_TRANSPORT_PRESERVE_KEYS => true,
-    XPDO_TRANSPORT_UPDATE_OBJECT => true,
+    XPDO_TRANSPORT_UPDATE_OBJECT => false,
 );
 foreach ($settings as $setting) {
     $vehicle = $builder->createVehicle($setting,$attributes);
