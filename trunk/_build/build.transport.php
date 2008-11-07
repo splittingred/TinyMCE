@@ -18,6 +18,7 @@ $sources= array (
     'lexicon' => $root . '_build/lexicon/',
     'resolvers' => $root . '_build/scripts/',
     'data' => $root . '_build/data/',
+    'docs' => $root . 'assets/components/tinymce/docs/',
 );
 
 /* override with your own defines here (see build.config.sample.php) */
@@ -73,6 +74,12 @@ foreach ($settings as $setting) {
     $vehicle = $builder->createVehicle($setting,$attributes);
     $builder->putVehicle($vehicle);
 }
+
+/* now pack in the license file, readme and setup options */
+$builder->setPackageAttributes(array(
+    'license' => file_get_contents($sources['docs'] . 'license.txt'),
+    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+));
 
 $builder->pack();
 
