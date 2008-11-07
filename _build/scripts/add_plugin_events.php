@@ -3,7 +3,7 @@ $success= false;
 if ($pluginid= $object->get('id')) {
     switch ($options[XPDO_TRANSPORT_PACKAGE_ACTION]) {
         case XPDO_TRANSPORT_ACTION_INSTALL:
-        case XPDO_TRANSPORT_ACTION_UPDATE:
+        case XPDO_TRANSPORT_ACTION_UPGRADE:
             $pluginEvent= $object->xpdo->newObject('modPluginEvent');
             $pluginEvent->set('pluginid', $pluginid);
             $pluginEvent->set('evtid', 85);
