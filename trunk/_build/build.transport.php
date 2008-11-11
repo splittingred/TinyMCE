@@ -12,13 +12,12 @@ set_time_limit(0);
 
 $root = dirname(dirname(__FILE__)).'/';
 $sources= array (
-    'assets' => $root . 'assets/',
     'root' => $root,
     'build' => $root .'_build/',
     'lexicon' => $root . '_build/lexicon/',
     'resolvers' => $root . '_build/scripts/',
     'data' => $root . '_build/data/',
-    'docs' => $root . 'assets/components/tinymce/docs/',
+    'docs' => $root . 'tinymce/docs/',
 );
 
 /* override with your own defines here (see build.config.sample.php) */
@@ -53,7 +52,7 @@ $vehicle->resolve('php',array(
 	'source' => $sources['resolvers'] . 'add_plugin_events.php',
 ));
 $vehicle->resolve('file',array(
-    'source' => $sources['assets'] . 'components/tinymce',
+    'source' => $sources['root'] . 'tinymce',
     'target' => "return MODX_ASSETS_PATH . 'components/';",
 ));
 $builder->putVehicle($vehicle);
