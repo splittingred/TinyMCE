@@ -9,24 +9,25 @@
  * @author Shaun McCormick <splittingred@gmail.com>
  * @created 2005/09/09
  * @modified 2007/10/22
- * @version 2.2.0
+ * @version 2.1.1-beta
  */
-include_once $modx->config['base_path'].'assets/plugins/tinymce/tinymce.class.php';
+include_once $modx->config['base_path'].'assets/components/tinymce/tinymce.class.php';
 
-// Set path and base setting variables
+/* Set path and base setting variables */
 if(!isset($tinyPath)) {
 	global $tinyPath;
-	$tinyPath = $modx->config['base_path'].'assets/plugins/tinymce';
+	$tinyPath = $modx->config['base_path'].'assets/components/tinymce/';
 }
 $base_url = $modx->config['base_url'];
 $displayStyle = ( ($_SESSION['browser']=='mz') || ($_SESSION['browser']=='op') ) ? "table-row" : "block" ;
 
 $TinyMCE = new TinyMCE($modx);
 
-// Handle event
+
+/* Handle event */
 $e = &$modx->event;
 switch ($e->name) {
-	case 'OnRichTextEditorRegister': // register only for backend
+	case 'OnRichTextEditorRegister': /* register only for backend */
 		$output = $TinyMCE->load('OnRichTextEditorRegister');
         $e->output($output);
 		break;
@@ -65,8 +66,8 @@ switch ($e->name) {
 					'css_selectors' => $modx->config['tinymce_css_selectors'],
 					'use_browser' => $modx->config['use_browser'],
 					'toolbar_align' => $webAlign,
-					'advimage_styles' => NULL,
-					'advlink_styles' => NULL,
+					'advimage_styles' => null,
+					'advlink_styles' => null,
 				));
 
 			} else {
@@ -105,6 +106,6 @@ switch ($e->name) {
 		}
 		break;
    default:
-      return; // stop here - this is very important.
+      return; /* stop here - this is very important. */
       break;
 }
