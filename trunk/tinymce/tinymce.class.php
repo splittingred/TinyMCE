@@ -23,15 +23,6 @@ class TinyMCE {
     /**#@-*/
 
     /**
-     * Loads language strings.
-     * @return array The lexicon merged with the MODx core lexicon.
-     */
-    function _loadLang() {
-        $this->modx->lexicon->load('tinymce:default');
-        return $this->modx->lexicon->fetch();
-    }
-
-    /**
      * Loads the correct event context
      * @param string $event The event to load by
      * @param array $config A configuration array.
@@ -43,7 +34,6 @@ class TinyMCE {
         ),$config);
         $config = array_merge($this->modx->config,$config);
         $this->config = $config;
-        $this->_loadLang();
 
         switch ($event) {
             case 'OnRichTextEditorRegister':
@@ -80,7 +70,7 @@ class TinyMCE {
 		$this->config['tinyTheme'] = $tinyTheme;
 		$this->config['theme'] = $theme;
 
-		// Set relative URL options
+		/* Set relative URL options */
 		switch ($this->config['path_options']) {
 			case 'rootrelative':
 				$this->config['relative_urls'] = false;
@@ -106,9 +96,10 @@ class TinyMCE {
 
 		$scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
 
-		$this->modx->smarty->assign('scriptfile',$scriptfile);
-		$this->modx->smarty->assign('config',$this->config);
-		$script = $this->modx->smarty->fetch($this->config['path'].'/templates/script.tpl');
+        ob_start();
+        include_once dirname(__FILE__).'/templates/script.tpl';
+        $script = ob_get_contents();
+        ob_end_clean();
 
 		return $script;
 	}

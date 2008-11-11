@@ -39,7 +39,7 @@ $builder->registerNamespace('tinymce',false,true);
 $c= $modx->newObject('modPlugin');
 $c->set('name', 'TinyMCE');
 $c->set('description', 'TinyMCE 2.1.1-beta plugin for MODx Revolution');
-$c->set('plugincode', file_get_contents($sources['root'] . 'tinymce.plugin.php'));
+$c->set('plugincode', file_get_contents($sources['root'] . 'tinymce/tinymce.plugin.php'));
 $c->set('category', 0);
 
 $attributes= array(
