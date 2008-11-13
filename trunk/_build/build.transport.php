@@ -37,6 +37,7 @@ $builder->registerNamespace('tinymce',false,true);
 
 /* create the plugin object */
 $c= $modx->newObject('modPlugin');
+$c->set('id',1);
 $c->set('name', 'TinyMCE');
 $c->set('description', 'TinyMCE 2.1.1-beta plugin for MODx Revolution');
 $c->set('plugincode', file_get_contents($sources['root'] . 'tinymce/tinymce.plugin.php'));
@@ -44,7 +45,7 @@ $c->set('category', 0);
 
 $attributes= array(
     XPDO_TRANSPORT_UNIQUE_KEY => 'name',
-    XPDO_TRANSPORT_PRESERVE_KEYS => true,
+    XPDO_TRANSPORT_PRESERVE_KEYS => false,
     XPDO_TRANSPORT_UPDATE_OBJECT => true,
 );
 $vehicle = $builder->createVehicle($c, $attributes);
