@@ -11,11 +11,11 @@ tinyMCE.init({
     
     <?php if (!empty($this->config['height'])) { echo ',height: "'.$this->config['height'].'"'; } ?>
         
-    ,relative_urls: <?php echo $config['relative_urls'] ? 'true' : 'false'; ?>
+    ,relative_urls: true /* <?php echo $config['relative_urls'] ? 'true' : 'false'; ?> */
     
     ,document_base_url: '<?php echo $config['document_base_url']; ?>'
         
-    ,remove_script_host: <?php echo $config['remove_script_host'] ? 'true' : 'false'; ?>
+    ,remove_script_host: true /* <?php echo $config['remove_script_host'] ? 'true' : 'false'; ?> */
     
     ,language: '<?php echo $config['language']; ?>'
     
@@ -46,7 +46,7 @@ tinyMCE.init({
     ,external_link_list_url: '<?php echo MODX_BASE_URL; ?>assets/components/tinymce/tinymce.linklist.php'
         <?php if ($this->config['use_browser']) { ?>
     ,resource_browser_path: '<?php echo MODX_BASE_URL; ?>manager/controllers/browser/index.php?'
-    ,file_browser_callback: 'fileBrowserCallBack'
+    ,file_browser_callback: 'myFileBrowser'
         <?php } ?>
     <?php } ?>
     
@@ -85,14 +85,27 @@ var loadRTE = function(id) {
 }
 
 <?php if (empty($this->config['frontend'])) { ?>
-function fileBrowserCallBack(field_name, url, type, win) {
-    // This is where you insert your custom filebrowser logic
-    var win=tinyMCE.getWindowArg("window");
-    win.BrowseServer(field_name);
-}
+
 <?php } ?>
 function tvOnTinyMCEChangeCallBack(i) {
     triggerRTEOnChange();
+}
+
+function myFileBrowser (field_name, url, type, win) {       
+    var cmsURL = '<?php echo MODX_BASE_URL; ?>manager/controllers/browser/index.php';    // script URL - use an absolute path!
+    
+    tinyMCE.activeEditor.windowManager.open({
+        file : cmsURL,
+        width : screen.width * 0.7,  // Your dimensions may differ - toy around with them!
+        height : screen.height * 0.7,
+        resizable : "yes",
+        inline : "yes",  // This parameter only has an effect if you use the inlinepopups plugin!
+        close_previous : "no"
+    }, {
+        window : win,
+        input : field_name
+    });
+    return false;
 }
 // ]]>
 </script>
