@@ -14,7 +14,7 @@ class TinyMCE {
      * @param modX $modx A reference to the modX constructor.
      */
 	function TinyMCE(&$modx) {
-		$this->__construct(&$modx);
+		$this->__construct($modx);
 	}
     /** @ignore */
 	function __construct(&$modx) {
