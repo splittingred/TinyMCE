@@ -1,7 +1,9 @@
 <?php
 /**
+ * TinyMCE build script
+ *
  * @package tinymce
- * @version 2.1.1
+ * @subpackage build
  */
 $mtime = microtime();
 $mtime = explode(" ", $mtime);
@@ -17,7 +19,9 @@ $sources= array (
     'lexicon' => $root . '_build/lexicon/',
     'resolvers' => $root . '_build/scripts/',
     'data' => $root . '_build/data/',
-    'docs' => $root . 'tinymce/docs/',
+    'docs' => $root . 'core/components/tinymce/docs/',
+    'source_assets' => $root . 'assets/components/tinymce',
+    'source_core' => $roo . 'core/components/tinymce',
 );
 
 /* override with your own defines here (see build.config.sample.php) */
@@ -32,29 +36,38 @@ $modx->setLogTarget('ECHO');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->createPackage('tinymce','2.1.1','beta');
+$builder->createPackage('tinymce','3.2.0.1','alpha1');
 $builder->registerNamespace('tinymce',false,true);
 
 /* create the plugin object */
-$c= $modx->newObject('modPlugin');
-$c->set('id',1);
-$c->set('name', 'TinyMCE');
-$c->set('description', 'TinyMCE 2.1.1-beta plugin for MODx Revolution');
-$c->set('plugincode', file_get_contents($sources['root'] . 'tinymce/tinymce.plugin.php'));
-$c->set('category', 0);
+$plugin= $modx->newObject('modPlugin');
+$plugin->set('id',1);
+$plugin->set('name', 'TinyMCE');
+$plugin->set('description', 'TinyMCE 3.2.0.1-alpha1 plugin for MODx Revolution');
+$plugin->set('plugincode', file_get_contents($sources['root'] . 'tinymce/tinymce.plugin.php'));
+$plugin->set('category', 0);
+
+/* load plugin properties */
+$properties = array();
+include $sources['data'].'properties.inc.php';
+$plugin->setProperties($properties);
 
 $attributes= array(
     XPDO_TRANSPORT_UNIQUE_KEY => 'name',
     XPDO_TRANSPORT_PRESERVE_KEYS => false,
     XPDO_TRANSPORT_UPDATE_OBJECT => true,
 );
-$vehicle = $builder->createVehicle($c, $attributes);
+$vehicle = $builder->createVehicle($plugin, $attributes);
 $vehicle->resolve('php',array(
 	'source' => $sources['resolvers'] . 'add_plugin_events.php',
 ));
 $vehicle->resolve('file',array(
-    'source' => $sources['root'] . 'tinymce',
+    'source' => $sources['source_assets'],
     'target' => "return MODX_ASSETS_PATH . 'components/';",
+));
+$vehicle->resolve('file',array(
+    'source' => $sources['source_core'],
+    'target' => "return MODX_CORE_PATH . 'components/';",
 ));
 $builder->putVehicle($vehicle);
 

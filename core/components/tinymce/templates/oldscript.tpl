@@ -1,9 +1,6 @@
-<script type="text/javascript" src="<?php echo MODX_BASE_URL; ?>assets/components/tinymce/jscripts/tiny_mce/<?php echo $scriptfile; ?>"></script>
-<script type="text/javascript" src="<?php echo MODX_BASE_URL; ?>assets/components/tinymce/xconfig.js"></script>
-<script language="javascript" type="text/javascript">
-// <[CDATA[
+
+/*
 tinyMCE.init({
-    /* Build init options */   
     theme: '<?php echo $this->config['tinyTheme']; ?>'
     ,mode: 'exact'
     
@@ -11,11 +8,11 @@ tinyMCE.init({
     
     <?php if (!empty($this->config['height'])) { echo ',height: "'.$this->config['height'].'"'; } ?>
         
-    ,relative_urls: true /* <?php echo $config['relative_urls'] ? 'true' : 'false'; ?> */
+    ,relative_urls: true // <?php echo $config['relative_urls'] ? 'true' : 'false'; ?> 
     
     ,document_base_url: '<?php echo $config['document_base_url']; ?>'
         
-    ,remove_script_host: true /* <?php echo $config['remove_script_host'] ? 'true' : 'false'; ?> */
+    ,remove_script_host: true // <?php echo $config['remove_script_host'] ? 'true' : 'false'; ?>
     
     ,language: '<?php echo $config['language']; ?>'
     
@@ -75,37 +72,4 @@ tinyMCE.init({
     
 <?php } ?>
 });
-
-var loadRTE = function(id) {
-    if (!tinyMCE.get(id)) {
-        tinyMCE.execCommand('mceAddControl', false, id);
-    } else {
-        tinyMCE.execCommand('mceRemoveControl', false, id);
-    }
-}
-
-<?php if (empty($this->config['frontend'])) { ?>
-
-<?php } ?>
-function tvOnTinyMCEChangeCallBack(i) {
-    triggerRTEOnChange();
-}
-
-function myFileBrowser (field_name, url, type, win) {       
-    var cmsURL = '<?php echo MODX_BASE_URL; ?>manager/controllers/browser/index.php';    // script URL - use an absolute path!
-    
-    tinyMCE.activeEditor.windowManager.open({
-        file : cmsURL,
-        width : screen.width * 0.7,  // Your dimensions may differ - toy around with them!
-        height : screen.height * 0.7,
-        resizable : "yes",
-        inline : "yes",  // This parameter only has an effect if you use the inlinepopups plugin!
-        close_previous : "no"
-    }, {
-        window : win,
-        input : field_name
-    });
-    return false;
-}
-// ]]>
-</script>
+*/
