@@ -258,13 +258,13 @@ $properties = array(
     ),
     array(
         'name' => 'theme_advanced_statusbar_location',
-        'desc' => 'This option enables you to specify where the element statusbar with the path and resize tool should be located. This option can be set to "top" or "bottom". The default value is set to "bottom". This option can only be used when the theme is set to "advanced".',
+        'desc' => 'This option enables you to specify where the element statusbar with the path and resize tool should be located. This option can be set to "top" or "bottom". The default value is set to "top". This option can only be used when the theme is set to "advanced".',
         'type' => 'list',
         'options' => array(
             array('name' => 'Top','value' => 'top'),
             array('name' => 'Bottom','value' => 'bottom'),
         ),
-        'value' => true,
+        'value' => 'bottom',
     ),
     array(
         'name' => 'theme_advanced_toolbar_align',
@@ -275,7 +275,7 @@ $properties = array(
             array('name' => 'Left','value' => 'left'),
             array('name' => 'Right','value' => 'right'),
         ),
-        'value' => 'center',
+        'value' => 'left',
     ),
     array(
         'name' => 'theme_advanced_toolbar_location',
@@ -286,7 +286,7 @@ This option enables you to specify where the toolbar should be located. This opt
             array('name' => 'Top','value' => 'top'),
             array('name' => 'Bottom','value' => 'bottom'),
         ),
-        'value' => 'bottom',
+        'value' => 'top',
     ),
     array(
         'name' => 'width',

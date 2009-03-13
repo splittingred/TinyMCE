@@ -116,12 +116,12 @@ class TinyMCE {
         if ($theme == 'editor' || $theme == 'custom') {
             $tinyTheme = 'advanced';
             if($theme == 'editor' || ($theme == 'custom' && (empty($this->config['plugins']) || empty($this->config['buttons1'])))) {
-                $this->config['formats'] = 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address';
+                $this->config['theme_advanced_blockformats'] = 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address';
                 $this->config['plugins'] = 'style,advimage,advlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media';
-                $this->config['buttons1'] = 'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,link,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help';
-                $this->config['buttons2'] = 'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops';
-                $this->config['buttons3'] = '';
-                $this->config['buttons4'] = '';
+                $this->config['theme_advanced_buttons1'] = 'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,link,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help';
+                $this->config['theme_advanced_buttons2'] = 'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops';
+                $this->config['theme_advanced_buttons3'] = '';
+                $this->config['theme_advanced_buttons4'] = '';
             }
             $theme = 'advanced';
         } else {
