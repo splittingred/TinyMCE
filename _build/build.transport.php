@@ -21,7 +21,7 @@ $sources= array (
     'data' => $root . '_build/data/',
     'docs' => $root . 'core/components/tinymce/docs/',
     'source_assets' => $root . 'assets/components/tinymce',
-    'source_core' => $roo . 'core/components/tinymce',
+    'source_core' => $root . 'core/components/tinymce',
 );
 
 /* override with your own defines here (see build.config.sample.php) */
