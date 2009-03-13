@@ -1,4 +1,8 @@
 <?php
+/**
+ * @package tinymce
+ * @subpackage build
+ */
 $settings['tinymce_editor_theme']= $modx->newObject('modSystemSetting');
 $settings['tinymce_editor_theme']->fromArray(array(
     'key' => 'tinymce_editor_theme',
