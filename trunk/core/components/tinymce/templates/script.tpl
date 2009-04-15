@@ -5,6 +5,9 @@ Ext.onReady(function() {
 });
 
 MODx.loadRTE = function(id) {
+    var oid = Ext.get(id);
+    if (!oid) return;
+      
     if (!tinyMCE.get(id)) {
         tinyMCE.execCommand('mceAddControl', false, id);
     } else {
@@ -13,7 +16,15 @@ MODx.loadRTE = function(id) {
 }
 
 function tvOnTinyMCEChangeCallBack(i) {
-    triggerRTEOnChange();
+    MODx.triggerRTEOnChange('TinyMCE');
+    
+    if (typeof(tinyMCE) != 'undefined') {
+        tinyMCE.triggerSave(true,true);
+        var ta = Ext.get('ta');
+        if (ta) {
+            ta.dom.value = tinyMCE.activeEditor.getContent();
+        }
+    }
 }
 
 function myFileBrowser (field_name, url, type, win) {       
