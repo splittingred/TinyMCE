@@ -20,14 +20,14 @@ class TinyMCE {
 
         $this->config = array_merge(array(
             'apply_source_formatting' => true,
-            'assets_path' => $this->modx->config['assets_path'].'components/tinymce/',
-            'assets_url' => $this->modx->config['assets_url'].'components/tinymce/',
+            'assets_path' => $this->modx->getOption('assets_path').'components/tinymce/',
+            'assets_url' => $this->modx->getOption('assets_url').'components/tinymce/',
             'button_tile_map' => false,
             'cleanup' => false,
             'compressor' => '',
             'convert_fonts_to_spans' => true,
             'convert_newlines_to_brs' => false,
-            'core_path' => $this->modx->config['core_path'].'components/tinymce/',
+            'core_path' => $this->modx->getOption('core_path').'components/tinymce/',
             'element_format' => 'xhtml',
             'element_list' => '',
             'entities' => '',
@@ -37,17 +37,17 @@ class TinyMCE {
             'frontend' => false,
             'height' => '400px',
             'invalid_elements' => '',
-            'language' => $this->modx->config['manager_language'],
+            'language' => $this->modx->getOption('manager_language'),
             'mode' => 'none',
             'nowrap' => false,
             'onchange_callback' => 'tvOnTinyMCEChangeCallBack',
-            'path' => $this->modx->config['assets_path'].'components/tinymce/',
+            'path' => $this->modx->getOption('assets_path').'components/tinymce/',
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
             'plugin_insertdate_timeFormat' => '%H:%M:%S',
             'relative_urls' => true,
             'remove_line_breaks' => false,
-            'resource_browser_path' => $this->modx->config['manager_url'].'controllers/browser/index.php?',
+            'resource_browser_path' => $this->modx->getOption('manager_url').'controllers/browser/index.php?',
             'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'theme_advanced_resizing' => false,
             'theme_advanced_resize_horizontal' => false,
@@ -60,20 +60,20 @@ class TinyMCE {
 
         /* now do user/context/system setting overrides - these must override properties */
         $this->config = array_merge($this->config,array(
-            'buttons1' => $this->modx->config['tinymce_custom_buttons1'],
-            'buttons2' => $this->modx->config['tinymce_custom_buttons2'],
-            'buttons3' => !empty($this->modx->config['tinymce_custom_buttons3']) ? $this->modx->config['tinymce_custom_buttons3'] : '',
-            'buttons4' => !empty($this->modx->config['tinymce_custom_buttons4']) ? $this->modx->config['tinymce_custom_buttons4'] : '',
-            'css_path' => $this->modx->config['editor_css_path'],
-            'css_selectors' => isset($this->modx->config['tinymce_css_selectors']) ? $this->modx->config['tinymce_css_selectors'] : '',
-            'plugins' => $this->modx->config['tinymce_custom_plugins'],
-            'theme' => !empty($this->modx->config['tinymce_editor_theme']) ? $this->modx->config['tinymce_editor_theme'] : 'simple',
-            'theme_advanced_buttons1' => $this->modx->config['tinymce_custom_buttons1'],
-            'theme_advanced_buttons2' => $this->modx->config['tinymce_custom_buttons2'],
-            'theme_advanced_buttons3' => !empty($this->modx->config['tinymce_custom_buttons3']) ? $this->modx->config['tinymce_custom_buttons3'] : '',
-            'theme_advanced_buttons4' => !empty($this->modx->config['tinymce_custom_buttons4']) ? $this->modx->config['tinymce_custom_buttons4'] : '',
-            'toolbar_align' => $this->modx->config['manager_direction'],
-            'use_browser' => $this->modx->config['use_browser'],
+            'buttons1' => $this->modx->getOption('tinymce.custom_buttons1'),
+            'buttons2' => $this->modx->getOption('tinymce.custom_buttons2'),
+            'buttons3' => $this->modx->getOption('tinymce.custom_buttons3',null,''),
+            'buttons4' => $this->modx->getOption('tinymce.custom_buttons4',null,''),
+            'css_path' => $this->modx->getOption('editor_css_path'),
+            'css_selectors' => $this->modx->getOption('tinymce.css_selectors',null,''),
+            'plugins' => $this->modx->getOption('tinymce.custom_plugins',null,''),
+            'theme' => $this->modx->getOption('tinymce.editor_theme',null,'simple'),
+            'theme_advanced_buttons1' => $this->modx->getOption('tinymce.custom_buttons1',null,''),
+            'theme_advanced_buttons2' => $this->modx->getOption('tinymce.custom_buttons2',null,''),
+            'theme_advanced_buttons3' => $this->modx->getOption('tinymce.custom_buttons3',null,''),
+            'theme_advanced_buttons4' => $this->modx->getOption('tinymce.custom_buttons4',null,''),
+            'toolbar_align' => $this->modx->getOption('manager_direction'),
+            'use_browser' => $this->modx->getOption('use_browser'),
         ));
 
         /* manual override */
@@ -89,7 +89,7 @@ class TinyMCE {
     function load($event = '',$config = array()) {
         $config = array_merge(array(
             'path' => dirname(__FILE__).'/',
-            'language' => $this->modx->config['manager_language'],
+            'language' => $this->modx->getOption('manager_language'),
         ),$config);
 
         switch ($event) {
