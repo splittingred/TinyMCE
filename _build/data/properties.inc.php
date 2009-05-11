@@ -296,3 +296,5 @@ This option enables you to specify where the toolbar should be located. This opt
         'value' => '100%',
     ),
 );
+
+return $properties;

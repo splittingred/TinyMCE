@@ -30,13 +30,12 @@ require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 
 $modx= new modX();
 $modx->initialize('mgr');
-echo '<pre>'; /* used for nice formatting of log messages */
 $modx->setLogLevel(MODX_LOG_LEVEL_INFO);
-$modx->setLogTarget('ECHO');
+$modx->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->createPackage('tinymce','3.2.0.1','alpha1');
+$builder->createPackage('tinymce','3.2.0.1','alpha2');
 $builder->registerNamespace('tinymce',false,true,'{core_path}components/tinymce/');
 
 /* create the plugin object */
@@ -48,8 +47,7 @@ $plugin->set('plugincode', file_get_contents($sources['source_core'] . '/tinymce
 $plugin->set('category', 0);
 
 /* load plugin properties */
-$properties = array();
-include $sources['data'].'properties.inc.php';
+$properties = include $sources['data'].'properties.inc.php';
 $plugin->setProperties($properties);
 
 $attributes= array(
@@ -75,9 +73,7 @@ $builder->putVehicle($vehicle);
 $builder->buildLexicon($sources['lexicon']);
 
 /* load system settings */
-$settings = array();
-include_once $sources['data'].'transport.settings.php';
-
+$settings = include $sources['data'].'transport.settings.php';
 $attributes= array(
     XPDO_TRANSPORT_UNIQUE_KEY => 'key',
     XPDO_TRANSPORT_PRESERVE_KEYS => true,
