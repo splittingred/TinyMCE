@@ -37,7 +37,7 @@ class TinyMCE {
             'frontend' => false,
             'height' => '400px',
             'invalid_elements' => '',
-            'language' => $this->modx->getOption('manager_language'),
+            'language' => $this->modx->getOption('manager_language',null,'en'),
             'mode' => 'none',
             'nowrap' => false,
             'onchange_callback' => 'tvOnTinyMCEChangeCallBack',
@@ -72,8 +72,8 @@ class TinyMCE {
             'theme_advanced_buttons2' => $this->modx->getOption('tinymce.custom_buttons2',null,''),
             'theme_advanced_buttons3' => $this->modx->getOption('tinymce.custom_buttons3',null,''),
             'theme_advanced_buttons4' => $this->modx->getOption('tinymce.custom_buttons4',null,''),
-            'toolbar_align' => $this->modx->getOption('manager_direction'),
-            'use_browser' => $this->modx->getOption('use_browser'),
+            'toolbar_align' => $this->modx->getOption('manager_direction',null,'ltr'),
+            'use_browser' => $this->modx->getOption('use_browser',null,true),
         ));
 
         /* manual override */
@@ -89,7 +89,7 @@ class TinyMCE {
     function load($event = '',$config = array()) {
         $config = array_merge(array(
             'path' => dirname(__FILE__).'/',
-            'language' => $this->modx->getOption('manager_language'),
+            'language' => $this->modx->getOption('manager_language',null,'en'),
         ),$config);
 
         switch ($event) {
