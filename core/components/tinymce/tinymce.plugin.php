@@ -9,9 +9,9 @@
  * @created 2005/09/09
  * @modified 2007/10/22
  * @modified 2009/03/13
- * @modified 2009/05/11
+ * @modified 2009/05/21
  */
-require_once $modx->config['core_path'].'components/tinymce/tinymce.class.php';
+require_once $modx->getOption('core_path').'components/tinymce/tinymce.class.php';
 $TinyMCE = new TinyMCE($modx,$scriptProperties);
 
 /* Handle event */
@@ -25,15 +25,16 @@ switch ($e->name) {
         if ($editor == 'TinyMCE') {
             $elementList = implode(',',$elements);
             if (isset($forfrontend) || $modx->isFrontend()) {
-                $TinyMCE->config['language'] = $modx->getOption('fe_editor_lang',array(),$modx->getOption('manager_language'));
+                $def = $modx->getOption('manager_language',null,'en');
+                $TinyMCE->config['language'] = $modx->getOption('fe_editor_lang',array(),$def);
                 $TinyMCE->config['frontend'] = true;
-
+                unset($def);
             }
             $html = $TinyMCE->load($e->name);
             $e->output($html);
+            unset($html);
         }
         break;
-   default:
-      return; /* stop here - this is very important. */
-      break;
+   default: break;
 }
+return;

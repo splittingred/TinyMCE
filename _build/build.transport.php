@@ -35,14 +35,14 @@ $modx->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->createPackage('tinymce','3.2.0.1','alpha2');
+$builder->createPackage('tinymce','3.2.0.1','beta1');
 $builder->registerNamespace('tinymce',false,true,'{core_path}components/tinymce/');
 
 /* create the plugin object */
 $plugin= $modx->newObject('modPlugin');
 $plugin->set('id',1);
 $plugin->set('name', 'TinyMCE');
-$plugin->set('description', 'TinyMCE 3.2.0.1-alpha1 plugin for MODx Revolution');
+$plugin->set('description', 'TinyMCE 3.2.0.1 plugin for MODx Revolution');
 $plugin->set('plugincode', file_get_contents($sources['source_core'] . '/tinymce.plugin.php'));
 $plugin->set('category', 0);
 
