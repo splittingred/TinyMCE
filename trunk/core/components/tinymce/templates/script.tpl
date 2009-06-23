@@ -1,7 +1,9 @@
 <script type="text/javascript">
 // <[CDATA[
 Ext.onReady(function() {
-	tinyMCE.init(<?php echo $this->modx->toJSON($this->config); ?>);
+    var p = <?php echo $this->modx->toJSON($this->config); ?>;
+    p.setup = function(ed) { ed.onInit.add(MODx.onTinyLoad); };
+	tinyMCE.init(p);
 });
 
 MODx.loadRTE = function(id) {
@@ -13,8 +15,21 @@ MODx.loadRTE = function(id) {
     } else {
         tinyMCE.execCommand('mceRemoveControl', false, id);
     }
-}
-
+};
+MODx.onTinyLoad = function(ed) {
+    var el = Ext.get(ed.id+'_ifr');
+    var z = window.frames[0].document.getElementById('tinymce');       
+    new MODx.load({
+        xtype: 'modx-treedrop'
+        ,target: el
+        ,targetEl: el.dom
+        ,iframe: true
+        ,iframeEl: 'tinymce'
+        ,onInsert: function(v) {
+            tinyMCE.execInstanceCommand(ed.id,"mceInsertContent",false,v);
+        }
+    });
+};
 function tvOnTinyMCEChangeCallBack(i) {
     MODx.triggerRTEOnChange('TinyMCE');
     
