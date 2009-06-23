@@ -18,7 +18,6 @@ MODx.loadRTE = function(id) {
 };
 MODx.onTinyLoad = function(ed) {
     var el = Ext.get(ed.id+'_ifr');
-    var z = window.frames[0].document.getElementById('tinymce');       
     new MODx.load({
         xtype: 'modx-treedrop'
         ,target: el
