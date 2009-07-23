@@ -9,7 +9,7 @@ Ext.onReady(function() {
 MODx.loadRTE = function(id) {
     var oid = Ext.get(id);
     if (!oid) return;
-      
+          
     if (!tinyMCE.get(id)) {
         tinyMCE.execCommand('mceAddControl', false, id);
     } else {
