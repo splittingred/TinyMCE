@@ -12,11 +12,11 @@ class TinyMCE {
      * @param modX $modx A reference to the modX constructor.
      */
     function TinyMCE(&$modx,$config = array()) {
-        $this->__construct($modx);
+        $this->__construct($modx,$config);
     }
     /** @ignore */
     function __construct(&$modx,$config = array()) {
-        $this->modx = $modx;
+        $this->modx =& $modx;
 
         $this->config = array_merge(array(
             'apply_source_formatting' => true,
@@ -152,6 +152,10 @@ class TinyMCE {
                 $this->config['relative_urls'] = false;
                 $this->config['remove_script_host'] = false;
             break;
+        }
+
+        if (!empty($this->config['resource'])) {
+            $this->config['resource'] = $this->config['resource']->toArray();
         }
 
         ob_start();

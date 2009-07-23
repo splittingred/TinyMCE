@@ -35,7 +35,7 @@ $modx->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->createPackage('tinymce','3.2.0.1','beta1');
+$builder->createPackage('tinymce','3.2.0.1','beta3');
 $builder->registerNamespace('tinymce',false,true,'{core_path}components/tinymce/');
 
 /* create the plugin object */
