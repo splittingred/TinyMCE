@@ -23,6 +23,11 @@ switch ($e->name) {
 
     case 'OnRichTextEditorInit':
         if ($editor == 'TinyMCE') {
+            if (!$TinyMCE->jsLoaded) {
+                $modx->regClientStartupScript($TinyMCE->config['assets_url'].'tiny.js');
+                $TinyMCE->jsLoaded = true;
+            }
+
             $elementList = implode(',',$elements);
             if (isset($forfrontend) || $modx->isFrontend()) {
                 $def = $modx->getOption('manager_language',null,'en');

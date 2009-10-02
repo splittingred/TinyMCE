@@ -5,6 +5,7 @@ class TinyMCE {
      * @access private
      */
     var $config = array();
+    var $jsLoaded = false;
 
     /**#@+
      * The TinyMCE constructor.
@@ -32,7 +33,7 @@ class TinyMCE {
             'element_list' => '',
             'entities' => '',
             'entity_encoding' => '',
-            'file_browser_callback' => 'myFileBrowser',
+            'file_browser_callback' => 'Tiny.launchBrowser',
             'formats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'frontend' => false,
             'height' => '400px',
@@ -40,7 +41,6 @@ class TinyMCE {
             'language' => $this->modx->getOption('manager_language',null,'en'),
             'mode' => 'none',
             'nowrap' => false,
-            'onchange_callback' => 'tvOnTinyMCEChangeCallBack',
             'path' => $this->modx->getOption('assets_path').'components/tinymce/',
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
