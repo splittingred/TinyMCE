@@ -42,7 +42,7 @@ $builder->registerNamespace('tinymce',false,true,'{core_path}components/tinymce/
 $plugin= $modx->newObject('modPlugin');
 $plugin->set('id',1);
 $plugin->set('name', 'TinyMCE');
-$plugin->set('description', 'TinyMCE 3.2.0.1 plugin for MODx Revolution');
+$plugin->set('description', 'TinyMCE 3.2.7 plugin for MODx Revolution');
 $plugin->set('plugincode', file_get_contents($sources['source_core'] . '/tinymce.plugin.php'));
 $plugin->set('category', 0);
 
