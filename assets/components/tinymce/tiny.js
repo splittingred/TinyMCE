@@ -11,7 +11,6 @@ var Tiny = {
                 tinyMCE.execCommand('mceInsertContent',false,v);
             }
         });
-        Ext.get('ta-toggle').on('click',Tiny.toggle);
     }
     
     ,onTVLoad: function() {
@@ -82,4 +81,5 @@ MODx.loadRTE = function(id) {
     tinyMCE.init(s);
     
     Ext.getCmp('modx-panel-resource-tv').on('load',Tiny.onTVLoad);
+    Ext.get('ta-toggle').on('click',Tiny.toggle);
 };
