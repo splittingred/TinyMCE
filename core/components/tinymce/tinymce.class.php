@@ -1,22 +1,21 @@
 <?php
+/**
+ * @package tinymce
+ */
 class TinyMCE {
     /**
      * @var array $config The configuration array for TinyMCE.
      * @access private
      */
-    var $config = array();
-    var $jsLoaded = false;
+    public $config = array();
+    public $jsLoaded = false;
 
-    /**#@+
+    /**
      * The TinyMCE constructor.
      *
      * @param modX $modx A reference to the modX constructor.
      */
-    function TinyMCE(&$modx,$config = array()) {
-        $this->__construct($modx,$config);
-    }
-    /** @ignore */
-    function __construct(&$modx,$config = array()) {
+    function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
         $this->config = array_merge(array(
@@ -79,14 +78,13 @@ class TinyMCE {
         /* manual override */
         $this->config['elements'] = 'ta';
     }
-    /**#@-*/
 
     /**
      * Loads the correct event context
      * @param string $event The event to load by
      * @param array $config A configuration array.
      */
-    function load($event = '',$config = array()) {
+    public function load($event = '',array $config = array()) {
         $config = array_merge(array(
             'path' => dirname(__FILE__).'/',
             'language' => $this->modx->getOption('manager_language',null,'en'),
@@ -107,7 +105,7 @@ class TinyMCE {
      * @access public
      * @param array $config An array of configuration parameters.
      */
-    function getScript() {
+    public function getScript() {
 
         $scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce_src.js');
 
