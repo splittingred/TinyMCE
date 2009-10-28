@@ -26,7 +26,7 @@ $sources= array (
 
 /* override with your own defines here (see build.config.sample.php) */
 require_once dirname(__FILE__) . '/build.config.php';
-require_once modX::CORE_PATH . 'model/modx/modx.class.php';
+require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
 
 $modx= new modX();
 $modx->initialize('mgr');
@@ -61,11 +61,11 @@ $vehicle->resolve('php',array(
 ));
 $vehicle->resolve('file',array(
     'source' => $sources['source_assets'],
-    'target' => "return modX::ASSETS_PATH . 'components/';",
+    'target' => "return MODX_ASSETS_PATH . 'components/';",
 ));
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
-    'target' => "return modX::CORE_PATH . 'components/';",
+    'target' => "return MODX_CORE_PATH . 'components/';",
 ));
 $builder->putVehicle($vehicle);
 
