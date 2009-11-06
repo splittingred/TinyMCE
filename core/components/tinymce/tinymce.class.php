@@ -18,21 +18,27 @@ class TinyMCE {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
+        $assetsUrl = $this->modx->getOption('tiny.assets_url',$config,$this->modx->getOption('assets_url').'components/tinymce/');
+        $assetsPath = $this->modx->getOption('tiny.assets_path',$config,$this->modx->getOption('assets_path').'components/tinymce/');
+        $corePath = $this->modx->getOption('tiny.core_path',$config,$this->modx->getOption('core_path').'components/tinymce/');
+
+        $browserAction = $this->_getBrowserAction();
         $this->config = array_merge(array(
             'apply_source_formatting' => true,
-            'assets_path' => $this->modx->getOption('assets_path').'components/tinymce/',
-            'assets_url' => $this->modx->getOption('assets_url').'components/tinymce/',
+            'assets_path' => $assetsPath,
+            'assets_url' => $assetsUrl,
+            'browserUrl' => $browserAction ? $modx->getOption('manager_url').'?a='.$browserAction->get('id') : null,
             'button_tile_map' => false,
             'cleanup' => false,
             'compressor' => '',
             'convert_fonts_to_spans' => true,
             'convert_newlines_to_brs' => false,
-            'core_path' => $this->modx->getOption('core_path').'components/tinymce/',
+            'core_path' => $corePath,
             'element_format' => 'xhtml',
             'element_list' => '',
             'entities' => '',
             'entity_encoding' => '',
-            'file_browser_callback' => 'Tiny.launchBrowser',
+            'file_browser_callback' => 'Tiny.loadBrowser',
             'formats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'frontend' => false,
             'height' => '400px',
@@ -40,7 +46,7 @@ class TinyMCE {
             'language' => $this->modx->getOption('manager_language',null,'en'),
             'mode' => 'none',
             'nowrap' => false,
-            'path' => $this->modx->getOption('assets_path').'components/tinymce/',
+            'path' => $assetsPath,
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
             'plugin_insertdate_timeFormat' => '%H:%M:%S',
@@ -59,18 +65,18 @@ class TinyMCE {
 
         /* now do user/context/system setting overrides - these must override properties */
         $this->config = array_merge($this->config,array(
-            'buttons1' => $this->modx->getOption('tinymce.custom_buttons1'),
-            'buttons2' => $this->modx->getOption('tinymce.custom_buttons2'),
-            'buttons3' => $this->modx->getOption('tinymce.custom_buttons3',null,''),
-            'buttons4' => $this->modx->getOption('tinymce.custom_buttons4',null,''),
+            'buttons1' => $this->modx->getOption('tiny.custom_buttons1'),
+            'buttons2' => $this->modx->getOption('tiny.custom_buttons2'),
+            'buttons3' => $this->modx->getOption('tiny.custom_buttons3',null,''),
+            'buttons4' => $this->modx->getOption('tiny.custom_buttons4',null,''),
             'css_path' => $this->modx->getOption('editor_css_path'),
-            'css_selectors' => $this->modx->getOption('tinymce.css_selectors',null,''),
-            'plugins' => $this->modx->getOption('tinymce.custom_plugins',null,''),
-            'theme' => $this->modx->getOption('tinymce.editor_theme',null,'simple'),
-            'theme_advanced_buttons1' => $this->modx->getOption('tinymce.custom_buttons1',null,''),
-            'theme_advanced_buttons2' => $this->modx->getOption('tinymce.custom_buttons2',null,''),
-            'theme_advanced_buttons3' => $this->modx->getOption('tinymce.custom_buttons3',null,''),
-            'theme_advanced_buttons4' => $this->modx->getOption('tinymce.custom_buttons4',null,''),
+            'css_selectors' => $this->modx->getOption('tiny.css_selectors',null,''),
+            'plugins' => $this->modx->getOption('tiny.custom_plugins',null,''),
+            'theme' => $this->modx->getOption('tiny.editor_theme',null,'simple'),
+            'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',null,''),
+            'theme_advanced_buttons2' => $this->modx->getOption('tiny.custom_buttons2',null,''),
+            'theme_advanced_buttons3' => $this->modx->getOption('tiny.custom_buttons3',null,''),
+            'theme_advanced_buttons4' => $this->modx->getOption('tiny.custom_buttons4',null,''),
             'toolbar_align' => $this->modx->getOption('manager_direction',null,'ltr'),
             'use_browser' => $this->modx->getOption('use_browser',null,true),
         ));
@@ -79,25 +85,21 @@ class TinyMCE {
         $this->config['elements'] = 'ta';
     }
 
-    /**
-     * Loads the correct event context
-     * @param string $event The event to load by
-     * @param array $config A configuration array.
-     */
-    public function load($event = '',array $config = array()) {
+    public function initialize() {
         $config = array_merge(array(
             'path' => dirname(__FILE__).'/',
             'language' => $this->modx->getOption('manager_language',null,'en'),
         ),$config);
 
-        switch ($event) {
-            case 'OnRichTextEditorRegister':
-                return 'TinyMCE';
-                break;
-            case 'OnRichTextEditorInit':
-                return $this->getScript();
-                break;
+        if (!$this->jsLoaded) {
+            $scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
+            $this->modx->regClientStartupScript($this->config['assets_url'].'jscripts/tiny_mce/'.$scriptfile);
+            $this->modx->regClientStartupScript($this->config['assets_url'].'xconfig.js');
+            $this->modx->regClientStartupScript($this->config['assets_url'].'tiny.js');
+            $this->modx->regClientStartupScript($this->config['assets_url'].'tinymce.panel.js');
+            $this->jsLoaded = true;
         }
+        return $this->getScript();
     }
 
     /**
@@ -106,12 +108,6 @@ class TinyMCE {
      * @param array $config An array of configuration parameters.
      */
     public function getScript() {
-
-        $scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce_src.js');
-
-        $this->modx->regClientStartupScript($this->config['assets_url'].'jscripts/tiny_mce/'.$scriptfile);
-        $this->modx->regClientStartupScript($this->config['assets_url'].'xconfig.js');
-
         $theme = $this->config['theme'];
         if ($theme == 'editor' || $theme == 'custom') {
             $tinyTheme = 'advanced';
@@ -163,5 +159,9 @@ class TinyMCE {
 
         $this->modx->regClientStartupHTMLBlock($script);
         return '';
+    }
+
+    private function _getBrowserAction() {
+        return $this->modx->getObject('modAction',array('controller' => 'browser'));
     }
 }

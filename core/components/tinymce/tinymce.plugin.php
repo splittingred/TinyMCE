@@ -2,44 +2,54 @@
 /**
  * TinyMCE RichText Editor Plugin
  *
- * Events:  OnRichTextEditorInit, OnRichTextEditorRegister
+ * Events: OnRichTextEditorInit, OnRichTextEditorRegister,
+ * OnBeforeManagerPageInit, OnRichTextBrowserInit
  *
  * @author Jeff Whitfield <jeff@collabpad.com>
  * @author Shaun McCormick <shaun@collabpad.com>
- * @created 2005/09/09
- * @modified 2007/10/22
- * @modified 2009/03/13
- * @modified 2009/05/21
+ *
+ * @package tinymce
+ * @subpackage build
  */
-require_once $modx->getOption('core_path').'components/tinymce/tinymce.class.php';
-$TinyMCE = new TinyMCE($modx,$scriptProperties);
+require_once $modx->getOption('tiny.core_path',$config,$modx->getOption('core_path').'components/tinymce/').'tinymce.class.php';
+$tiny = new TinyMCE($modx,$scriptProperties);
 
 /* Handle event */
-$e = &$modx->event;
-switch ($e->name) {
+switch ($modx->event->name) {
     case 'OnRichTextEditorRegister': /* register only for backend */
-        $e->output('TinyMCE');
+        $modx->event->output('TinyMCE');
         break;
 
     case 'OnRichTextEditorInit':
         if ($editor == 'TinyMCE') {
-            if (!$TinyMCE->jsLoaded) {
-                $modx->regClientStartupScript($TinyMCE->config['assets_url'].'tiny.js');
-                $TinyMCE->jsLoaded = true;
-            }
-
             $elementList = implode(',',$elements);
             if (isset($forfrontend) || $modx->isFrontend()) {
                 $def = $modx->getOption('manager_language',null,'en');
-                $TinyMCE->config['language'] = $modx->getOption('fe_editor_lang',array(),$def);
-                $TinyMCE->config['frontend'] = true;
+                $tiny->config['language'] = $modx->getOption('fe_editor_lang',array(),$def);
+                $tiny->config['frontend'] = true;
                 unset($def);
             }
-            $html = $TinyMCE->load($e->name);
-            $e->output($html);
+            $html = $tiny->initialize();
+            $modx->event->output($html);
             unset($html);
         }
         break;
+    case 'OnBeforeManagerPageInit':
+        if ($modx->getOption('use_editor',null,false)) {
+            $html = $tiny->initialize();
+            $modx->event->output($html);
+        }
+        break;
+    case 'OnRichTextBrowserInit':
+        if ($modx->getOption('use_editor',null,false)) {
+            $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/tiny_mce_popup.js');
+            $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/langs/en.js');
+            $modx->regClientStartupScript($tiny->config['assets_url'].'tiny.browser.js');
+            $modx->event->output('Tiny.browserCallback');
+        }
+        return '';
+        break;
+
    default: break;
 }
 return;

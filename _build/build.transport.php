@@ -9,7 +9,6 @@ $mtime = microtime();
 $mtime = explode(" ", $mtime);
 $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
-/* get rid of time limit */
 set_time_limit(0);
 
 $root = dirname(dirname(__FILE__)).'/';
@@ -24,10 +23,13 @@ $sources= array (
     'source_core' => $root . 'core/components/tinymce',
 );
 
-/* override with your own defines here (see build.config.sample.php) */
+define('PKG_NAME','TinyMCE');
+define('PKG_NAMESPACE',strtolower(PKG_NAME));
+define('PKG_VERSION','3.2.7.0');
+define('PKG_RELEASE','beta3');
+
 require_once dirname(__FILE__) . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
-
 $modx= new modX();
 $modx->initialize('mgr');
 $modx->setLogLevel(modX::LOG_LEVEL_INFO);
@@ -35,14 +37,14 @@ $modx->setLogTarget(XPDO_CLI_MODE ? 'ECHO' : 'HTML');
 
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
-$builder->createPackage('tinymce','3.2.7.0','beta2');
-$builder->registerNamespace('tinymce',false,true,'{core_path}components/tinymce/');
+$builder->createPackage(PKG_NAMESPACE,PKG_VERSION,PKG_RELEASE);
+$builder->registerNamespace(PKG_NAMESPACE,false,true,'{core_path}components/'.PKG_NAMESPACE.'/');
 
 /* create the plugin object */
 $plugin= $modx->newObject('modPlugin');
 $plugin->set('id',1);
-$plugin->set('name', 'TinyMCE');
-$plugin->set('description', 'TinyMCE 3.2.7 plugin for MODx Revolution');
+$plugin->set('name', PKG_NAME);
+$plugin->set('description', PKG_NAME.' '.PKG_VERSION.'-'.PKG_RELEASE.' plugin for MODx Revolution');
 $plugin->set('plugincode', file_get_contents($sources['source_core'] . '/tinymce.plugin.php'));
 $plugin->set('category', 0);
 

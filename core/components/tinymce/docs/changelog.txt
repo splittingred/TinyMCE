@@ -1,3 +1,14 @@
+
+This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
+development release, and is only shown to give an idea of what's currently in the pipeline.
+
+TinyMCE 3.2.7.0 ($LastChangedRevision: 581 $, $LastChangedDate: 2009-11-06 08:20:21 -0600 (Fri, 06 Nov 2009) $)
+====================================
+- Changed integrations to work in Revo-beta5.
+- Added hook for OnRichTextBrowserInit to allow for proper integrations into MODx.Browser
+- Added hook for OnBeforeManagerPageInit to properly register TinyMCE JS and Ext-derived object before page load; this allows using the 'tinymce' xtype in ExtJS forms
+
+====================================
 Version 3.2.0.1 (2008-09-17)
 	Fixed bug where font sizes and faces wouldn't be changed correctly when there was a parent with a different style.
 	Fixed bug where adding fonts to the same selection would produce redundant spans.
@@ -171,7 +182,7 @@ Version 3.0.7 (2008-04-14)
 	Fixed bug where it was possible to add style information to the body element using the style plugin.
 	Fixed bug where Gecko would add an extra undo level some times due to the blur event.
 	Fixed bug where the underline icon would get active if the caret was inside a link element.
-	Fixed bug where merging th cells not working correctly. Patch contributed by André R.
+	Fixed bug where merging th cells not working correctly. Patch contributed by Andrï¿½ R.
 	Fixed bug where forecolorpicker and backcolorpicker buttons where rendered incorrectly when the o2k7 skin was used.
 	Fixed bug where comment couldn't contain -- since it's invalid markup. It will now at least not break on those invalid comments.
 	Fixed bug where apos wasn't handled correctly in IE. It will now convert apos to &#39; on IE since that browser doesn't support that entity.
@@ -322,8 +333,8 @@ Version 3.0.3 (2008-03-03)
 Version 3.0.2.1 (2008-02-26)
 	Fixed alert/confirm dialogs so they display correctly.
 Version 3.0.2 (2008-02-26)
-	Added new body_id option that enables you to specify the id of the body inside the editor iframe based on ideas by David Bildström (ChronoZ).
-	Added new body_class option that enables you to set the class for the body of the editor iframe based on ideas by David Bildström (ChronoZ).
+	Added new body_id option that enables you to specify the id of the body inside the editor iframe based on ideas by David Bildstrï¿½m (ChronoZ).
+	Added new body_class option that enables you to set the class for the body of the editor iframe based on ideas by David Bildstrï¿½m (ChronoZ).
 	Added new CSS class to the default content.css files mceForceColors that forces white background and black text can be used with the body_class option.
 	Added new type parameter to the Editor.getParam function to reduce redundant logic for parsing hash tables.
 	Added new isDone method to the ScriptLoaded class, this enables you to check if a script has been loaded or not.
