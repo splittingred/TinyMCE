@@ -1,10 +1,11 @@
 Tiny.Editor = function(config) {
     config = config || {};
+    config.tinyConfig = config.tinyConfig || Tiny.config;
     config.tinyConfig = config.tinyConfig || {};
     Ext.applyIf(config.tinyConfig,{
         setup: (function(ed) {
-            //ed.onInit.add(this.onLoad);
-            //ed.onKeyUp.add(this.onChange);
+            ed.onInit.add(this.onLoad);
+            ed.onKeyUp.add(this.onChange);
         }).createDelegate(this)
         ,apply_source_formatting: true
         ,browserUrl: MODx.config.manager_url+'?a='+MODx.action['browser']
@@ -58,7 +59,6 @@ Tiny.Editor = function(config) {
         ,toolbar_align: MODx.config['manager_direction'] || 'rtl'
         ,use_browser: MODx.config['use_browser'] || true
     });
-    //Tiny.browserUrl = '<?php echo $this->modx->config['base_url']; ?>manager/controllers/browser/index.php';
     Ext.applyIf(config,{
         width: '90%'
     });
