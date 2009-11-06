@@ -17,7 +17,7 @@ $settings['tiny.editor_theme']->fromArray(array(
 $settings['tiny.custom_plugins']= $modx->newObject('modSystemSetting');
 $settings['tiny.custom_plugins']->fromArray(array(
     'key' => 'tiny.custom_plugins',
-    'value' => 'text;style,advimage,advlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media',
+    'value' => 'style,advimage,advlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media',
     'xtype' => 'textfield',
     'namespace' => 'tinymce',
     'area' => 'tinymce',
