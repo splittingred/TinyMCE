@@ -6,7 +6,6 @@ Ext.onReady(function() {
         ed.onInit.add(Tiny.onLoad);
         ed.onKeyUp.add(Tiny.onChange);
     };
-    Tiny.browserUrl = '<?php echo $this->modx->config['base_url']; ?>manager/controllers/browser/index.php';
 });
 // ]]>
 </script>
