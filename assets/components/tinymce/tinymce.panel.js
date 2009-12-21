@@ -10,7 +10,7 @@ Tiny.Editor = function(config) {
         ,apply_source_formatting: true
         ,browserUrl: MODx.config.manager_url+'?a='+MODx.action['browser']
         ,button_tile_map: false
-        ,cleanup: false
+        ,cleanup: true
         ,compressor: ''
         ,convert_fonts_to_spans: true
         ,convert_newlines_to_brs: false
@@ -79,7 +79,8 @@ Ext.extend(Tiny.Editor,Ext.form.TextArea,{
     }
     
     ,setValue: function(v) {
-        tinyMCE.get(this.getTinyId()).setContent(v);        
+        var c = tinyMCE.get(this.getTinyId());
+        if (c) c.setContent(v);        
     }
     
     ,onTinyRender: function() {

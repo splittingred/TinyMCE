@@ -16,7 +16,7 @@ var Tiny = {
     ,onTVLoad: function() {
         var els = Ext.query('.modx-richtext');
         Ext.each(els,function(el,i) {
-            el = Ext.get(el);
+            el = Ext.get(el);            
             tinyMCE.execCommand('mceAddControl', false, el.dom.id);
         },this);
         var btns = Ext.query('.modx-richtext-toggle');
@@ -78,8 +78,12 @@ MODx.loadRTE = function(id) {
     var s = Tiny.config;
     s.mode = 'exact';
     s.elements = id;
+    s.width = 400;
     tinyMCE.init(s);
     
     Ext.getCmp('modx-panel-resource-tv').on('load',Tiny.onTVLoad);
     Ext.get('ta-toggle').on('click',Tiny.toggle);
+};
+MODx.afterTVLoad = function() {
+    Tiny.onTVLoad();
 };
