@@ -51,6 +51,7 @@ class TinyMCE {
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
             'plugin_insertdate_timeFormat' => '%H:%M:%S',
+            'resizable' => true,
             'relative_urls' => true,
             'remove_line_breaks' => false,
             'resource_browser_path' => $this->modx->getOption('manager_url').'controllers/browser/index.php?',
@@ -62,7 +63,7 @@ class TinyMCE {
             'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',null,''),
             'theme_advanced_toolbar_align' => 'left',
             'theme_advanced_toolbar_location' => 'top',
-            'width' => '100%',
+            //'width' => '100%',
         ),$config);
 
         /* now do user/context/system setting overrides - these must override properties */
@@ -82,7 +83,6 @@ class TinyMCE {
             'toolbar_align' => $this->modx->getOption('manager_direction',null,'ltr'),
             'use_browser' => $this->modx->getOption('use_browser',null,true),
         ));
-
         /* manual override */
         $this->config['elements'] = 'ta';
     }
@@ -91,7 +91,7 @@ class TinyMCE {
         $config = array_merge(array(
             'path' => dirname(__FILE__).'/',
             'language' => $this->modx->getOption('manager_language',null,'en'),
-        ),$config);
+        ),$this->config);
 
         if (!$this->jsLoaded) {
             $scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
@@ -153,7 +153,7 @@ class TinyMCE {
         if (!empty($this->config['resource'])) {
             $this->config['resource'] = $this->config['resource']->toArray();
         }
-
+        unset($this->config['width'],$this->config['height']);
         ob_start();
         include_once dirname(__FILE__).'/templates/script.tpl';
         $script = ob_get_contents();

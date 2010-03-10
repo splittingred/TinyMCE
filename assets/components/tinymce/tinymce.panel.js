@@ -115,13 +115,7 @@ Ext.extend(Tiny.Editor,Ext.form.TextArea,{
             el = Ext.get(el);
             tinyMCE.execCommand('mceAddControl', false, el.dom.id);
         },this);
-        
-        var btns = Ext.query('.modx-richtext-toggle');
-        Ext.each(btns,function(el,i) {
-            el = Ext.get(el);
-            el.on('click',this.toggle,this);
-        },this);
-        
+                
         this.fireEvent('ajaxload');
     }
     ,toggle: function(e,t) {
