@@ -21,3 +21,6 @@ $_lang['tinymce_theme_simple'] = 'Simple';
 $_lang['tinymce_theme_advanced'] = 'Advanced';
 $_lang['tinymce_theme_editor'] = 'Content Editor';
 $_lang['tinymce_theme_custom'] = 'Custom';
+
+
+

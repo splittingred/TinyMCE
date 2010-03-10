@@ -19,11 +19,6 @@ var Tiny = {
             el = Ext.get(el);            
             tinyMCE.execCommand('mceAddControl', false, el.dom.id);
         },this);
-        var btns = Ext.query('.modx-richtext-toggle');
-        Ext.each(btns,function(el,i) {
-            el = Ext.get(el);
-            el.on('click',Tiny.toggle);
-        });
     }
     
     ,toggle: function(e,t) {
@@ -75,14 +70,14 @@ MODx.loadRTE = function(id) {
     var oid = Ext.get(id);
     if (!oid) return;
     
-    var s = Tiny.config;
+    var s = Tiny.config || {};
     s.mode = 'exact';
     s.elements = id;
     s.width = 400;
     tinyMCE.init(s);
     
-    Ext.getCmp('modx-panel-resource-tv').on('load',Tiny.onTVLoad);
-    Ext.get('ta-toggle').on('click',Tiny.toggle);
+    var ptv = Ext.getCmp('modx-panel-resource-tv');
+    if (ptv) { ptv.on('load',Tiny.onTVLoad); }
 };
 MODx.afterTVLoad = function() {
     Tiny.onTVLoad();

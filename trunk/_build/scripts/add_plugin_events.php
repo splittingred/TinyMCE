@@ -14,7 +14,7 @@ if ($pluginid= $object->get('id')) {
                 'OnRichTextBrowserInit',
                 'OnRichTextEditorRegister',
                 'OnRichTextEditorInit',
-                'OnBeforeManagerPageInit',
+                /*'OnBeforeManagerPageInit',*/
             );
 
             foreach ($events as $eventName) {

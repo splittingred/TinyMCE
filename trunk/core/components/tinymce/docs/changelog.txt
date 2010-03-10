@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 3.2.7.0 ($LastChangedRevision: 581 $, $LastChangedDate: 2009-11-06 08:20:21 -0600 (Fri, 06 Nov 2009) $)
 ====================================
+- Fixed bug with toggle not found in SVN
+- Fixed various bugs
 - Fixed bug with css style selectors
 - Changed integrations to work in Revo-beta5.
 - Added hook for OnRichTextBrowserInit to allow for proper integrations into MODx.Browser
