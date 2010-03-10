@@ -162,15 +162,14 @@ $properties = array(
     ),
     array(
         'name' => 'path_options',
-        'desc' => 'Sets a group of options. Note: If this is set to anything besides "None", it will override the relative_urls and remove_script_host settings.',
+        'desc' => 'Sets a group of options. Note: This will override the relative_urls, document_base_url and remove_script_host settings.',
         'type' => 'textfield',
         'options' => array(
-            array('name' => 'None','value' => ''),
-            array('name' => 'Root Relative','value' => 'rootrelative'),
             array('name' => 'Document Relative','value' => 'docrelative'),
+            array('name' => 'Root Relative','value' => 'rootrelative'),
             array('name' => 'Full Path URL','value' => 'fullpathurl'),
         ),
-        'value' => '',
+        'value' => 'docrelative',
     ),
     array(
         'name' => 'plugin_insertdate_dateFormat',
@@ -191,7 +190,7 @@ $properties = array(
         'desc' => 'If you enable this feature, whitespace such as tabs and spaces will be preserved. Much like the behavior of a <pre> element. This can be handy when integrating TinyMCE with webmail clients. This option is disabled by default.',
         'type' => 'combo-boolean',
         'options' => '',
-        'value' => false,
+        'value' => true,
     ),
     array(
         'name' => 'relative_urls',
@@ -201,11 +200,11 @@ $properties = array(
         'value' => true,
     ),
     array(
-        'name' => 'remove_line_breaks',
+        'name' => 'remove_linebreaks',
         'desc' => 'This option controls whether line break characters should be removed from output HTML. This option is enabled by default because there are differences between browser implementations regarding what to do with white space in the DOM. Gecko and Safari place white space in text nodes in the DOM. IE and Opera remove them from the DOM and therefore the line breaks will automatically be removed in those. This option will normalize this behavior when enabled (true) and all browsers will have a white-space-stripped DOM serialization.',
         'type' => 'combo-boolean',
         'options' => '',
-        'value' => true,
+        'value' => false,
     ),
     array(
         'name' => 'remove_script_host',

@@ -29,7 +29,7 @@ class TinyMCE {
             'assets_url' => $assetsUrl,
             'browserUrl' => $browserAction ? $modx->getOption('manager_url').'?a='.$browserAction->get('id') : null,
             'button_tile_map' => false,
-            'cleanup' => false,
+            'cleanup' => true,
             'compressor' => '',
             'content_css' => $this->modx->getOption('editor_css_path'),
             'convert_fonts_to_spans' => true,
@@ -41,6 +41,8 @@ class TinyMCE {
             'entity_encoding' => '',
             'file_browser_callback' => 'Tiny.loadBrowser',
             'formats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
+            'force_p_newlines' => true,
+            'force_br_newlines' => false,
             'frontend' => false,
             'height' => '400px',
             'invalid_elements' => '',
@@ -51,9 +53,11 @@ class TinyMCE {
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
             'plugin_insertdate_timeFormat' => '%H:%M:%S',
+            'preformatted' => true,
             'resizable' => true,
             'relative_urls' => true,
-            'remove_line_breaks' => false,
+            'remove_linebreaks' => false,
+            'remove_script_host' => true,
             'resource_browser_path' => $this->modx->getOption('manager_url').'controllers/browser/index.php?',
             'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'theme_advanced_disable' => '',
@@ -63,7 +67,6 @@ class TinyMCE {
             'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',null,''),
             'theme_advanced_toolbar_align' => 'left',
             'theme_advanced_toolbar_location' => 'top',
-            //'width' => '100%',
         ),$config);
 
         /* now do user/context/system setting overrides - these must override properties */
@@ -133,14 +136,15 @@ class TinyMCE {
 
         /* Set relative URL options */
         switch ($this->config['path_options']) {
-            case 'rootrelative':
-                $this->config['relative_urls'] = false;
-                $this->config['remove_script_host'] = true;
-            break;
-
+            default:
             case 'docrelative':
                 $this->config['relative_urls'] = true;
-                $this->config['document_base_url'] = $this->config['assets_url'];
+                $this->config['remove_script_host'] = true;
+                $this->config['document_base_url'] = $this->modx->getOption('base_url');
+            break;
+
+            case 'rootrelative':
+                $this->config['relative_urls'] = false;
                 $this->config['remove_script_host'] = true;
             break;
 

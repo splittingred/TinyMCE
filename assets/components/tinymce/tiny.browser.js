@@ -1,4 +1,4 @@
-
+Ext.ns('Tiny');
 Tiny.browserCallback = function(data) {
     var FileBrowserDialogue = {
         init : function () {}
