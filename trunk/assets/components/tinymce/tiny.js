@@ -15,9 +15,22 @@ var Tiny = {
     
     ,onTVLoad: function() {
         var els = Ext.query('.modx-richtext');
+        var ed;
         Ext.each(els,function(el,i) {
-            el = Ext.get(el);            
+            el = Ext.get(el);        
             tinyMCE.execCommand('mceAddControl', false, el.dom.id);
+            ed = tinyMCE.get(el.dom.id);
+            if (ed) {
+                ed.onChange.add(this.onChange);
+            }
+        },this);
+    }
+    ,onTVUnload: function() {
+        var els = Ext.query('.modx-richtext');
+        var ed;
+        Ext.each(els,function(el,i) {
+            el = Ext.get(el);        
+            tinyMCE.execCommand('mceRemoveControl', false, el.dom.id);
         },this);
     }
     
@@ -29,23 +42,17 @@ var Tiny = {
         }
     }
     
-    ,onChange: function(i) {
-        MODx.triggerRTEOnChange('TinyMCE');
+    ,onChange: function(ed,e) {
+        Ext.getCmp('modx-panel-resource').markDirty();
         
         if (typeof(tinyMCE) != 'undefined') {
-            tinyMCE.triggerSave(true,true);
-            var ta = Ext.get('ta');
-            if (ta) {
-                ta.dom.value = tinyMCE.activeEditor.getContent();
-            }
-                
-            var el = null;    
-            for (n in tinyMCE.editors) {
-                inst = tinyMCE.editors[n];
-                el = inst.editorId;
-                Ext.get(el).dom.value = inst.getContent();
-            }
-            
+            try {
+                tinyMCE.triggerSave();
+                var ta = Ext.getCmp(ed.id);
+                if (ta && ed && ed.getContent) {
+                    ta.setValue(ed.getContent());
+                }
+            } catch (e) {}
         }
     }
     
@@ -73,7 +80,6 @@ MODx.loadRTE = function(id) {
     var s = Tiny.config || {};
     s.mode = 'exact';
     s.elements = id;
-    s.width = 400;
     tinyMCE.init(s);
     
     var ptv = Ext.getCmp('modx-panel-resource-tv');
@@ -81,4 +87,7 @@ MODx.loadRTE = function(id) {
 };
 MODx.afterTVLoad = function() {
     Tiny.onTVLoad();
+};
+MODx.unloadTVRTE = function() {
+    Tiny.onTVUnload();
 };

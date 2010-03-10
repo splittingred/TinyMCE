@@ -21,7 +21,7 @@ switch ($modx->event->name) {
         break;
 
     case 'OnRichTextEditorInit':
-        if ($editor == 'TinyMCE') {
+        if ($modx->getOption('use_editor',null,false) && $modx->getOption('which_editor') == 'TinyMCE') {
             $elementList = implode(',',$elements);
             if (isset($forfrontend) || $modx->isFrontend()) {
                 $def = $modx->getOption('manager_language',null,'en');
@@ -41,7 +41,7 @@ switch ($modx->event->name) {
         //}
         break;
     case 'OnRichTextBrowserInit':
-        if ($modx->getOption('use_editor',null,false)) {
+        if ($modx->getOption('use_editor',null,false) && $modx->getOption('which_editor') == 'TinyMCE') {
             $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/tiny_mce_popup.js');
             $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/langs/en.js');
             $modx->regClientStartupScript($tiny->config['assets_url'].'tiny.browser.js');
