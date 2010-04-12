@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 3.2.7.0 ($LastChangedRevision: 581 $, $LastChangedDate: 2009-11-06 08:20:21 -0600 (Fri, 06 Nov 2009) $)
 ====================================
+- [#TINYMCE-52] Added skin and skin_variant properties for TinyMCE; also set the default to the silver o2k7 theme
+- [#TINYMCE-53] Added tiny.custom_buttons5 setting for 5th row of buttons options
+- [#TINYMCE-54] Added table_inline_editing property
+- Removed deprecated assets docs dir
 - [#TINYMCE-42], [#TINYMCE-38], [#TINYMCE-46], [#TINYMCE-43], [#TINYMCE-29], [#TINYMCE-6], [#TINYMCE-47] Fixed bugs with saving not syncing, bugs where RTE would not reload in TVs when 'Reload' was clicked, image path bugs, other bugs
 - Fixed bug with toggle not found in SVN
 - Fixed various bugs

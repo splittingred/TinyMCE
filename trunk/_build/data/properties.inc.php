@@ -221,6 +221,27 @@ $properties = array(
         'value' => false,
     ),
     array(
+        'name' => 'skin',
+        'desc' => 'This option enables you to specify what skin you want to use with your theme. A skin is basically a CSS file that gets loaded from the skins directory inside the theme. The advanced theme that TinyMCE comes with has two skins these are called "default" and "o2k7".',
+        'type' => 'textfield',
+        'options' => '',
+        'value' => 'o2k7',
+    ),
+    array(
+        'name' => 'skin_variant',
+        'desc' => 'This option enables you to specify a variant for the skin, for example "silver" or "black". "default" skin does not offer any variant, whereas "o2k7" default offers "silver" or "black" variants to the default one. When creating a skin, additional variants may also be created, by adding ui_[variant_name].css files alongside the default ui.css.',
+        'type' => 'textfield',
+        'options' => '',
+        'value' => 'silver',
+    ),
+    array(
+        'name' => 'table_inline_editing',
+        'desc' => '',
+        'type' => 'combo-boolean',
+        'options' => '',
+        'value' => true,
+    ),
+    array(
         'name' => 'theme_advanced_blockformats',
         'desc' => 'This option should contain a comma separated list of formats that will be available in the format drop down list. This option is only available if the advanced theme is used.',
         'type' => 'textfield',
