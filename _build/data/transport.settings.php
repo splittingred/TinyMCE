@@ -50,10 +50,18 @@ $settings['tiny.custom_buttons3']->fromArray(array(
     'area' => 'tinymce',
 ),'',true,true);
 
-
 $settings['tiny.custom_buttons4']= $modx->newObject('modSystemSetting');
 $settings['tiny.custom_buttons4']->fromArray(array(
     'key' => 'tiny.custom_buttons4',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
+$settings['tiny.custom_buttons5']= $modx->newObject('modSystemSetting');
+$settings['tiny.custom_buttons5']->fromArray(array(
+    'key' => 'tiny.custom_buttons5',
     'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'tinymce',
