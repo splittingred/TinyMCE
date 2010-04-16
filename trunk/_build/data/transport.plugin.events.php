@@ -3,23 +3,25 @@
  * @package tinymce
  * @subpackage build
  */
-$eventNames = array(
-    'OnRichTextBrowserInit',
-    'OnRichTextEditorRegister',
-    'OnRichTextEditorInit',
-    /*'OnBeforeManagerPageInit',*/
-);
 $events = array();
 
-foreach ($eventNames as $eventName) {
-    $pluginEvent= $modx->newObject('modPluginEvent');
-    $pluginEvent->fromArray(array(
-        'pluginid' => 0,
-        'event' => $eventName,
-        'priority' => 0,
-        'propertyset' => 0,
-    ),'',true,true);
-    $events[] = $pluginEvent;
-}
+$events['OnRichTextBrowserInit']= $modx->newObject('modPluginEvent');
+$events['OnRichTextBrowserInit']->fromArray(array(
+    'event' => 'OnRichTextBrowserInit',
+    'priority' => 0,
+    'propertyset' => 0,
+),'',true,true);
+$events['OnRichTextEditorRegister']= $modx->newObject('modPluginEvent');
+$events['OnRichTextEditorRegister']->fromArray(array(
+    'event' => 'OnRichTextEditorRegister',
+    'priority' => 0,
+    'propertyset' => 0,
+),'',true,true);
+$events['OnRichTextEditorInit']= $modx->newObject('modPluginEvent');
+$events['OnRichTextEditorInit']->fromArray(array(
+    'event' => 'OnRichTextEditorInit',
+    'priority' => 0,
+    'propertyset' => 0,
+),'',true,true);
 
 return $events;

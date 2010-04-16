@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 3.2.7.0 ($LastChangedRevision: 581 $, $LastChangedDate: 2009-11-06 08:20:21 -0600 (Fri, 06 Nov 2009) $)
 ====================================
+- Adjusted resolver code to work with Revo RC2
 - [#TINYMCE-52] Added skin and skin_variant properties for TinyMCE; also set the default to the silver o2k7 theme
 - [#TINYMCE-53] Added tiny.custom_buttons5 setting for 5th row of buttons options
 - [#TINYMCE-54] Added table_inline_editing property
