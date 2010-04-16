@@ -70,7 +70,7 @@ $attributes= array(
     xPDOTransport::RELATED_OBJECTS => true,
     xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
         'PluginEvents' => array(
-            xPDOTransport::PRESERVE_KEYS => false,
+            xPDOTransport::PRESERVE_KEYS => true,
             xPDOTransport::UPDATE_OBJECT => false,
             xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
         ),
