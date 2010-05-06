@@ -15,10 +15,10 @@ $root = dirname(dirname(__FILE__)).'/';
 $sources= array (
     'root' => $root,
     'build' => $root .'_build/',
-    'lexicon' => $root . '_build/lexicon/',
     'resolvers' => $root . '_build/resolvers/',
     'data' => $root . '_build/data/',
     'docs' => $root . 'core/components/tinymce/docs/',
+    'lexicon' => $root . 'core/components/tinymce/lexicon/',
     'source_assets' => $root . 'assets/components/tinymce',
     'source_core' => $root . 'core/components/tinymce',
 );
@@ -26,7 +26,7 @@ $sources= array (
 define('PKG_NAME','TinyMCE');
 define('PKG_NAMESPACE',strtolower(PKG_NAME));
 define('PKG_VERSION','3.2.7.0');
-define('PKG_RELEASE','rc3');
+define('PKG_RELEASE','rc4');
 
 require_once dirname(__FILE__) . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
@@ -86,9 +86,6 @@ $vehicle->resolve('file',array(
     'target' => "return MODX_CORE_PATH . 'components/';",
 ));
 $builder->putVehicle($vehicle);
-
-/* load lexicon strings */
-$builder->buildLexicon($sources['lexicon']);
 
 /* load system settings */
 $settings = include $sources['data'].'transport.settings.php';
