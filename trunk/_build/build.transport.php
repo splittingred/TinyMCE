@@ -25,8 +25,8 @@ $sources= array (
 
 define('PKG_NAME','TinyMCE');
 define('PKG_NAMESPACE',strtolower(PKG_NAME));
-define('PKG_VERSION','3.2.7.0');
-define('PKG_RELEASE','rc4');
+define('PKG_VERSION','4.0.0');
+define('PKG_RELEASE','rc1');
 
 require_once dirname(__FILE__) . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
@@ -84,6 +84,9 @@ $vehicle->resolve('file',array(
 $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
+));
+$vehicle->resolve('php',array(
+    'source' => $sources['resolvers'] . 'resolve.whicheditor.php',
 ));
 $builder->putVehicle($vehicle);
 

@@ -17,7 +17,7 @@ $settings['tiny.editor_theme']->fromArray(array(
 $settings['tiny.custom_plugins']= $modx->newObject('modSystemSetting');
 $settings['tiny.custom_plugins']->fromArray(array(
     'key' => 'tiny.custom_plugins',
-    'value' => 'style,advimage,advlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media',
+    'value' => 'style,advimage,advlink,modxlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media',
     'xtype' => 'textfield',
     'namespace' => 'tinymce',
     'area' => 'tinymce',
@@ -26,7 +26,7 @@ $settings['tiny.custom_plugins']->fromArray(array(
 $settings['tiny.custom_buttons1']= $modx->newObject('modSystemSetting');
 $settings['tiny.custom_buttons1']->fromArray(array(
     'key' => 'tiny.custom_buttons1',
-    'value' => 'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,link,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help',
+    'value' => 'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help',
     'xtype' => 'textfield',
     'namespace' => 'tinymce',
     'area' => 'tinymce',
@@ -67,7 +67,6 @@ $settings['tiny.custom_buttons5']->fromArray(array(
     'namespace' => 'tinymce',
     'area' => 'tinymce',
 ),'',true,true);
-
 
 $settings['tiny.css_selectors']= $modx->newObject('modSystemSetting');
 $settings['tiny.css_selectors']->fromArray(array(
