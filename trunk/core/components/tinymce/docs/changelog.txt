@@ -3,11 +3,12 @@ This file shows the changes in recent releases of TinyMCE for MODx. The most cur
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 
-TinyMCE 4.0.0 ($LastChangedRevision: 581 $, $LastChangedDate: 2009-11-06 08:20:21 -0600 (Fri, 06 Nov 2009) $)
+TinyMCE 4.0.0 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
 - Added modxlink tinymce plugin to add searchability to link popup
 - Fixed bug where css_selectors setting wasnt working
 - Added resolver to auto-set which_editor to TinyMCE and use_editor to 1 when installing
+- Added svn props to changelog
 
 TinyMCE 3.2.7.0 (LastChangedRevision: 581, LastChangedDate: 2009-11-06 08:20:21 -0600 (Fri, 06 Nov 2009))
 ====================================
