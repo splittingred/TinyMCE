@@ -34,12 +34,6 @@ switch ($modx->event->name) {
             unset($html);
         }
         break;
-    case 'OnBeforeManagerPageInit':
-        //if ($modx->getOption('use_editor',null,false)) {
-        //    $html = $tiny->initialize();
-        //    $modx->event->output($html);
-        //}
-        break;
     case 'OnRichTextBrowserInit':
         if ($modx->getOption('use_editor',null,false) && $modx->getOption('which_editor') == 'TinyMCE') {
             $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/tiny_mce_popup.js');
