@@ -1,0 +1,94 @@
+var Tiny = {    
+    onLoad: function(ed) {
+        var el = Ext.get(ed.id+'_ifr');
+        new MODx.load({
+            xtype: 'modx-treedrop'
+            ,target: el
+            ,targetEl: el.dom
+            ,iframe: true
+            ,iframeEl: 'tinymce'
+            ,onInsert: function(v) {
+                tinyMCE.execCommand('mceInsertContent',false,v);
+            }
+        });
+    }
+    
+    ,onTVLoad: function() {
+        var els = Ext.query('.modx-richtext');
+        var ed;
+        Ext.each(els,function(el,i) {
+            el = Ext.get(el);        
+            tinyMCE.execCommand('mceAddControl', false, el.dom.id);
+            ed = tinyMCE.get(el.dom.id);
+            if (ed) {
+                ed.onChange.add(this.onChange);
+            }
+        },this);
+    }
+    ,onTVUnload: function() {
+        var els = Ext.query('.modx-richtext');
+        var ed;
+        Ext.each(els,function(el,i) {
+            el = Ext.get(el);        
+            tinyMCE.execCommand('mceRemoveControl', false, el.dom.id);
+        },this);
+    }
+    
+    ,toggle: function(e,t) {
+        t = t.id.replace(/-toggle/,'');
+        ed = tinyMCE.get(t);
+        if (ed) {
+            ed.isHidden() ? ed.show() : ed.hide();
+        }
+    }
+    
+    ,onChange: function(ed,e) {
+        Ext.getCmp('modx-panel-resource').markDirty();
+        
+        if (typeof(tinyMCE) != 'undefined') {
+            try {
+                tinyMCE.triggerSave();
+                var ta = Ext.getCmp(ed.id);
+                if (ta && ed && ed.getContent) {
+                    ta.setValue(ed.getContent());
+                }
+            } catch (e) {}
+        }
+    }
+    
+    ,loadBrowser: function(fld, url, type, win) {
+        tinyMCE.activeEditor.windowManager.open({
+            file: Tiny.config.browserUrl
+            ,width: screen.width * 0.7
+            ,height: screen.height * 0.7
+            ,resizable: 'yes'
+            ,inline: 'yes'
+            ,close_previous: 'no'
+        }, {
+            window: win
+            ,input: fld
+        });
+        return false;
+    }
+};
+
+
+MODx.loadRTE = function(id) {
+    var oid = Ext.get(id);
+    if (!oid) return;
+    
+    var s = Tiny.config || {};
+    s.mode = 'exact';
+    s.elements = id;
+
+    tinyMCE.init(s);
+    
+    var ptv = Ext.getCmp('modx-panel-resource-tv');
+    if (ptv) { ptv.on('load',Tiny.onTVLoad); }
+};
+MODx.afterTVLoad = function() {
+    Tiny.onTVLoad();
+};
+MODx.unloadTVRTE = function() {
+    Tiny.onTVUnload();
+};
