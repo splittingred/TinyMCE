@@ -74,17 +74,16 @@ var Tiny = {
 
 
 MODx.loadRTE = function(id) {
-    var oid = Ext.get(id);
-    if (!oid) return;
-    
     var s = Tiny.config || {};
     s.mode = 'exact';
-    s.elements = id;
-
     tinyMCE.init(s);
-    
+
     var ptv = Ext.getCmp('modx-panel-resource-tv');
     if (ptv) { ptv.on('load',Tiny.onTVLoad); }
+
+    var oid = Ext.get(id);
+    if (!oid) return;
+    tinyMCE.execCommand('mceAddControl',false,id);
 };
 MODx.afterTVLoad = function() {
     Tiny.onTVLoad();

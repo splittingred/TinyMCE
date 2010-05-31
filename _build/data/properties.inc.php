@@ -32,7 +32,7 @@ $properties = array(
         'desc' => 'This option enables or disables the built-in clean up functionality. TinyMCE is equipped with powerful clean up functionality that enables you to specify what elements and attributes are allowed and how HTML contents should be generated. This option is set to true by default, but if you want to disable it you may set it to false.',
         'type' => 'combo-boolean',
         'options' => '',
-        'value' => false,
+        'value' => true,
     ),
     array(
         'name' => 'cleanup_on_startup',
