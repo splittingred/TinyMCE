@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.0.0 ($LastChangedRevision$, $LastChangedDate$)
 ====================================
+- Fixed bug where TinyMCE was ignoring save syncing
 - Adjusted rte loading logic to properly load right data for TV rtes
 - Fixed bug with mce tags being added in, cleanup setting now defaults to true
 - Added modxlink tinymce plugin to add searchability to link popup

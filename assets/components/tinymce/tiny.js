@@ -75,7 +75,6 @@ var Tiny = {
 
 MODx.loadRTE = function(id) {
     var s = Tiny.config || {};
-    s.mode = 'exact';
     tinyMCE.init(s);
 
     var ptv = Ext.getCmp('modx-panel-resource-tv');
