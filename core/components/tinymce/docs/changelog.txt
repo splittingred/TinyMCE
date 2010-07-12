@@ -2,7 +2,6 @@
 This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-
 TinyMCE 4.0.0
 ====================================
 - Fixed bug with language being ignored
