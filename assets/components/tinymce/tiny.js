@@ -51,6 +51,12 @@ var Tiny = {
                 var ta = Ext.getCmp(ed.id);
                 if (ta && ed && ed.getContent) {
                     ta.setValue(ed.getContent());
+                } else {
+                    MODx.sleep(3);
+                    ta = Ext.get(ed.id);
+                    if (ta) {
+                        ta.dom.value = ed.getContent();
+                    }
                 }
             } catch (e) {}
         }

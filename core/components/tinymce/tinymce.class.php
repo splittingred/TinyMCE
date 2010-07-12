@@ -43,10 +43,11 @@ class TinyMCE {
             'formats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'force_p_newlines' => true,
             'force_br_newlines' => false,
+            'forced_root_block' => false,
             'frontend' => false,
             'height' => '400px',
             'invalid_elements' => '',
-            'language' => $this->modx->getOption('manager_language',null,'en'),
+            'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
             'mode' => 'none',
             'nowrap' => false,
             'path' => $assetsPath,
@@ -99,7 +100,7 @@ class TinyMCE {
     public function initialize() {
         $config = array_merge(array(
             'path' => dirname(__FILE__).'/',
-            'language' => $this->modx->getOption('manager_language',null,'en'),
+            'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
         ),$this->config);
 
         if (!$this->jsLoaded) {

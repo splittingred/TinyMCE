@@ -3,8 +3,10 @@ This file shows the changes in recent releases of TinyMCE for MODx. The most cur
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
 
-TinyMCE 4.0.0 ($LastChangedRevision$, $LastChangedDate$)
+TinyMCE 4.0.0
 ====================================
+- Fixed bug with language being ignored
+- Fixed bug with TVs on non-document panels as TVs
 - Fixed bug where TinyMCE was ignoring save syncing
 - Adjusted rte loading logic to properly load right data for TV rtes
 - Fixed bug with mce tags being added in, cleanup setting now defaults to true
