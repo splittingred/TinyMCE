@@ -6,6 +6,7 @@ Ext.onReady(function() {
         ed.onInit.add(Tiny.onLoad);
         ed.onKeyUp.add(Tiny.onChange);
     };
+    Tiny.templates = <?php echo $this->modx->toJSON($templates); ?>;
 });
 // ]]>
 </script>

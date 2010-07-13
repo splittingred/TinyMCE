@@ -77,4 +77,13 @@ $settings['tiny.css_selectors']->fromArray(array(
     'area' => 'tinymce',
 ),'',true,true);
 
+$settings['tiny.template_list']= $modx->newObject('modSystemSetting');
+$settings['tiny.template_list']->fromArray(array(
+    'key' => 'tiny.template_list',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
 return $settings;

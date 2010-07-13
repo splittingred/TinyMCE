@@ -63,6 +63,7 @@ class TinyMCE {
             'skin' => 'o2k7',
             'skin_variant' => 'silver',
             'table_inline_editing' => true,
+            'template_external_list_url' => $assetsUrl.'template.list.php',
             'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'theme_advanced_disable' => '',
             'theme_advanced_resizing' => false,
@@ -157,6 +158,10 @@ class TinyMCE {
             $this->config['resource'] = $this->config['resource']->toArray();
         }
         unset($this->config['width'],$this->config['height']);
+        
+        $templates = $this->getTemplateList();
+
+        /* get JS */
         ob_start();
         include_once dirname(__FILE__).'/templates/script.tpl';
         $script = ob_get_contents();
@@ -164,6 +169,25 @@ class TinyMCE {
 
         $this->modx->regClientStartupHTMLBlock($script);
         return '';
+    }
+
+    public function getTemplateList() {
+        $list = array();
+
+        $templateList = $this->modx->getOption('tiny.template_list',$this->config,'');
+        if (empty($templateList)) return $list;
+
+        $templateList = explode(',',$templateList);
+        foreach ($templateList as $template) {
+            if (empty($template)) continue;
+            $templateParams = explode(':',$template);
+            if (count($templateParams) < 2) continue;
+
+            $t = array($templateParams[0],$templateParams[1]);
+            if (!empty($templateParams[2])) array_push($t,$templateParams[2]);
+            $list[] = $t;
+        }
+        return $list;
     }
 
     private function _getBrowserAction() {
