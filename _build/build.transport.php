@@ -25,8 +25,8 @@ $sources= array (
 
 define('PKG_NAME','TinyMCE');
 define('PKG_NAMESPACE',strtolower(PKG_NAME));
-define('PKG_VERSION','4.0.0');
-define('PKG_RELEASE','pl');
+define('PKG_VERSION','4.0.1');
+define('PKG_RELEASE','rc1');
 
 require_once dirname(__FILE__) . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
