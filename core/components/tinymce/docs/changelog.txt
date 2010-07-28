@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.0.0
 ====================================
+- Added cirkuit skin and made it default
+- Cleaned up code execution in plugin
 - Added lexicon support for tiny system settings
 - Added support for template plugin, can now use tiny.template_list setting
 - Fixed bug with editor theme
