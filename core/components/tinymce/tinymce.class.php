@@ -60,7 +60,7 @@ class TinyMCE {
             'remove_linebreaks' => false,
             'remove_script_host' => true,
             'resource_browser_path' => $this->modx->getOption('manager_url').'controllers/browser/index.php?',
-            'skin' => 'o2k7',
+            'skin' => 'cirkuit',
             'skin_variant' => 'silver',
             'table_inline_editing' => true,
             'template_external_list_url' => $assetsUrl.'template.list.php',

@@ -225,7 +225,7 @@ $properties = array(
         'desc' => 'This option enables you to specify what skin you want to use with your theme. A skin is basically a CSS file that gets loaded from the skins directory inside the theme. The advanced theme that TinyMCE comes with has two skins these are called "default" and "o2k7".',
         'type' => 'textfield',
         'options' => '',
-        'value' => 'o2k7',
+        'value' => 'cirkuit',
     ),
     array(
         'name' => 'skin_variant',

@@ -11,17 +11,20 @@
  * @package tinymce
  * @subpackage build
  */
+if ($modx->event->name == 'OnRichTextEditorRegister') {
+    $modx->event->output('TinyMCE');
+    return;
+}
 require_once $modx->getOption('tiny.core_path',$config,$modx->getOption('core_path').'components/tinymce/').'tinymce.class.php';
 $tiny = new TinyMCE($modx,$scriptProperties);
 
+$useEditor = $modx->getOption('use_editor',null,false);
+$whichEditor = $modx->getOption('which_editor',null,'');
+
 /* Handle event */
 switch ($modx->event->name) {
-    case 'OnRichTextEditorRegister': /* register only for backend */
-        $modx->event->output('TinyMCE');
-        break;
-
     case 'OnRichTextEditorInit':
-        if ($modx->getOption('use_editor',null,false) && $modx->getOption('which_editor') == 'TinyMCE') {
+        if ($useEditor && $whichEditor == 'TinyMCE') {
             $elementList = implode(',',$elements);
             if (isset($forfrontend) || $modx->isFrontend()) {
                 $def = $modx->getOption('manager_language',null,'en');
@@ -35,7 +38,7 @@ switch ($modx->event->name) {
         }
         break;
     case 'OnRichTextBrowserInit':
-        if ($modx->getOption('use_editor',null,false) && $modx->getOption('which_editor') == 'TinyMCE') {
+        if ($useEditor && $whichEditor == 'TinyMCE') {
             $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/tiny_mce_popup.js');
             $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/langs/'.$tiny->config['language'].'.js');
             $modx->regClientStartupScript($tiny->config['assets_url'].'tiny.browser.js');

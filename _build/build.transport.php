@@ -11,25 +11,29 @@ $mtime = $mtime[1] + $mtime[0];
 $tstart = $mtime;
 set_time_limit(0);
 
+/* define package */
+define('PKG_NAME','TinyMCE');
+define('PKG_NAMESPACE','tinymce');
+define('PKG_VERSION','4.0.1');
+define('PKG_RELEASE','rc2');
+
+/* define sources */
 $root = dirname(dirname(__FILE__)).'/';
 $sources= array (
     'root' => $root,
     'build' => $root .'_build/',
     'resolvers' => $root . '_build/resolvers/',
     'data' => $root . '_build/data/',
-    'docs' => $root . 'core/components/tinymce/docs/',
-    'lexicon' => $root . 'core/components/tinymce/lexicon/',
-    'source_assets' => $root . 'assets/components/tinymce',
-    'source_core' => $root . 'core/components/tinymce',
+    'docs' => $root . 'core/components/'.PKG_NAMESPACE.'/docs/',
+    'lexicon' => $root . 'core/components/'.PKG_NAMESPACE.'/lexicon/',
+    'source_assets' => $root . 'assets/components/'.PKG_NAMESPACE,
+    'source_core' => $root . 'core/components/'.PKG_NAMESPACE,
 );
 
-define('PKG_NAME','TinyMCE');
-define('PKG_NAMESPACE',strtolower(PKG_NAME));
-define('PKG_VERSION','4.0.1');
-define('PKG_RELEASE','rc1');
-
+/* load modx */
 require_once dirname(__FILE__) . '/build.config.php';
 require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
+require_once $sources['build'] . '/includes/functions.php';
 $modx= new modX();
 $modx->initialize('mgr');
 $modx->setLogLevel(modX::LOG_LEVEL_INFO);
@@ -46,22 +50,26 @@ $plugin= $modx->newObject('modPlugin');
 $plugin->set('id',1);
 $plugin->set('name', PKG_NAME);
 $plugin->set('description', PKG_NAME.' '.PKG_VERSION.'-'.PKG_RELEASE.' plugin for MODx Revolution');
-$plugin->set('plugincode', file_get_contents($sources['source_core'] . '/tinymce.plugin.php'));
+$plugin->set('plugincode', getSnippetContent($sources['source_core'] . '/tinymce.plugin.php'));
 $plugin->set('category', 0);
 
 /* add plugin events */
-$modx->log(xPDO::LOG_LEVEL_INFO,'Packaging in Plugin Events...'); flush();
 $events = include $sources['data'].'transport.plugin.events.php';
 if (is_array($events) && !empty($events)) {
     $plugin->addMany($events);
+    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' Plugin Events.'); flush();
 } else {
     $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not find plugin events!');
 }
 
 /* load plugin properties */
-$modx->log(xPDO::LOG_LEVEL_INFO,'Setting Plugin Properties...'); flush();
 $properties = include $sources['data'].'properties.inc.php';
-$plugin->setProperties($properties);
+if (is_array($properties)) {
+    $modx->log(xPDO::LOG_LEVEL_INFO,'Set '.count($properties).' plugin properties.'); flush();
+    $plugin->setProperties($properties);
+} else {
+    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not set plugin properties.');
+}
 
 $attributes= array(
     xPDOTransport::UNIQUE_KEY => 'name',
