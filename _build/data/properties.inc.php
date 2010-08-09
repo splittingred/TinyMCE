@@ -232,7 +232,7 @@ $properties = array(
         'desc' => 'This option enables you to specify a variant for the skin, for example "silver" or "black". "default" skin does not offer any variant, whereas "o2k7" default offers "silver" or "black" variants to the default one. When creating a skin, additional variants may also be created, by adding ui_[variant_name].css files alongside the default ui.css.',
         'type' => 'textfield',
         'options' => '',
-        'value' => 'silver',
+        'value' => '',
     ),
     array(
         'name' => 'table_inline_editing',

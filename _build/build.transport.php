@@ -15,7 +15,7 @@ set_time_limit(0);
 define('PKG_NAME','TinyMCE');
 define('PKG_NAMESPACE','tinymce');
 define('PKG_VERSION','4.0.1');
-define('PKG_RELEASE','rc2');
+define('PKG_RELEASE','pl');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';
@@ -114,7 +114,6 @@ foreach ($settings as $setting) {
 $modx->log(xPDO::LOG_LEVEL_INFO,'Setting Package Attributes...'); flush();
 $builder->setPackageAttributes(array(
     'license' => file_get_contents($sources['docs'] . 'license.txt'),
-    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
 ));
 
 $modx->log(xPDO::LOG_LEVEL_INFO,'Zipping up package...'); flush();

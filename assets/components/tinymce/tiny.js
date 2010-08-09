@@ -81,6 +81,14 @@ var Tiny = {
 
 MODx.loadRTE = function(id) {
     var s = Tiny.config || {};
+    delete s.assets_path;
+    delete s.assets_url;
+    delete s.core_path;
+    delete s.css_path;
+    delete s.editor;
+    delete s.id;
+    delete s.mode;
+    delete s.path;
     tinyMCE.init(s);
 
     var ptv = Ext.getCmp('modx-panel-resource-tv');

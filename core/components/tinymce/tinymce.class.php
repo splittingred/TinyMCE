@@ -40,7 +40,6 @@ class TinyMCE {
             'entities' => '',
             'entity_encoding' => 'named',
             'file_browser_callback' => 'Tiny.loadBrowser',
-            'formats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'force_p_newlines' => true,
             'force_br_newlines' => false,
             'forced_root_block' => false,
@@ -48,7 +47,6 @@ class TinyMCE {
             'height' => '400px',
             'invalid_elements' => '',
             'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
-            'mode' => 'none',
             'nowrap' => false,
             'path' => $assetsPath,
             'path_options' => '',
@@ -61,7 +59,7 @@ class TinyMCE {
             'remove_script_host' => true,
             'resource_browser_path' => $this->modx->getOption('manager_url').'controllers/browser/index.php?',
             'skin' => 'cirkuit',
-            'skin_variant' => 'silver',
+            'skin_variant' => '',
             'table_inline_editing' => true,
             'template_external_list_url' => $assetsUrl.'template.list.php',
             'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
@@ -128,7 +126,6 @@ class TinyMCE {
         } else {
             $tinyTheme = $theme;
         }
-        $this->config['tinyTheme'] = $tinyTheme;
         $this->config['theme'] = $theme;
 
 
@@ -160,6 +157,9 @@ class TinyMCE {
         unset($this->config['width'],$this->config['height']);
         
         $templates = $this->getTemplateList();
+
+        /* get formats */
+        $this->config['formats'] = $this->getFormats();
 
         /* get JS */
         ob_start();
@@ -193,4 +193,61 @@ class TinyMCE {
     private function _getBrowserAction() {
         return $this->modx->getObject('modAction',array('controller' => 'browser'));
     }
+
+    public function getFormats() {
+        $formats = explode(',',$this->config['formats']);
+        $fs = array();
+        foreach ($formats as $format) {
+            $fs[$format] = array();
+
+        }
+        $formats = json_encode($fs,JSON_FORCE_OBJECT);
+        unset($this->config['formats']);
+//        $this->config['formats'] = $fs;
+    }
 }
+
+/*
+ *
+$formatMap = array(
+    'alignleft' => array(
+        'selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img',
+        'classes' => 'left',
+    ),
+    'aligncenter' => array(
+        'selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img',
+        'classes' => 'center',
+    ),
+    'alignright' => array(
+        'selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img',
+        'classes' => 'right',
+    ),
+    'alignfull' => array(
+        'selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img',
+        'classes' => 'full',
+    ),
+    'bold' => array(
+        'inline' => 'span',
+        'classes' => 'bold',
+    ),
+    'italic' => array(
+        'inline' => 'span',
+        'classes' => 'italic',
+    ),
+    'underline' => array(
+        'inline' => 'span',
+        'classes' => 'underline',
+        'exact' => true,
+    ),
+    'strikethrough' => array(
+        'inline' => 'del',
+    ),
+    'forecolor' => array(
+        'inline' => 'span',
+        'classes' => 'hilitecolor',
+        'styles' => array(
+            'backgroundColor' => '%value',
+        ),
+    ),
+);
+ */
