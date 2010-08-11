@@ -6,18 +6,18 @@ Tiny.browserCallback = function(data) {
             url = url.replace('//','/');
             var win = tinyMCEPopup.getWindowArg('window');
         
-            // insert information now
+            /* insert information now */
             win.document.getElementById(tinyMCEPopup.getWindowArg('input')).value = url;
         
             if (typeof(win.ImageDialog) != 'undefined') {
-                // for image browsers: update image dimensions
+                /* for image browsers: update image dimensions */
                 if (win.ImageDialog.getImageData) {
                     win.ImageDialog.getImageData();
                 }
                 win.ImageDialog.showPreviewImage(url);
             }
         
-            // close popup window
+            /* close popup window */
             tinyMCEPopup.close();
             win.focus(); win.document.focus();
         }
