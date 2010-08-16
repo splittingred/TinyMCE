@@ -2,7 +2,7 @@
 This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-TinyMCE 4.0.2
+TinyMCE 4.0.3
 ====================================
 - Fixed JSON issue with PHP installs less than 5.3.0
 - Fixed issues with richtext TVs
