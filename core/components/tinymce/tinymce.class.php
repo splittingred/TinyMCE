@@ -198,12 +198,10 @@ class TinyMCE {
         $formats = explode(',',$this->config['formats']);
         $fs = array();
         foreach ($formats as $format) {
-            $fs[$format] = array();
-
+            $fs[$format] = new stdClass();
         }
-        $formats = json_encode($fs,JSON_FORCE_OBJECT);
+        $formats = json_encode($fs);
         unset($this->config['formats']);
-//        $this->config['formats'] = $fs;
     }
 }
 
