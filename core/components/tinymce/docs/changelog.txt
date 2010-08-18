@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.0.3
 ====================================
+- Added setting to toggle between uncompressed TinyMCE JS library
+- Fixed random issue with element being loaded twice
 - Fixed JSON issue with PHP installs less than 5.3.0
 - Fixed issues with richtext TVs
 

@@ -91,9 +91,6 @@ class TinyMCE {
             'toolbar_align' => $this->modx->getOption('manager_direction',null,'ltr'),
             'use_browser' => $this->modx->getOption('use_browser',null,true),
         ));
-
-        /* manual override */
-        $this->config['elements'] = 'ta';
     }
 
     public function initialize() {
@@ -104,6 +101,9 @@ class TinyMCE {
 
         if (!$this->jsLoaded) {
             $scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
+            if ($this->modx->getOption('tiny.use_uncompressed_library',null,false)) {
+                $scriptfile = 'tiny_mce_src.js';
+            }
             $this->modx->regClientStartupScript($this->config['assets_url'].'jscripts/tiny_mce/'.$scriptfile);
             $this->modx->regClientStartupScript($this->config['assets_url'].'xconfig.js');
             $this->modx->regClientStartupScript($this->config['assets_url'].'tiny.js');

@@ -86,4 +86,14 @@ $settings['tiny.template_list']->fromArray(array(
     'area' => 'tinymce',
 ),'',true,true);
 
+$settings['tiny.use_uncompressed_library']= $modx->newObject('modSystemSetting');
+$settings['tiny.use_uncompressed_library']->fromArray(array(
+    'key' => 'tiny.use_uncompressed_library',
+    'value' => false,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
+
 return $settings;
