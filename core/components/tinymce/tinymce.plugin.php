@@ -15,7 +15,7 @@ if ($modx->event->name == 'OnRichTextEditorRegister') {
     $modx->event->output('TinyMCE');
     return;
 }
-require_once $modx->getOption('tiny.core_path',$config,$modx->getOption('core_path').'components/tinymce/').'tinymce.class.php';
+require_once $modx->getOption('tiny.core_path',null,$modx->getOption('core_path').'components/tinymce/').'tinymce.class.php';
 $tiny = new TinyMCE($modx,$scriptProperties);
 
 $useEditor = $modx->getOption('use_editor',null,false);
@@ -27,10 +27,11 @@ switch ($modx->event->name) {
         if ($useEditor && $whichEditor == 'TinyMCE') {
             if (isset($forfrontend) || $modx->isFrontend()) {
                 $def = $modx->getOption('cultureKey',null,$modx->getOption('manager_language',null,'en'));
-                $tiny->config['language'] = $modx->getOption('fe_editor_lang',array(),$def);
-                $tiny->config['frontend'] = true;
+                $tiny->properties['language'] = $modx->getOption('fe_editor_lang',array(),$def);
+                $tiny->properties['frontend'] = true;
                 unset($def);
             }
+            $tiny->setProperties($scriptProperties);
             $html = $tiny->initialize();
             $modx->event->output($html);
             unset($html);
@@ -38,9 +39,9 @@ switch ($modx->event->name) {
         break;
     case 'OnRichTextBrowserInit':
         if ($useEditor && $whichEditor == 'TinyMCE') {
-            $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/tiny_mce_popup.js');
-            $modx->regClientStartupScript($tiny->config['assets_url'].'jscripts/tiny_mce/langs/'.$tiny->config['language'].'.js');
-            $modx->regClientStartupScript($tiny->config['assets_url'].'tiny.browser.js');
+            $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/tiny_mce_popup.js');
+            $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js');
+            $modx->regClientStartupScript($tiny->config['assetsUrl'].'tiny.browser.js');
             $modx->event->output('Tiny.browserCallback');
         }
         return '';

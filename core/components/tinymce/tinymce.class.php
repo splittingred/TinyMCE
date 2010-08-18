@@ -3,11 +3,8 @@
  * @package tinymce
  */
 class TinyMCE {
-    /**
-     * @var array $config The configuration array for TinyMCE.
-     * @access private
-     */
     public $config = array();
+    public $properties = array();
     public $jsLoaded = false;
 
     /**
@@ -18,23 +15,29 @@ class TinyMCE {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
-        $assetsUrl = $this->modx->getOption('tiny.assets_url',$config,$this->modx->getOption('assets_url').'components/tinymce/');
-        $assetsPath = $this->modx->getOption('tiny.assets_path',$config,$this->modx->getOption('assets_path').'components/tinymce/');
-        $corePath = $this->modx->getOption('tiny.core_path',$config,$this->modx->getOption('core_path').'components/tinymce/');
+        $assetsUrl = $this->modx->getOption('tiny.assets_url',$config,$this->modx->getOption('assets_url',null,MODX_ASSETS_URL).'components/tinymce/');
+        $assetsPath = $this->modx->getOption('tiny.assets_path',$config,$this->modx->getOption('assets_path',null,MODX_ASSETS_PATH).'components/tinymce/');
+        $corePath = $this->modx->getOption('tiny.core_path',$config,$this->modx->getOption('core_path',null,MODX_CORE_PATH).'components/tinymce/');
 
-        $browserAction = $this->_getBrowserAction();
         $this->config = array_merge(array(
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'path' => $assetsPath,
+            'corePath' => $corePath,
+        ),$config);
+    }
+
+    public function setProperties(array $properties = array()) {
+        $browserAction = $this->_getBrowserAction();
+        $this->properties = array_merge(array(
             'apply_source_formatting' => true,
-            'assets_path' => $assetsPath,
-            'assets_url' => $assetsUrl,
-            'browserUrl' => $browserAction ? $modx->getOption('manager_url').'?a='.$browserAction->get('id') : null,
+            'browserUrl' => $browserAction ? $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'?a='.$browserAction->get('id') : null,
             'button_tile_map' => false,
             'cleanup' => true,
             'compressor' => '',
             'content_css' => $this->modx->getOption('editor_css_path'),
             'convert_fonts_to_spans' => true,
             'convert_newlines_to_brs' => false,
-            'core_path' => $corePath,
             'element_format' => 'xhtml',
             'element_list' => '',
             'entities' => '',
@@ -48,7 +51,6 @@ class TinyMCE {
             'invalid_elements' => '',
             'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
             'nowrap' => false,
-            'path' => $assetsPath,
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
             'plugin_insertdate_timeFormat' => '%H:%M:%S',
@@ -57,11 +59,11 @@ class TinyMCE {
             'relative_urls' => true,
             'remove_linebreaks' => false,
             'remove_script_host' => true,
-            'resource_browser_path' => $this->modx->getOption('manager_url').'controllers/browser/index.php?',
+            'resource_browser_path' => $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'controllers/browser/index.php?',
             'skin' => 'cirkuit',
             'skin_variant' => '',
             'table_inline_editing' => true,
-            'template_external_list_url' => $assetsUrl.'template.list.php',
+            'template_external_list_url' => $this->config['assetsUrl'].'template.list.php',
             'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'theme_advanced_disable' => '',
             'theme_advanced_resizing' => false,
@@ -70,44 +72,39 @@ class TinyMCE {
             'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',null,''),
             'theme_advanced_toolbar_align' => 'left',
             'theme_advanced_toolbar_location' => 'top',
-        ),$config);
+        ),$properties);
 
         /* now do user/context/system setting overrides - these must override properties */
-        $this->config = array_merge($this->config,array(
-            'buttons1' => $this->modx->getOption('tiny.custom_buttons1',null,''),
-            'buttons2' => $this->modx->getOption('tiny.custom_buttons2',null,''),
-            'buttons3' => $this->modx->getOption('tiny.custom_buttons3',null,''),
-            'buttons4' => $this->modx->getOption('tiny.custom_buttons4',null,''),
-            'buttons5' => $this->modx->getOption('tiny.custom_buttons5',null,''),
-            'css_path' => $this->modx->getOption('editor_css_path'),
-            'plugins' => $this->modx->getOption('tiny.custom_plugins',null,''),
-            'theme' => $this->modx->getOption('tiny.editor_theme',null,'simple'),
-            'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',null,''),
-            'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',null,''),
-            'theme_advanced_buttons2' => $this->modx->getOption('tiny.custom_buttons2',null,''),
-            'theme_advanced_buttons3' => $this->modx->getOption('tiny.custom_buttons3',null,''),
-            'theme_advanced_buttons4' => $this->modx->getOption('tiny.custom_buttons4',null,''),
-            'theme_advanced_buttons5' => $this->modx->getOption('tiny.custom_buttons5',null,''),
-            'toolbar_align' => $this->modx->getOption('manager_direction',null,'ltr'),
-            'use_browser' => $this->modx->getOption('use_browser',null,true),
+        $this->properties = array_merge($this->properties,array(
+            'buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,''),
+            'buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,''),
+            'buttons3' => $this->modx->getOption('tiny.custom_buttons3',$this->properties,''),
+            'buttons4' => $this->modx->getOption('tiny.custom_buttons4',$this->properties,''),
+            'buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
+            'css_path' => $this->modx->getOption('editor_css_path',$this->properties,''),
+            'plugins' => $this->modx->getOption('tiny.custom_plugins',$this->properties,''),
+            'theme' => $this->modx->getOption('tiny.editor_theme',$this->properties,'simple'),
+            'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',$this->properties,''),
+            'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,''),
+            'theme_advanced_buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,''),
+            'theme_advanced_buttons3' => $this->modx->getOption('tiny.custom_buttons3',$this->properties,''),
+            'theme_advanced_buttons4' => $this->modx->getOption('tiny.custom_buttons4',$this->properties,''),
+            'theme_advanced_buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
+            'toolbar_align' => $this->modx->getOption('manager_direction',$this->properties,'ltr'),
+            'use_browser' => $this->modx->getOption('use_browser',$this->properties,true),
         ));
     }
 
     public function initialize() {
-        $config = array_merge(array(
-            'path' => dirname(__FILE__).'/',
-            'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
-        ),$this->config);
-
         if (!$this->jsLoaded) {
-            $scriptfile = ((!$this->config['frontend'] && $this->config['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
+            $scriptfile = ((!$this->properties['frontend'] && $this->properties['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
             if ($this->modx->getOption('tiny.use_uncompressed_library',null,false)) {
                 $scriptfile = 'tiny_mce_src.js';
             }
-            $this->modx->regClientStartupScript($this->config['assets_url'].'jscripts/tiny_mce/'.$scriptfile);
-            $this->modx->regClientStartupScript($this->config['assets_url'].'xconfig.js');
-            $this->modx->regClientStartupScript($this->config['assets_url'].'tiny.js');
-            $this->modx->regClientStartupScript($this->config['assets_url'].'tinymce.panel.js');
+            $this->modx->regClientStartupScript($this->config['assetsUrl'].'jscripts/tiny_mce/'.$scriptfile);
+            $this->modx->regClientStartupScript($this->config['assetsUrl'].'xconfig.js');
+            $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
+            $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
             $this->jsLoaded = true;
         }
         return $this->getScript();
@@ -119,47 +116,45 @@ class TinyMCE {
      * @param array $config An array of configuration parameters.
      */
     public function getScript() {
-        $theme = $this->config['theme'];
+        $theme = $this->properties['theme'];
         if ($theme == 'editor' || $theme == 'custom') {
             $tinyTheme = 'advanced';
             $theme = 'advanced';
         } else {
             $tinyTheme = $theme;
         }
-        $this->config['theme'] = $theme;
-
-
-        $this->config['document_base_url'] = $this->config['assets_url'];
+        $this->properties['theme'] = $theme;
+        $this->properties['document_base_url'] = $this->config['assetsUrl'];
 
         /* Set relative URL options */
-        switch ($this->config['path_options']) {
+        switch ($this->properties['path_options']) {
             default:
             case 'docrelative':
-                $this->config['relative_urls'] = true;
-                $this->config['remove_script_host'] = true;
-                $this->config['document_base_url'] = $this->modx->getOption('base_url');
+                $this->properties['relative_urls'] = true;
+                $this->properties['remove_script_host'] = true;
+                $this->properties['document_base_url'] = $this->modx->getOption('base_url',null,MODX_BASE_URL);
             break;
 
             case 'rootrelative':
-                $this->config['relative_urls'] = false;
-                $this->config['remove_script_host'] = true;
+                $this->conpropertiesfig['relative_urls'] = false;
+                $this->properties['remove_script_host'] = true;
             break;
 
             case 'fullpathurl':
-                $this->config['relative_urls'] = false;
-                $this->config['remove_script_host'] = false;
+                $this->properties['relative_urls'] = false;
+                $this->properties['remove_script_host'] = false;
             break;
         }
 
-        if (!empty($this->config['resource'])) {
-            $this->config['resource'] = $this->config['resource']->toArray();
+        if (!empty($this->properties['resource'])) {
+            $this->properties['resource'] = $this->properties['resource']->toArray();
         }
-        unset($this->config['width'],$this->config['height']);
+        unset($this->properties['width'],$this->properties['height']);
         
         $templates = $this->getTemplateList();
 
         /* get formats */
-        $this->config['formats'] = $this->getFormats();
+        //$this->properties['formats'] = $this->getFormats();
 
         /* get JS */
         ob_start();
@@ -171,10 +166,13 @@ class TinyMCE {
         return '';
     }
 
+    /**
+     * Allows for custom templates
+     */
     public function getTemplateList() {
         $list = array();
 
-        $templateList = $this->modx->getOption('tiny.template_list',$this->config,'');
+        $templateList = $this->modx->getOption('tiny.template_list',$this->properties,'');
         if (empty($templateList)) return $list;
 
         $templateList = explode(',',$templateList);
@@ -190,18 +188,28 @@ class TinyMCE {
         return $list;
     }
 
+    /**
+     * Gets the MODx modAction for the rte browser.
+     */
     private function _getBrowserAction() {
         return $this->modx->getObject('modAction',array('controller' => 'browser'));
     }
 
+    /**
+     * Allows for custom formats.
+     *
+     * TODO: Figure out proprietary storage format to have this work. Currently
+     * ignored.
+     */
     public function getFormats() {
-        $formats = explode(',',$this->config['formats']);
+        $formats = explode(',',$this->properties['formats']);
         $fs = array();
         foreach ($formats as $format) {
             $fs[$format] = new stdClass();
         }
         $formats = json_encode($fs);
-        unset($this->config['formats']);
+        unset($this->properties['formats']);
+        return '';
     }
 }
 
