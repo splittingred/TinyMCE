@@ -57,24 +57,7 @@ var Tiny = {
                     ta.dom.value = ed.getContent();
                 }
             } catch (e) {}
-/*
-            var ta = Ext.get(ed.id);
-            if (ta && ta.setValue && ed && ed.getContent) {
-                MODx.sleep(3);
-                ta.setValue(ed.getContent());
-            } else if (ed) {
-                MODx.sleep(3); // give DOM time to collect itself
-                ta = Ext.get(ed.id);
-                MODx.sleep(3); // why we have to do this here i have no clue, but it works when this is here
-                if (ta) {
-                    ta.dom.value = ed.getContent();
-                }
-            } else {
-                Ext.isSafari || Ext.isWebKit ? console.log(ed) : null;
-            }
-            */
         }
-        //console.log(Ext.getCmp('modx-panel-resource').getForm().getValues());
 
         Ext.getCmp('modx-panel-resource').markDirty();
     }
