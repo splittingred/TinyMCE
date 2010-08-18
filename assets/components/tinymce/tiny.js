@@ -17,16 +17,18 @@ var Tiny = {
     ,onTVLoad: function() {
         var els = Ext.query('.modx-richtext');
         var ed;
-        Ext.each(els,function(el,i) {
-            if (this.loadedTVs.indexOf(el) == -1) {
-                el = Ext.get(el);
-                tinyMCE.execCommand('mceAddControl', false, el.dom.id);
-                ed = tinyMCE.get(el.dom.id);
-                if (ed) {
-                    ed.onChange.add(this.onChange);
-                }
-                this.loadedTVs.push(el);
+        Ext.each(els,function(el,i) {            
+            el = Ext.get(el);
+            if (!el) { return; }
+            if (Ext.isEmpty(Tiny.loadedTVs)) { Tiny.loadedTVs = []; }
+            if (Tiny.loadedTVs.indexOf(el) != -1) { return; }
+
+            tinyMCE.execCommand('mceAddControl', false, el.dom.id);
+            ed = tinyMCE.get(el.dom.id);
+            if (ed) {
+                ed.onChange.add(this.onChange);
             }
+            Tiny.loadedTVs.push(el);
         },this);
     }
     ,onTVUnload: function() {
