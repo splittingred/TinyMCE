@@ -50,7 +50,7 @@ function getBrowserHTML(id, target_form_element, type, prefix) {
 		return "";
 
 	html = "";
-	html += '<a id="' + id + '_link" href="javascript:openBrowser(\'' + id + '\',\'' + target_form_element + '\', \'' + type + '\',\'' + option + '\');" onmousedown="return false;" class="browse">';
+	html += '<a id="' + id + '_link" href="javascript:openBrowser(\'' + id + '\',\'' + target_form_element + '\',\'' + type + '\',\'' + option + '\');" onmousedown="return false;" class="browse">';
 	html += '<span id="' + id + '" title="' + tinyMCEPopup.getLang('browse') + '">&nbsp;</span></a>';
 
 	return html;

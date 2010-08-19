@@ -31,7 +31,7 @@ class TinyMCE {
         $browserAction = $this->_getBrowserAction();
         $this->properties = array_merge(array(
             'apply_source_formatting' => true,
-            'browserUrl' => $browserAction ? $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'?a='.$browserAction->get('id') : null,
+            'browserUrl' => $browserAction ? $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'index.php?a='.$browserAction->get('id') : null,
             'button_tile_map' => false,
             'cleanup' => true,
             'compressor' => '',

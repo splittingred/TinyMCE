@@ -4,6 +4,10 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.0.3
 ====================================
+- Fixed bugs that occur only in strict PHP environments
+
+TinyMCE 4.0.3
+====================================
 - Fixed bug where TinyMCE wasn't working with TVs
 - Moved config array to properties array to prevent collusions of config vars in tiny JS
 - Added setting to toggle between uncompressed TinyMCE JS library
