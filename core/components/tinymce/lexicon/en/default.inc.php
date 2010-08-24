@@ -22,3 +22,5 @@ $_lang['setting_tiny.custom_plugins_desc'] = 'A comma-separated list of TinyMCE 
 $_lang['setting_tiny.editor_theme'] = 'Editor Theme';
 $_lang['setting_tiny.template_list'] = 'Template List';
 $_lang['setting_tiny.template_list_desc'] = 'Specify a list of templates for the template plugin. They must be comma-separated, and then have the format name:URL:description. For example, MyTemp:assets/templates/mytemp.html:My very own template';
+$_lang['setting_tiny.path_options'] = 'Path Options';
+$_lang['setting_tiny.path_options_desc'] = 'Either "rootrelative", "docrelative", or "fullpathurl".';

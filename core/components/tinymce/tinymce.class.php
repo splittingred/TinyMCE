@@ -92,6 +92,7 @@ class TinyMCE {
             'theme_advanced_buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
             'toolbar_align' => $this->modx->getOption('manager_direction',$this->properties,'ltr'),
             'use_browser' => $this->modx->getOption('use_browser',$this->properties,true),
+            'path_options' => $this->modx->getOption('tiny.path_options',$this->properties,''),
         ));
     }
 
@@ -136,7 +137,7 @@ class TinyMCE {
             break;
 
             case 'rootrelative':
-                $this->conpropertiesfig['relative_urls'] = false;
+                $this->properties['relative_urls'] = false;
                 $this->properties['remove_script_host'] = true;
             break;
 

@@ -95,5 +95,14 @@ $settings['tiny.use_uncompressed_library']->fromArray(array(
     'area' => 'tinymce',
 ),'',true,true);
 
+$settings['tiny.path_options']= $modx->newObject('modSystemSetting');
+$settings['tiny.path_options']->fromArray(array(
+    'key' => 'tiny.path_options',
+    'value' => false,
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
 
 return $settings;

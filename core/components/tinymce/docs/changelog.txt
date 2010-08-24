@@ -2,8 +2,9 @@
 This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-TinyMCE 4.0.3
+TinyMCE 4.0.4
 ====================================
+- Fixed bugs in relative path mapping
 - Fixed bugs that occur only in strict PHP environments
 
 TinyMCE 4.0.3
