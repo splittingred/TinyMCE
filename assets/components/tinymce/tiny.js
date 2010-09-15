@@ -86,13 +86,12 @@ var Tiny = {
             case "get_from_editor":
             case "insert_to_editor":
                 var regexp = /(\[\[[^\]]*)&amp;([^\[]*\]\])/g;
-                value = value.replace(regexp,'$1&$2');
                 /*
                 var tests = [
                     "",
                     "no modx tags",
                     "[[something?&amp;foo=`bar`]]",
-                    "[[something? &amp;foo=`[[$bar &amp;baz=`fuz`]]",
+                    "[[something? &amp;foo=`[[$bar? &amp;baz=`fuz`]]`]]",
                     "[[something? &amp;replace=`yes`]] &amp; don't replace",
                     "[[something? &amp;replace=`yes`]] &amp; don't replace [[something? &amp;replace=`yes`]]",
                     "[[line1? &amp;foo=`[[$bar? &amp;joo=`test`]]`]] &amp; don't replace\n[[line2? &amp;bar=`baz`]]",
@@ -105,7 +104,8 @@ var Tiny = {
                     s = tests[i].replace(regexp, '$1&$2');
                     console.log('REPLACED: '+s);
                 }
-                 */
+                */
+                value = value.replace(regexp,'$1&$2');
             break;
             case "submit_content":
                 //value.innerHTML = value.innerHTML.replace('&amp;','&');
