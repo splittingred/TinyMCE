@@ -30,10 +30,12 @@ class TinyMCE {
     public function setProperties(array $properties = array()) {
         $browserAction = $this->_getBrowserAction();
         $this->properties = array_merge(array(
+            'accessibility_warnings' => false,
             'apply_source_formatting' => true,
             'browserUrl' => $browserAction ? $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'index.php?a='.$browserAction->get('id') : null,
             'button_tile_map' => false,
             'cleanup' => true,
+            'cleanup_on_startup' => false,
             'compressor' => '',
             'content_css' => $this->modx->getOption('editor_css_path'),
             'convert_fonts_to_spans' => true,
@@ -46,6 +48,11 @@ class TinyMCE {
             'force_p_newlines' => true,
             'force_br_newlines' => false,
             'forced_root_block' => false,
+            'formats' => array(
+		'alignleft' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyleft'),
+		'alignright' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyright'),
+		'alignfull' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyfull'),
+            ),
             'frontend' => false,
             'height' => '400px',
             'invalid_elements' => '',
@@ -65,6 +72,7 @@ class TinyMCE {
             'table_inline_editing' => true,
             'template_external_list_url' => $this->config['assetsUrl'].'template.list.php',
             'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
+            'theme_advanced_font_sizes' => '80%,90%,100%,120%,140%,160%,180%,220%,260%,320%,400%,500%,700%',
             'theme_advanced_disable' => '',
             'theme_advanced_resizing' => false,
             'theme_advanced_resize_horizontal' => false,

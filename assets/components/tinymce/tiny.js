@@ -1,5 +1,6 @@
-var Tiny = {    
-    onLoad: function(ed) {
+var Tiny = {
+    button: {}
+    ,onLoad: function(ed) {
         var el = Ext.get(ed.id+'_ifr');
         new MODx.load({
             xtype: 'modx-treedrop'
@@ -19,9 +20,9 @@ var Tiny = {
         var ed;
         Ext.each(els,function(el,i) {            
             el = Ext.get(el);
-            if (!el) { return; }
-            if (Ext.isEmpty(Tiny.loadedTVs)) { Tiny.loadedTVs = []; }
-            if (Tiny.loadedTVs.indexOf(el) != -1) { return; }
+            if (!el) {return;}
+            if (Ext.isEmpty(Tiny.loadedTVs)) {Tiny.loadedTVs = [];}
+            if (Tiny.loadedTVs.indexOf(el) != -1) {return;}
 
             tinyMCE.execCommand('mceAddControl', false, el.dom.id);
             ed = tinyMCE.get(el.dom.id);
@@ -76,8 +77,51 @@ var Tiny = {
         });
         return false;
     }
-};
 
+    /**
+     * Prevents MODx tags from becoming &amp;=`value`
+     */
+    ,onCleanup: function(type,value) {
+	switch (type) {
+            case "get_from_editor":
+            case "insert_to_editor":
+                value = value.replace('&amp;','&');
+                value = value.replace(/\&amp\;/i,'&');
+            break;
+            case "submit_content":
+                //value.innerHTML = value.innerHTML.replace('&amp;','&');
+            break;
+            case "get_from_editor_dom":
+            case "insert_to_editor_dom":
+            case "setup_content_dom":
+            case "submit_content_dom":
+                //value.innerHTML = value.innerHTML.replace('&amp;','&');
+            break;
+	}
+        return value;
+    }
+
+    ,addContentAbove: function() {
+        var above = Ext.get('modx-content-above');
+        above.createChild({
+            tag: 'div'
+            ,id: 'tiny-content-above'
+            ,style: 'margin-bottom: 5px;'
+        });
+        MODx.load({
+            xtype: 'tiny-btn-image'
+            ,text: 'Insert Image'
+            ,listeners: {
+                'select': function(data) {
+                    var img = '<img src="'+data.relativeUrl+'" alt="" />';
+                    tinyMCE.execCommand('mceInsertContent',false,img);
+                }
+            }
+            ,renderTo: 'tiny-content-above'
+        });
+        
+    }
+};
 
 MODx.loadRTE = function(id) {
     var s = Tiny.config || {};
@@ -89,10 +133,13 @@ MODx.loadRTE = function(id) {
     delete s.id;
     delete s.mode;
     delete s.path;
+    s.cleanup_callback = "Tiny.onCleanup";
     tinyMCE.init(s);
 
+    /*Tiny.addContentAbove();*/
+
     var ptv = Ext.getCmp('modx-panel-resource-tv');
-    if (ptv) { ptv.on('load',Tiny.onTVLoad); }
+    if (ptv) {ptv.on('load',Tiny.onTVLoad);}
 
     var oid = Ext.get(id);
     if (!oid) return;
@@ -104,3 +151,46 @@ MODx.afterTVLoad = function() {
 MODx.unloadTVRTE = function() {
     Tiny.onTVUnload();
 };
+
+/* for future versions */
+/*
+Tiny.button.Image = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        
+    });
+    Tiny.button.Image.superclass.constructor.call(this,config);
+    this.config = config;
+    this.addEvents({select: true});
+};
+Ext.extend(Tiny.button.Image,Ext.Button,{
+    onClick : function(btn){
+        if (this.disabled){
+            return false;
+        }
+        if (Ext.isEmpty(this.browser)) {
+            this.browser = MODx.load({
+                xtype: 'modx-browser'
+                ,id: Ext.id()
+                ,multiple: true
+                ,prependPath: this.config.prependPath || null
+                ,prependUrl: this.config.prependUrl || null
+                ,hideFiles: this.config.hideFiles || false
+                ,rootVisible: this.config.rootVisible || false
+                ,listeners: {
+                    'select': {fn: function(data) {
+                        this.fireEvent('select',data);
+                    },scope:this}
+                }
+            });
+        }
+        this.browser.show(btn);
+        return true;
+    }
+
+    ,onDestroy: function(){
+        Tiny.button.Image.superclass.onDestroy.call(this);
+    }
+});
+Ext.reg('tiny-btn-image',Tiny.button.Image);
+*/

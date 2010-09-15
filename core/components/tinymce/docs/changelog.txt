@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.0.4
 ====================================
+- Fixed random bugs with ampersands and other issues
 - Fixed bugs in relative path mapping
 - Fixed bugs that occur only in strict PHP environments
 
