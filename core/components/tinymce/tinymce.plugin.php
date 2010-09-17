@@ -31,6 +31,8 @@ switch ($modx->event->name) {
                 $tiny->properties['frontend'] = true;
                 unset($def);
             }
+            if (isset($scriptProperties['resource']) && !$resource->get('richtext')) return;
+            if (!isset($scriptProperties['resource']) && !$modx->getOption('richtext_default',null,false)) return;
             $tiny->setProperties($scriptProperties);
             $html = $tiny->initialize();
             $modx->event->output($html);
