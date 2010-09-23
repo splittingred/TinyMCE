@@ -61,7 +61,7 @@ class TinyMCE {
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
             'plugin_insertdate_timeFormat' => '%H:%M:%S',
-            'preformatted' => true,
+            'preformatted' => false,
             'resizable' => true,
             'relative_urls' => true,
             'remove_linebreaks' => false,

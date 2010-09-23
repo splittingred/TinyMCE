@@ -18,7 +18,7 @@ var Tiny = {
     ,onTVLoad: function() {
         var els = Ext.query('.modx-richtext');
         var ed;
-        Ext.each(els,function(el,i) {            
+        Ext.each(els,function(el,i) {
             el = Ext.get(el);
             if (!el) {return;}
             if (Ext.isEmpty(Tiny.loadedTVs)) {Tiny.loadedTVs = [];}
@@ -27,7 +27,7 @@ var Tiny = {
             tinyMCE.execCommand('mceAddControl', false, el.dom.id);
             ed = tinyMCE.get(el.dom.id);
             if (ed) {
-                ed.onChange.add(this.onChange);
+                //ed.onChange.add(this.onChange);
             }
             Tiny.loadedTVs.push(el);
         },this);
@@ -36,7 +36,8 @@ var Tiny = {
         var els = Ext.query('.modx-richtext');
         var ed;
         Ext.each(els,function(el,i) {
-            el = Ext.get(el);        
+            el = Ext.get(el);
+            Tiny.loadedTVs.remove(el);
             tinyMCE.execCommand('mceRemoveControl', false, el.dom.id);
         },this);
     }
@@ -86,25 +87,6 @@ var Tiny = {
             case "get_from_editor":
             case "insert_to_editor":
                 var regexp = /(\[\[[^\]]*)&amp;([^\[]*\]\])/g;
-                /*
-                var tests = [
-                    "",
-                    "no modx tags",
-                    "[[something?&amp;foo=`bar`]]",
-                    "[[something? &amp;foo=`[[$bar? &amp;baz=`fuz`]]`]]",
-                    "[[something? &amp;replace=`yes`]] &amp; don't replace",
-                    "[[something? &amp;replace=`yes`]] &amp; don't replace [[something? &amp;replace=`yes`]]",
-                    "[[line1? &amp;foo=`[[$bar? &amp;joo=`test`]]`]] &amp; don't replace\n[[line2? &amp;bar=`baz`]]",
-                    "<p>[[!*RichtextTV]] </p><p>[[!*RichtextTV2]]  </p><p>[[!TestSnippet? &amp;page=`test`]] </p>"
-                ];
-                var s;
-                for(var i in tests) {
-                    s = tests[i];
-                    console.log(s);
-                    s = tests[i].replace(regexp, '$1&$2');
-                    console.log('REPLACED: '+s);
-                }
-                */
                 value = value.replace(regexp,'$1&$2');
             break;
             case "submit_content":
