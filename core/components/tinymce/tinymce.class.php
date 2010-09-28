@@ -113,6 +113,9 @@ class TinyMCE {
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'jscripts/tiny_mce/'.$scriptfile);
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'xconfig.js');
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
+            $this->modx->lexicon->load('tinymce:default');
+            $lang = $this->modx->lexicon->fetch('tiny.',true);
+            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Tiny.lang = '.$this->modx->toJSON($lang).';</script>');
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
             $this->jsLoaded = true;
         }

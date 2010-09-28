@@ -5,6 +5,7 @@
  * @package tinymce
  * @language en
  */
+$_lang['tiny.toggle_editor'] = 'Toggle Editor: ';
 $_lang['setting_tiny.css_selectors'] = 'CSS Selectors';
 $_lang['setting_tiny.css_selectors_desc'] = 'Here you can enter a list of selectors that should be available in the editor. Enter them as follows:<br />"displayName=selectorName;displayName2=selectorName2"<br />For instance, say you have <b>.mono</b> and <b>.smallText</b> selectors in your CSS file, you could add them here as:<br />"Monospaced text=mono;Small text=smallText"<br />Note that the last entry should not have a semi-colon after it.';
 $_lang['setting_tiny.custom_buttons1'] = 'Custom Buttons Row 1';
