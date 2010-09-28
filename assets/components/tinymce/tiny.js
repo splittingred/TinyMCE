@@ -160,8 +160,11 @@ var Tiny = {
                 }
             }
             ,renderTo: 'tiny-content-above'
-        });
-        
+        });   
+    }
+    ,onExecCommand: function(ed,el,cmd,ui,v) {
+        Ext.getCmp('modx-panel-resource').markDirty();
+	return false;
     }
 };
 

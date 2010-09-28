@@ -44,6 +44,7 @@ class TinyMCE {
             'element_list' => '',
             'entities' => '',
             'entity_encoding' => 'named',
+            'execcommand_callback' => 'Tiny.onExecCommand',
             'file_browser_callback' => 'Tiny.loadBrowser',
             'force_p_newlines' => true,
             'force_br_newlines' => false,
