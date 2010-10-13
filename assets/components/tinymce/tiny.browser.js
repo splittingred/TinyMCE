@@ -27,6 +27,6 @@ Tiny.browserCallback = function(data) {
     function OpenFile(fileUrl){
         FileBrowserDialogue.selectURL(fileUrl);
     }
-    var fileUrl = unescape(data.url);
+    var fileUrl = unescape(data.relativeUrl);
     OpenFile(fileUrl);
 };

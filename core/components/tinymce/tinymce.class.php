@@ -146,7 +146,18 @@ class TinyMCE {
             case 'docrelative':
                 $this->properties['relative_urls'] = true;
                 $this->properties['remove_script_host'] = true;
-                $this->properties['document_base_url'] = $this->modx->getOption('base_url',null,MODX_BASE_URL);
+
+                $baseUrl = $this->modx->context->getOption('base_url',MODX_BASE_URL);
+                $resource = $this->properties['resource'];
+                if ($resource) {
+                    $ctx = $resource->get('context_key');
+                    $ctx = $this->modx->getObject('modContext',$ctx);
+                    if ($ctx) {
+                        $ctx->prepare();
+                        $baseUrl = $ctx->getOption('base_url',$baseUrl);
+                    }
+                }
+                $this->properties['document_base_url'] = $baseUrl;
             break;
 
             case 'rootrelative':
@@ -171,6 +182,7 @@ class TinyMCE {
         //$this->properties['formats'] = $this->getFormats();
 
         /* get JS */
+        unset($this->properties['resource']);
         ob_start();
         include_once dirname(__FILE__).'/templates/script.tpl';
         $script = ob_get_contents();
