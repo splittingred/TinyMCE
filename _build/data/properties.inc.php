@@ -140,13 +140,6 @@ $properties = array(
         'value' => '',
     ),
     array(
-        'name' => 'language',
-        'desc' => 'Sets the language for TinyMCE.',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => 'en',
-    ),
-    array(
         'name' => 'nowrap',
         'desc' => 'This nowrap option enables you to control how whitespace is to be wordwrapped within the editor. This option is set to false by default, but if you enable it by setting it to true editor contents will never wrap.',
         'type' => 'combo-boolean',

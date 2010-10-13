@@ -57,7 +57,6 @@ class TinyMCE {
             'frontend' => false,
             'height' => '400px',
             'invalid_elements' => '',
-            'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
             'nowrap' => false,
             'path_options' => '',
             'plugin_insertdate_dateFormat' => '%Y-%m-%d',
@@ -103,6 +102,7 @@ class TinyMCE {
             'toolbar_align' => $this->modx->getOption('manager_direction',$this->properties,'ltr'),
             'use_browser' => $this->modx->getOption('use_browser',$this->properties,true),
             'path_options' => $this->modx->getOption('tiny.path_options',$this->properties,''),
+            'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
         ));
     }
 
