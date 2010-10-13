@@ -72,8 +72,6 @@ class TinyMCE {
             'skin_variant' => '',
             'table_inline_editing' => true,
             'template_external_list_url' => $this->config['assetsUrl'].'template.list.php',
-            'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
-            'theme_advanced_font_sizes' => '80%,90%,100%,120%,140%,160%,180%,220%,260%,320%,400%,500%,700%',
             'theme_advanced_disable' => '',
             'theme_advanced_resizing' => true,
             'theme_advanced_resize_horizontal' => true,
@@ -86,6 +84,8 @@ class TinyMCE {
 
         /* now do user/context/system setting overrides - these must override properties */
         $this->properties = array_merge($this->properties,array(
+            'theme_advanced_blockformats' => $this->modx->getOption('tiny.theme_advanced_blockformats',$this->properties,'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address'),
+            'theme_advanced_font_sizes' => $this->modx->getOption('tiny.theme_advanced_font_sizes',$this->properties,'80%,90%,100%,120%,140%,160%,180%,220%,260%,320%,400%,500%,700%'),
             'buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,''),
             'buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,''),
             'buttons3' => $this->modx->getOption('tiny.custom_buttons3',$this->properties,''),

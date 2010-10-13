@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.1.0
 ====================================
+- Added theme_advanced_blockformats system setting
 - Fixed bugs with width of tinymce in panels
 - Fixed issue with language loading in non-english languages and modxlink plugin
 - Enabled resizing by default on editors

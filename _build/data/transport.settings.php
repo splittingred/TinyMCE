@@ -104,5 +104,14 @@ $settings['tiny.path_options']->fromArray(array(
     'area' => 'tinymce',
 ),'',true,true);
 
+$settings['tiny.theme_advanced_blockformats']= $modx->newObject('modSystemSetting');
+$settings['tiny.theme_advanced_blockformats']->fromArray(array(
+    'key' => 'tiny.theme_advanced_blockformats',
+    'value' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
 
 return $settings;

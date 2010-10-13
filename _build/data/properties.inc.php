@@ -242,13 +242,6 @@ $properties = array(
         'value' => true,
     ),
     array(
-        'name' => 'theme_advanced_blockformats',
-        'desc' => 'This option should contain a comma separated list of formats that will be available in the format drop down list. This option is only available if the advanced theme is used.',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
-    ),
-    array(
         'name' => 'theme_advanced_disable',
         'desc' => 'This option should contain a comma separated list of controls to disable from any toolbar row/panel in TinyMCE.',
         'type' => 'textfield',

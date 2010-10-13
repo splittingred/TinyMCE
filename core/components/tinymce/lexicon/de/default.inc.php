@@ -24,4 +24,5 @@ $_lang['tinymce_theme_simple'] = "Simple";
 $_lang['tinymce_theme_advanced'] = "Advanced";
 $_lang['tinymce_theme_editor'] = "Content Editor";
 $_lang['tinymce_theme_custom'] = "Custom";
-?>
+$_lang['setting_tiny.theme_advanced_blockformats'] = 'HTML-Blockelemente';
+$_lang['setting_tiny.theme_advanced_blockformats_desc'] = 'Eine kommaseparierte Liste von HTML-Blockelementen. Mögliche Werte sind: p, h1, h2, h3, h4, h5, h6, div, blockquote, code, pre, address.';

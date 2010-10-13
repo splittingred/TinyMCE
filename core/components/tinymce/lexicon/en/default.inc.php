@@ -25,3 +25,5 @@ $_lang['setting_tiny.template_list'] = 'Template List';
 $_lang['setting_tiny.template_list_desc'] = 'Specify a list of templates for the template plugin. They must be comma-separated, and then have the format name:URL:description. For example, MyTemp:assets/templates/mytemp.html:My very own template';
 $_lang['setting_tiny.path_options'] = 'Path Options';
 $_lang['setting_tiny.path_options_desc'] = 'Either "rootrelative", "docrelative", or "fullpathurl".';
+$_lang['setting_tiny.theme_advanced_blockformats'] = 'HTML Block Elements';
+$_lang['setting_tiny.theme_advanced_blockformats_desc'] = 'This option should contain a comma separated list of formats that will be available in the format drop down list. This option is only available if the advanced theme is used.';
