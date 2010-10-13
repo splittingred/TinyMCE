@@ -75,12 +75,13 @@ class TinyMCE {
             'theme_advanced_blockformats' => 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',
             'theme_advanced_font_sizes' => '80%,90%,100%,120%,140%,160%,180%,220%,260%,320%,400%,500%,700%',
             'theme_advanced_disable' => '',
-            'theme_advanced_resizing' => false,
-            'theme_advanced_resize_horizontal' => false,
+            'theme_advanced_resizing' => true,
+            'theme_advanced_resize_horizontal' => true,
             'theme_advanced_statusbar_location' => 'bottom',
             'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',null,''),
             'theme_advanced_toolbar_align' => 'left',
             'theme_advanced_toolbar_location' => 'top',
+            'width' => '95%',
         ),$properties);
 
         /* now do user/context/system setting overrides - these must override properties */
@@ -92,7 +93,7 @@ class TinyMCE {
             'buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
             'css_path' => $this->modx->getOption('editor_css_path',$this->properties,''),
             'plugins' => $this->modx->getOption('tiny.custom_plugins',$this->properties,''),
-            'theme' => $this->modx->getOption('tiny.editor_theme',$this->properties,'simple'),
+            'theme' => $this->modx->getOption('tiny.editor_theme',$this->properties,'advanced'),
             'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',$this->properties,''),
             'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,''),
             'theme_advanced_buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,''),
@@ -162,7 +163,7 @@ class TinyMCE {
         if (!empty($this->properties['resource'])) {
             $this->properties['resource'] = $this->properties['resource']->toArray();
         }
-        unset($this->properties['width'],$this->properties['height']);
+        //unset($this->properties['width'],$this->properties['height']);
         
         $templates = $this->getTemplateList();
 

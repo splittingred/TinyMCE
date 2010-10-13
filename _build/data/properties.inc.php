@@ -274,7 +274,7 @@ $properties = array(
         'desc' => 'This option gives you the ability to enable/disable the resizing button. This option is only useful if the theme_advanced_statusbar_location option is set to "top" or "bottom". This option is set to false by default.',
         'type' => 'combo-boolean',
         'options' => '',
-        'value' => false,
+        'value' => true,
     ),
     array(
         'name' => 'theme_advanced_statusbar_location',
@@ -313,7 +313,7 @@ This option enables you to specify where the toolbar should be located. This opt
         'desc' => 'The width of the TinyMCE editor.',
         'type' => 'textfield',
         'options' => '',
-        'value' => '100%',
+        'value' => '95%',
     ),
 );
 
