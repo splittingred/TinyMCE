@@ -2,6 +2,10 @@
 This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+TinyMCE 4.1.1
+====================================
+- Fixed issue with Tiny preventing save bar loading on derivative Resource types
+
 TinyMCE 4.1.0
 ====================================
 - Fixed issues with context support of thumbnails and relative paths

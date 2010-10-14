@@ -104,6 +104,7 @@ var Tiny = {
     }
     ,addContentBelow: function() {
         var below = Ext.get('modx-content-below');
+        if (!below) return false;
         below.createChild({
             tag: 'div'
             ,id: 'tiny-content-below'
