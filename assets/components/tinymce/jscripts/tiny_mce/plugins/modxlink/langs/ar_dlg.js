@@ -1,4 +1,4 @@
-tinyMCE.addI18n('ar.advlink_dlg',{
+tinyMCE.addI18n('ar.modxlink_dlg',{
 title:"Insert/edit link",
 url:"Link URL",
 target:"Target",
@@ -49,4 +49,7 @@ accesskey:"Accesskey",
 ltr:"Left to right",
 rtl:"Right to left",
 link_list:"Link list"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

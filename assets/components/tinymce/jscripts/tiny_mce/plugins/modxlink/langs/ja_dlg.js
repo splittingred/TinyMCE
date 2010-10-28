@@ -1,4 +1,4 @@
-tinyMCE.addI18n('ja.advlink_dlg',{
+tinyMCE.addI18n('ja.modxlink_dlg',{
 title:"\u30EA\u30F3\u30AF\u306E\u633F\u5165/\u7DE8\u96C6",
 url:"\u30EA\u30F3\u30AFURL",
 target:"\u30BF\u30FC\u30B2\u30C3\u30C8",
@@ -49,4 +49,7 @@ accesskey:"\u30A2\u30AF\u30BB\u30B9\u30AD\u30FC",
 ltr:"\u5DE6\u304B\u3089\u53F3",
 rtl:"\u53F3\u304B\u3089\u5DE6",
 link_list:"\u4E00\u89A7\u304B\u3089\u9078\u3076"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

@@ -1,4 +1,4 @@
-tinyMCE.addI18n('az.advlink_dlg',{
+tinyMCE.addI18n('az.modxlink_dlg',{
 title:"Ke\u00E7idi \u0259lav\u0259/redakt\u0259 et",
 url:"Ke\u00E7id \u00FCnvan\u0131",
 target:"H\u0259d\u0259f",
@@ -49,4 +49,7 @@ accesskey:"Giri\u015F klavi\u015Fi",
 ltr:"Solda-sa\u011Fa",
 rtl:"Sa\u011Fda-sola",
 link_list:"Ke\u00E7id siyah\u0131s\u0131"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

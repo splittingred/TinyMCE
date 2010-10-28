@@ -1,4 +1,4 @@
-tinyMCE.addI18n('pt.advlink_dlg',{
+tinyMCE.addI18n('pt.modxlink_dlg',{
 title:"Inserir/editar hyperlink",
 url:"URL do hyperlink",
 target:"Alvo",
@@ -49,4 +49,7 @@ accesskey:"Chave de acesso",
 ltr:"Da esquerda para a direita",
 rtl:"Da direita para a esquerda",
 link_list:"Lista de hyperlinks"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

@@ -1,4 +1,4 @@
-tinyMCE.addI18n('zh.advlink_dlg',{
+tinyMCE.addI18n('zh.modxlink_dlg',{
 title:"\u63D2\u5165/\u7F16\u8F91\u94FE\u63A5",
 url:"\u94FE\u63A5 URL",
 target:"\u76EE\u6807",
@@ -49,4 +49,7 @@ accesskey:"\u5FEB\u6377\u952E",
 ltr:"\u4ECE\u5DE6\u5230\u53F3",
 rtl:"\u4ECE\u53F3\u5230\u5DE6",
 link_list:"\u94FE\u63A5\u5217\u8868"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

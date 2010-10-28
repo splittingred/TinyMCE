@@ -1,4 +1,4 @@
-tinyMCE.addI18n('eu.advlink_dlg',{
+tinyMCE.addI18n('eu.modxlink_dlg',{
 title:"Lotura txertatu/editatu",
 url:"Loturaren URL helbidea",
 target:"Helburua",
@@ -49,4 +49,7 @@ accesskey:"Laster-tekla",
 ltr:"Ezkerretik eskuinera",
 rtl:"Eskuinetik ezkerrera",
 link_list:"Lotura-zerrenda"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

@@ -1,4 +1,4 @@
-tinyMCE.addI18n('lt.advlink_dlg',{
+tinyMCE.addI18n('lt.modxlink_dlg',{
 title:"\u012Eterpti/Redaguoti nuorod\u0105",
 url:"Nuorodos URL adresas",
 target:"Paskirtis",
@@ -49,4 +49,7 @@ accesskey:"Prieigos klavi\u0161as",
 ltr:"I\u0161 kair\u0117s \u012F de\u0161in\u0119",
 rtl:"I\u0161 de\u0161in\u0117s \u012F kair\u0119",
 link_list:"Nuorod\u0173 s\u0105ra\u0161as"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

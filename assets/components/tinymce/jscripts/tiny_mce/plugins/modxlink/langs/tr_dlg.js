@@ -1,4 +1,4 @@
-tinyMCE.addI18n('tr.advlink_dlg',{
+tinyMCE.addI18n('tr.modxlink_dlg',{
 title:"Ba\u011Flant\u0131 ekle/d\u00FCzenle",
 url:"Ba\u011Flant\u0131 URL'si",
 target:"Hedef",
@@ -49,4 +49,7 @@ accesskey:"Eri\u015Fim tu\u015Fu",
 ltr:"Soldan sa\u011Fa",
 rtl:"Sa\u011Fdan sola",
 link_list:"Ba\u011Flant\u0131 listesi"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

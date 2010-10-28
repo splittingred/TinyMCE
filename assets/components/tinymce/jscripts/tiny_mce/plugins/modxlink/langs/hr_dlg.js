@@ -1,4 +1,4 @@
-tinyMCE.addI18n('hr.advlink_dlg',{
+tinyMCE.addI18n('hr.modxlink_dlg',{
 title:"Umetni/uredi poveznicu",
 url:"URL poveznice",
 target:"Meta",
@@ -49,4 +49,7 @@ accesskey:"Accesskey",
 ltr:"S lijeva na desno",
 rtl:"S desna na lijevo",
 link_list:"Lista poveznica"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

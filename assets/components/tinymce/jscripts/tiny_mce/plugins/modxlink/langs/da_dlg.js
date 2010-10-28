@@ -1,4 +1,4 @@
-tinyMCE.addI18n('da.advlink_dlg',{
+tinyMCE.addI18n('da.modxlink_dlg',{
 title:"Inds\u00E6t/rediger link",
 url:"Link URL",
 target:"M\u00E5l",
@@ -49,4 +49,7 @@ accesskey:"Genvejstast",
 ltr:"Venstre mod h\u00F8jre",
 rtl:"H\u00F8jre mod venstre",
 link_list:"Liste over links"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

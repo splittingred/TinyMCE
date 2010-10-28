@@ -1,4 +1,4 @@
-tinyMCE.addI18n('hu.advlink_dlg',{
+tinyMCE.addI18n('hu.modxlink_dlg',{
 title:"Link besz\u00FAr\u00E1s/szerkeszt\u00E9s",
 url:"Link URL",
 target:"Target",
@@ -49,4 +49,7 @@ accesskey:"Gyorsgomb",
 ltr:"Balr\u00F3l jobbra",
 rtl:"Jobbr\u00F3l balra",
 link_list:"Link lista"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

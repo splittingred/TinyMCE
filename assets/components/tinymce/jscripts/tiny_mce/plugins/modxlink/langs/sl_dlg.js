@@ -1,4 +1,4 @@
-tinyMCE.addI18n('sl.advlink_dlg',{
+tinyMCE.addI18n('sl.modxlink_dlg',{
 title:"Vstavi/uredi povezavo",
 url:"Naslov URL",
 target:"Cilj",
@@ -49,4 +49,7 @@ accesskey:"Tipka dostopa",
 ltr:"Od leve proti desni",
 rtl:"Od desne proti levi",
 link_list:"Seznam povezav"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

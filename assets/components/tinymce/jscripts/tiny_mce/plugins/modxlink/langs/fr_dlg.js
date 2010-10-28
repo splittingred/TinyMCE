@@ -1,4 +1,4 @@
-tinyMCE.addI18n('fr.advlink_dlg',{
+tinyMCE.addI18n('fr.modxlink_dlg',{
 title:"Ins\u00E9rer / \u00E9diter un lien",
 url:"URL du lien",
 target:"Cible",
@@ -49,4 +49,7 @@ accesskey:"Touche d'acc\u00E8s rapide",
 ltr:"Gauche \u00E0 droite",
 rtl:"Droite \u00E0 gauche",
 link_list:"Liste des liens"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

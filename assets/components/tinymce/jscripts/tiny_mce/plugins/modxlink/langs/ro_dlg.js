@@ -1,4 +1,4 @@
-tinyMCE.addI18n('ro.advlink_dlg',{
+tinyMCE.addI18n('ro.modxlink_dlg',{
 title:"Insereaz\u0103/editeaz\u0103 link",
 url:"URL leg\u0103tur\u0103",
 target:"\u0162int\u0103",
@@ -49,4 +49,7 @@ accesskey:"Cheie de acces",
 ltr:"St\u00E2nga la dreapta",
 rtl:"Dreapta la st\u00E2nga",
 link_list:"List\u0103 leg\u0103turi"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

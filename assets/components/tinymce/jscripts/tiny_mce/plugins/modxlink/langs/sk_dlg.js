@@ -1,4 +1,4 @@
-tinyMCE.addI18n('sk.advlink_dlg',{
+tinyMCE.addI18n('sk.modxlink_dlg',{
 title:"Vlo\u017Ei\u0165/upravi\u0165 odkaz",
 url:"URL odkazu",
 target:"Cie\u013E",
@@ -49,4 +49,7 @@ accesskey:"Kl\u00E1vesov\u00E1 skratka",
 ltr:"Z\u013Eava doprava",
 rtl:"Sprava do\u013Eava",
 link_list:"Zoznam odkazov"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

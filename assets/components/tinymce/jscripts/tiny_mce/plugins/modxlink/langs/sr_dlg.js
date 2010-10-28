@@ -1,4 +1,4 @@
-tinyMCE.addI18n('sr.advlink_dlg',{
+tinyMCE.addI18n('sr.modxlink_dlg',{
 title:"Ubaci/promijeni link",
 url:"URL link",
 target:"Meta",
@@ -49,4 +49,7 @@ accesskey:"Accesskey",
 ltr:"S leva na desno",
 rtl:"S desna na levo",
 link_list:"Lista linkova"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

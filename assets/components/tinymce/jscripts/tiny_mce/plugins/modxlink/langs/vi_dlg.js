@@ -1,4 +1,4 @@
-tinyMCE.addI18n('vi.advlink_dlg',{
+tinyMCE.addI18n('vi.modxlink_dlg',{
 title:"Th\u00EAm/S\u1EEDa Li\u00EAn k\u1EBFt",
 url:"URL Li\u00EAn k\u1EBFt",
 target:"\u0110\u00EDch",
@@ -49,4 +49,7 @@ accesskey:"Ph\u00EDm truy c\u1EADp",
 ltr:"Tr\u00E1i qua ph\u1EA3i",
 rtl:"Ph\u1EA3i qua tr\u00E1i",
 link_list:"Danh s\u00E1ch li\u00EAn k\u1EBFt"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

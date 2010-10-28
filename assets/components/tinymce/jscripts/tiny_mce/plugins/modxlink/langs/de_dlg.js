@@ -1,4 +1,4 @@
-tinyMCE.addI18n('de.advlink_dlg',{
+tinyMCE.addI18n('de.modxlink_dlg',{
 title:"Link einf\u00FCgen/bearbeiten",
 url:"Adresse",
 target:"Fenster",
@@ -49,4 +49,7 @@ accesskey:"Tastenk\u00FCrzel",
 ltr:"Links nach rechts",
 rtl:"Rechts nach links",
 link_list:"Linkliste"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

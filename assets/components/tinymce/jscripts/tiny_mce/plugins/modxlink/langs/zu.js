@@ -1,3 +1,3 @@
-tinyMCE.addI18n('en.modxlink',{
+tinyMCE.addI18n('zu.modxlink',{
     link_desc:"Insert/edit link"
 });

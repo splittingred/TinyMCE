@@ -1,4 +1,4 @@
-tinyMCE.addI18n('id.advlink_dlg',{
+tinyMCE.addI18n('id.modxlink_dlg',{
 title:"Sisipkan/Ubah link",
 url:"Link URL",
 target:"Target",
@@ -49,4 +49,7 @@ accesskey:"Accesskey",
 ltr:"Kiri ke kanan",
 rtl:"Kanan ke kiri",
 link_list:"Daftar Link"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

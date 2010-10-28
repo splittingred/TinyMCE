@@ -1,4 +1,4 @@
-tinyMCE.addI18n('hy.advlink_dlg',{
+tinyMCE.addI18n('hy.modxlink_dlg',{
 title:"\u054F\u0565\u0572\u0561\u0564\u0580\u0565\u056C / \u0583\u0578\u0583\u0578\u056D\u0565\u056C \u0570\u0572\u0578\u0582\u0574",
 url:"\u0540\u0561\u057D\u0581\u0565",
 target:"\u0532\u0561\u0581\u0565\u056C ...",
@@ -49,4 +49,7 @@ accesskey:"Accesskey",
 ltr:"\u0541\u0561\u056D\u056B\u0581 \u0561\u057B",
 rtl:"\u0531\u057B\u056B\u0581 \u0571\u0561\u056D",
 link_list:"\u0540\u0572\u0578\u0582\u0574\u0576\u0565\u0580\u056B \u0581\u0561\u0576\u056F"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

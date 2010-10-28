@@ -1,4 +1,4 @@
-tinyMCE.addI18n('cy.advlink_dlg',{
+tinyMCE.addI18n('cy.modxlink_dlg',{
 title:"Mewnosod/Golygu cyswllt",
 url:"URL cyswllt",
 target:"Targed",
@@ -49,4 +49,7 @@ accesskey:"Bysell mynediad",
 ltr:"Chwith i'r dde",
 rtl:"De i'r chwith",
 link_list:"Rhestr cysylltau"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

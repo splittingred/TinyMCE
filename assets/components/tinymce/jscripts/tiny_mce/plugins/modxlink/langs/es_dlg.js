@@ -1,4 +1,4 @@
-tinyMCE.addI18n('es.advlink_dlg',{
+tinyMCE.addI18n('es.modxlink_dlg',{
 title:"Insertar/editar hiperv\u00EDnculo",
 url:"URL del hiperv\u00EDnculo",
 target:"Destino",
@@ -49,4 +49,7 @@ accesskey:"Tecla de acceso",
 ltr:"Izquierda a derecha",
 rtl:"Derecha a izquierda",
 link_list:"Lista de v\u00EDnculo"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

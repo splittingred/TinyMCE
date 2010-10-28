@@ -1,4 +1,4 @@
-tinyMCE.addI18n('se.advlink_dlg',{
+tinyMCE.addI18n('se.modxlink_dlg',{
 title:"Infoga/redigera l\u00E4nk",
 url:"L\u00E4nkens URL",
 target:"M\u00E5l",
@@ -49,4 +49,7 @@ accesskey:"Snabbtangent",
 ltr:"V\u00E4nster till h\u00F6ger",
 rtl:"H\u00F6ger till v\u00E4nster",
 link_list:"L\u00E4nklista"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

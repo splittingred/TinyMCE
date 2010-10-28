@@ -14,8 +14,8 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','TinyMCE');
 define('PKG_NAMESPACE','tinymce');
-define('PKG_VERSION','4.1.1');
-define('PKG_RELEASE','pl');
+define('PKG_VERSION','4.1.2');
+define('PKG_RELEASE','rc1');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';

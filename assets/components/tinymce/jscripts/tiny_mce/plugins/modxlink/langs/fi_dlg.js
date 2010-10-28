@@ -1,4 +1,4 @@
-tinyMCE.addI18n('fi.advlink_dlg',{
+tinyMCE.addI18n('fi.modxlink_dlg',{
 title:"Lis\u00E4\u00E4/muokkaa linkki\u00E4",
 url:"Linkin URL",
 target:"Kohde (target)",
@@ -49,4 +49,7 @@ accesskey:"Pikan\u00E4pp\u00E4in",
 ltr:"Vasemmalta oikealle",
 rtl:"Oikealta vasemmalle",
 link_list:"Linkkilista"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

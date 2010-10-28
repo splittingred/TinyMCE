@@ -1,4 +1,4 @@
-tinyMCE.addI18n('it.advlink_dlg',{
+tinyMCE.addI18n('it.modxlink_dlg',{
 title:"Inserisci/modifica link",
 url:"URL collegamento",
 target:"Target",
@@ -49,4 +49,7 @@ accesskey:"Carattere di accesso",
 ltr:"Sinistra verso destra",
 rtl:"Destra verso sinistra",
 link_list:"Lista collegamenti"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

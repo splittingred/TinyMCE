@@ -1,4 +1,4 @@
-tinyMCE.addI18n('ms.advlink_dlg',{
+tinyMCE.addI18n('ms.modxlink_dlg',{
 title:"Sisip/sunting pautan",
 url:"Pautan URL",
 target:"Sasaran",
@@ -49,4 +49,7 @@ accesskey:"Kunci akses",
 ltr:"Kiri ke kanan",
 rtl:"Kanan ke kiri",
 link_list:"Senarai pautan"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

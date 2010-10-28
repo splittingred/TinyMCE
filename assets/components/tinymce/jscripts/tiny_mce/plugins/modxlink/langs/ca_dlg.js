@@ -1,4 +1,4 @@
-tinyMCE.addI18n('ca.advlink_dlg',{
+tinyMCE.addI18n('ca.modxlink_dlg',{
 title:"Insereix/edita enlla\u00E7",
 url:"URL de l\'enlla\u00E7",
 target:"Objectiu",
@@ -49,4 +49,7 @@ accesskey:"Accesskey",
 ltr:"D\'esquerra a dreta",
 rtl:"De dreta a esquerra",
 link_list:"Llista d\'enlla\u00E7os"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

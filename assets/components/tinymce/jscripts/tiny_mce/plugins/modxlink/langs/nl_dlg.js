@@ -1,4 +1,4 @@
-tinyMCE.addI18n('nl.advlink_dlg',{
+tinyMCE.addI18n('nl.modxlink_dlg',{
 title:"Link invoegen/bewerken",
 url:"URL",
 target:"Doel",
@@ -49,4 +49,7 @@ accesskey:"Toegangstoets",
 ltr:"Van links naar rechts",
 rtl:"Van rechts naar links",
 link_list:"Lijst"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

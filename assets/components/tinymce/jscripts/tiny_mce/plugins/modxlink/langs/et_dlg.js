@@ -1,4 +1,4 @@
-tinyMCE.addI18n('et.advlink_dlg',{
+tinyMCE.addI18n('et.modxlink_dlg',{
 title:"Sisesta muuda linki",
 url:" URL\u2019i link",
 target:"Sihtm\u00E4rk",
@@ -49,4 +49,7 @@ accesskey:"Ligip\u00E4\u00E4suklahv",
 ltr:"Vasakult paremale",
 rtl:"Paremalt vasakule",
 link_list:"Linkide list"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

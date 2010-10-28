@@ -1,4 +1,4 @@
-tinyMCE.addI18n('sq.advlink_dlg',{
+tinyMCE.addI18n('sq.modxlink_dlg',{
 title:"Fut/edito lidhje",
 url:"URL e lidhjes",
 target:"Sh\u00EBnjestra",
@@ -49,4 +49,7 @@ accesskey:"Butoni i aksesit",
 ltr:"Majtas-Djathtas",
 rtl:"Djathtas-Majtas",
 link_list:"Lista e lidhjeve"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

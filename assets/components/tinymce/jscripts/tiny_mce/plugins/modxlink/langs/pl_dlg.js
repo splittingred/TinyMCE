@@ -1,4 +1,4 @@
-tinyMCE.addI18n('pl.advlink_dlg',{
+tinyMCE.addI18n('pl.modxlink_dlg',{
 title:"Wstaw/edytuj link",
 url:"Link URL",
 target:"Cel",
@@ -49,4 +49,7 @@ accesskey:"Klawisz skr\u00F3tu",
 ltr:"Kierunek z lewej do prawej",
 rtl:"Kierunek z prawej do lewej",
 link_list:"Lista odno\u015Bnik\u00F3w"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

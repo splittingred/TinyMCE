@@ -1,4 +1,4 @@
-tinyMCE.addI18n('nb.advlink_dlg',{
+tinyMCE.addI18n('nb.modxlink_dlg',{
 title:"Sett inn / rediger lenke",
 url:"Lenkens URL",
 target:"M\u00E5l",
@@ -49,4 +49,7 @@ accesskey:"Hurtigtast",
 ltr:"Venstre mot h\u00F8yre",
 rtl:"H\u00F8yre  mot venstre",
 link_list:"Lenkeliste"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

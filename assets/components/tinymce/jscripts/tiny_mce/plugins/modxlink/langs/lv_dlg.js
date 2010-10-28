@@ -1,4 +1,4 @@
-tinyMCE.addI18n('lv.advlink_dlg',{
+tinyMCE.addI18n('lv.modxlink_dlg',{
 title:"Ievietot/Redi\u0123\u0113t saiti",
 url:"Saites URL",
 target:"M\u0113r\u0137is",
@@ -49,4 +49,7 @@ accesskey:"Pieejas poga",
 ltr:"No kreisas puses uz labo",
 rtl:"No labas puses uz kreiso",
 link_list:"Sakaru saraksts"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });

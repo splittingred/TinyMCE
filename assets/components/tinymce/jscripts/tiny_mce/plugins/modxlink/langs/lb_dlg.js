@@ -1,4 +1,4 @@
-tinyMCE.addI18n('lb.advlink_dlg',{
+tinyMCE.addI18n('lb.modxlink_dlg',{
 title:"Link af\u00FCgen/beaarbechten",
 url:"Adress",
 target:"F\u00EBnster",
@@ -49,4 +49,7 @@ accesskey:"Tastekierzel",
 ltr:"L\u00E9nks no riets",
 rtl:"Riets no l\u00E9nks",
 link_list:"Linkl\u00EBscht"
+,pagetitle: 'Pagetitle'
+,alias: 'Alias'
+,search: 'Search'
 });
