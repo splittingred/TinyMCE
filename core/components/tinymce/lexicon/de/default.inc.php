@@ -1,28 +1,31 @@
 <?php
-/*
- * Filename:       assets/plugins/tinymce/lang/german.inc.php
- * Function:       German language file for TinyMCE.  Needs to be translated and re-encoded!
- * Encoding:       ISO-Latin-1
- * Author:         Jeff Whitfield
- * Date:           2007/01/06
- * Version:        2.0.9
- * MODx version:   0.9.5
-*/
-
-include_once(dirname(__FILE__).'/english.inc.php'); // fallback for missing defaults or new additions
-
-$_lang['tinymce_editor_theme_title'] = "Theme:";
-$_lang['tinymce_editor_theme_message'] = "Here you can select which theme or skin to use with the editor.";
-$_lang['tinymce_editor_custom_plugins_title'] = "Custom Plugins:";
-$_lang['tinymce_editor_custom_plugins_message'] = "Enter the plugins to use for the 'custom' theme as a comma separated list.";
-$_lang['tinymce_editor_custom_buttons_title'] = "Custom Buttons:";
-$_lang['tinymce_editor_custom_buttons_message'] = "Enter the buttons to use for the 'custom' theme as a comma separated list for each row. Be sure that each button has the required plugin enabled in the 'Custom Plugins' setting.";
-$_lang['tinymce_editor_css_selectors_title'] = "CSS selectors:";
-$_lang['tinymce_editor_css_selectors_message'] = "Here you can enter a list of selectors that should be available in the editor. Enter them as follows:<br />'displayName=selectorName;displayName2=selectorName2'<br />For instance, say you have <b>.mono</b> and <b>.smallText</b> selectors in your CSS file, you could add them here as:<br />'Monospaced text=mono;Small text=smallText'<br />Note that the last entry should not have a semi-colon after it.";
-$_lang['tinymce_settings'] = "TinyMCE Settings";
-$_lang['tinymce_theme_simple'] = "Simple";
-$_lang['tinymce_theme_advanced'] = "Advanced";
-$_lang['tinymce_theme_editor'] = "Content Editor";
-$_lang['tinymce_theme_custom'] = "Custom";
+/**
+ * Default TinyMCE language file
+ *
+ * @package tinymce
+ * @language de
+ */
+$_lang['tiny.toggle_editor'] = 'Editor ein- und ausschalten: ';
+$_lang['setting_tiny.css_selectors'] = 'CSS-Selektoren';
+$_lang['setting_tiny.css_selectors_desc'] = 'Hier können Sie eine Liste von Selektoren eingeben, die im Editor verfügbar sein sollen. Geben Sie sie folgendermaßen ein:<br />"angezeigterName=selektorName;angezeigterName2=selektorName2"<br />Wenn Sie zum Beispiel die Selektoren <b>.mono</b> und <b>.smallText</b> in Ihrer CSS-Datei haben, können Sie sie hier so hinzufügen:<br />"Monospace-Text=mono;Kleiner Text=smallText"<br />Beachten Sie, dass hinter dem letzten Eintrag kein Semikolon stehen sollte.';
+$_lang['setting_tiny.custom_buttons1'] = 'Selbstdefinierte Button-Zeile 1';
+$_lang['setting_tiny.custom_buttons1_desc'] = 'Geben Sie die für die erste Zeile zu verwendenden Buttons als kommaseparierte Liste ein. Stellen Sie sicher, dass für jeden Button das benötigte Plugin in der Einstellung "Zu verwendende Plugins" aktiviert ist.';
+$_lang['setting_tiny.custom_buttons2'] = 'Selbstdefinierte Button-Zeile 2';
+$_lang['setting_tiny.custom_buttons2_desc'] = 'Geben Sie die für die zweite Zeile zu verwendenden Buttons als kommaseparierte Liste ein. Stellen Sie sicher, dass für jeden Button das benötigte Plugin in der Einstellung "Zu verwendende Plugins" aktiviert ist.';
+$_lang['setting_tiny.custom_buttons3'] = 'Selbstdefinierte Button-Zeile 3';
+$_lang['setting_tiny.custom_buttons3_desc'] = 'Geben Sie die für die dritte Zeile zu verwendenden Buttons als kommaseparierte Liste ein. Stellen Sie sicher, dass für jeden Button das benötigte Plugin in der Einstellung "Zu verwendende Plugins" aktiviert ist.';
+$_lang['setting_tiny.custom_buttons4'] = 'Selbstdefinierte Button-Zeile 4';
+$_lang['setting_tiny.custom_buttons4_desc'] = 'Geben Sie die für die vierte Zeile zu verwendenden Buttons als kommaseparierte Liste ein. Stellen Sie sicher, dass für jeden Button das benötigte Plugin in der Einstellung "Zu verwendende Plugins" aktiviert ist.';
+$_lang['setting_tiny.custom_buttons5'] = 'Selbstdefinierte Button-Zeile 5';
+$_lang['setting_tiny.custom_buttons5_desc'] = 'Geben Sie die für die fünfte Zeile zu verwendenden Buttons als kommaseparierte Liste ein. Stellen Sie sicher, dass für jeden Button das benötigte Plugin in der Einstellung "Zu verwendende Plugins" aktiviert ist.';
+$_lang['setting_tiny.custom_plugins'] = 'Zu verwendende Plugins';
+$_lang['setting_tiny.custom_plugins_desc'] = 'Eine kommaseparierte Liste der zu verwendenden TinyMCE-Plugins.';
+$_lang['setting_tiny.editor_theme'] = 'Editor-Theme';
+$_lang['setting_tiny.template_list'] = 'Template-Liste';
+$_lang['setting_tiny.template_list_desc'] = 'Geben Sie eine Liste von Templates für das Template-Plugin ein. Die Einträge müssen durch Kommata getrennt sein und das Format Name:URL:Beschreibung haben. Beispiel: MeinTemplate:assets/templates/mytemp.html:Mein eigenes Template';
+$_lang['setting_tiny.path_options'] = 'Pfad-Optionen';
+$_lang['setting_tiny.path_options_desc'] = 'Mögliche Werte: "rootrelative", "docrelative" oder "fullpathurl".';
+$_lang['setting_tiny.use_uncompressed_library'] = 'Unkomprimierte Bibliothek verwenden';
+$_lang['setting_tiny.use_uncompressed_library_desc'] = 'Wenn diese Einstellung aktiviert ist, verwendet MODx nicht die komprimierte TinyMCE-JavaScript-Bibliothek. Dies verursacht mehr Last und erhöht die Ausführungszeit. Aktivieren Sie diese Einstellung nur, wenn Sie Modifikationen vornehmen möchten.';
 $_lang['setting_tiny.theme_advanced_blockformats'] = 'HTML-Blockelemente';
-$_lang['setting_tiny.theme_advanced_blockformats_desc'] = 'Eine kommaseparierte Liste von HTML-Blockelementen. Mögliche Werte sind: p, h1, h2, h3, h4, h5, h6, div, blockquote, code, pre, address.';
+$_lang['setting_tiny.theme_advanced_blockformats_desc'] = 'Diese Einstellung sollte eine kommaseparierte Liste von HTML-Blockelementen enthalten, die in dem Drop-Down-Feld "Vorlage" angezeigt werden sollen. Diese Option ist nur verfügbar, wenn das Theme "advanced" verwendet wird. Mögliche Werte sind z. B.: p, h1, h2, h3, h4, h5, h6, div, blockquote, code, pre, address.';
