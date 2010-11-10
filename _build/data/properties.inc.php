@@ -215,21 +215,28 @@ $properties = array(
     ),
     array(
         'name' => 'skin',
-        'desc' => 'This option enables you to specify what skin you want to use with your theme. A skin is basically a CSS file that gets loaded from the skins directory inside the theme. The advanced theme that TinyMCE comes with has two skins these are called "default" and "o2k7".',
+        'desc' => 'This option enables you to specify what skin you want to use with your theme. A skin is basically a CSS file that gets loaded from the skins directory inside the theme. The advanced theme that TinyMCE comes with has two skins, these are called "default" and "o2k7". We added another skin named "cirkuit" that is chosen by default.',
         'type' => 'textfield',
         'options' => '',
         'value' => 'cirkuit',
     ),
     array(
         'name' => 'skin_variant',
-        'desc' => 'This option enables you to specify a variant for the skin, for example "silver" or "black". "default" skin does not offer any variant, whereas "o2k7" default offers "silver" or "black" variants to the default one. When creating a skin, additional variants may also be created, by adding ui_[variant_name].css files alongside the default ui.css.',
+        'desc' => 'This option enables you to specify a variant for the skin, for example "silver" or "black". "default" skin does not offer any variant, whereas "o2k7" default offers "silver" or "black" variants to the default one. For the "cirkuit" skin there\'s one variant named "silver". When creating a skin, additional variants may also be created, by adding ui_[variant_name].css files alongside the default ui.css.',
         'type' => 'textfield',
         'options' => '',
         'value' => '',
     ),
     array(
+        'name' => 'object_resizing',
+        'desc' => 'This option gives you the ability to turn on/off the inline resizing controls of tables and images in Firefox/Mozilla. These are enabled by default.',
+        'type' => 'combo-boolean',
+        'options' => '',
+        'value' => true,
+    ),
+    array(
         'name' => 'table_inline_editing',
-        'desc' => '',
+        'desc' => 'This option gives you the ability to turn on/off the inline table editing controls in Firefox/Mozilla. According to the TinyMCE documentation, these controls are somewhat buggy and not redesignable, so they are disabled by default.',
         'type' => 'combo-boolean',
         'options' => '',
         'value' => true,
@@ -300,6 +307,13 @@ This option enables you to specify where the toolbar should be located. This opt
         'type' => 'textfield',
         'options' => '',
         'value' => '95%',
+    ),
+    array(
+        'name' => 'template_selected_content_classes',
+        'desc' => 'Specify a list of CSS class names for the template plugin. They must be separated by spaces. Any template element with one of the specified CSS classes will have its content replaced by the selected editor content when first inserted.',
+        'type' => 'textfield',
+        'options' => '',
+        'value' => '',
     ),
 );
 

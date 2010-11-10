@@ -34,7 +34,7 @@ Tiny.Editor = function(config) {
         ,remove_line_breaks: false
         ,resource_browser_path: Tiny.config.manager_url+'controllers/browser/index.php?'
         ,width: '90%'
-        
+
         ,buttons1: MODx.config['tiny.custom_buttons1']
         ,buttons2: MODx.config['tiny.custom_buttons2']
         ,buttons3: MODx.config['tiny.custom_buttons3']
@@ -42,7 +42,7 @@ Tiny.Editor = function(config) {
         ,css_path: MODx.config['editor_css_path'] || ''
         ,css_selectors: MODx.config['tinymce.css_selectors']
         ,plugins: MODx.config['tiny.custom_plugins']
-        
+
         ,theme: MODx.config['tiny.editor_theme'] || 'advanced'
         ,theme_advanced_buttons1: MODx.config['tiny.custom_buttons1']
         ,theme_advanced_buttons2: MODx.config['tiny.custom_buttons2']
@@ -55,9 +55,15 @@ Tiny.Editor = function(config) {
         ,theme_advanced_toolbar_align: 'left'
         ,theme_advanced_disable: ''
         ,theme_advanced_toolbar_location: 'top'
-        
+
         ,toolbar_align: MODx.config['manager_direction'] || 'rtl'
         ,use_browser: MODx.config['use_browser'] || true
+
+        ,skin: MODx.config['tiny.skin']
+        ,skin_variant: MODx.config['tiny.skin_variant']
+        ,object_resizing: MODx.config['tiny.object_resizing'] || true
+        ,table_inline_editing: MODx.config['tiny.table_inline_editing'] || true
+        ,template_selected_content_classes: MODx.config['tiny.template_selected_content_classes']
     });
     Ext.applyIf(config,{
         width: '90%'
@@ -73,27 +79,27 @@ Tiny.Editor = function(config) {
 };
 Ext.extend(Tiny.Editor,Ext.form.TextArea,{
     editor: null
-    
+
     ,getTinyId: function() {
         return this.getEl().dom.id;
     }
-    
+
     ,setValue: function(v) {
         var c = tinyMCE.get(this.getTinyId());
-        if (c) c.setContent(v);        
+        if (c) c.setContent(v);
     }
-    
+
     ,onTinyRender: function() {
         var oid = Ext.get(this.getTinyId());
         if (!oid) return;
-        
+
         var s = this.config.tinyConfig;
         s.mode = 'exact';
         tinyMCE.init(s);
         tinyMCE.execCommand('mceAddControl', false,this.getTinyId());
         this.fireEvent('load');
     }
-    
+
     ,onChange: function() {}
     ,onLoad: function(ed) {
         return false;
@@ -115,7 +121,7 @@ Ext.extend(Tiny.Editor,Ext.form.TextArea,{
             el = Ext.get(el);
             tinyMCE.execCommand('mceAddControl', false, el.dom.id);
         },this);
-                
+
         this.fireEvent('ajaxload');
     }
     ,toggle: function(e,t) {
