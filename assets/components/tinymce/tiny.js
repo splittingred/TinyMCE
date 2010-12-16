@@ -58,11 +58,13 @@ var Tiny = {
                 var ta = Ext.get(ed.id);
                 if (ta) {
                     ta.dom.value = ed.getContent();
+                    ta.dom.innerHTML = ta.dom.value;
                 }
             } catch (e) {}
         }
 
-        Ext.getCmp('modx-panel-resource').markDirty();
+        var pr = Ext.getCmp('modx-panel-resource');
+        if (pr) pr.markDirty();
     }
     
     ,loadBrowser: function(fld, url, type, win) {
@@ -171,21 +173,27 @@ var Tiny = {
 };
 
 MODx.loadRTE = function(id) {
-    var s = Tiny.config || {};
-    delete s.assets_path;
-    delete s.assets_url;
-    delete s.core_path;
-    delete s.css_path;
-    delete s.editor;
-    delete s.id;
-    delete s.mode;
-    delete s.path;
-    s.cleanup_callback = "Tiny.onCleanup";
-    var z = Ext.state.Manager.get(MODx.siteId+'-tiny');
-    if (z !== false) {
-        delete s.elements;
-    }
-    tinyMCE.init(s);
+    if (Tiny.config){
+        var s = Tiny.config || {};
+        delete s.assets_path;
+        delete s.assets_url;
+        delete s.core_path;
+        delete s.css_path;
+        delete s.editor;
+        delete s.id;
+        delete s.mode;
+        delete s.path;
+        s.cleanup_callback = "Tiny.onCleanup";
+        var z = Ext.state.Manager.get(MODx.siteId + '-tiny');
+        if (z !== false) {
+            delete s.elements;
+        }
+        if (Tiny.config.frontend||Tiny.config.selector){
+            s.mode = "specific_textareas";
+            s.editor_selector = Tiny.config.selector||"modx-richtext";        
+        }
+        tinyMCE.init(s);		
+	}
 
     /*Tiny.addContentAbove();*/
     Tiny.addContentBelow();
@@ -198,6 +206,8 @@ MODx.loadRTE = function(id) {
         if (!oid) return;
         tinyMCE.execCommand('mceAddControl',false,id);
     }
+
+
 };
 MODx.afterTVLoad = function() {
     Tiny.onTVLoad();
