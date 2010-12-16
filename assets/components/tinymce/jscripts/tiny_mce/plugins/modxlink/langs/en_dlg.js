@@ -48,7 +48,7 @@ title:"Insert/edit link"
 ,ltr:"Left to right"
 ,rtl:"Right to left"
 ,link_list:"Link list"
-,pagetitle: 'Pagetitle'
-,alias: 'Alias'
-,search: 'Search'
+,pagetitle:"Pagetitle"
+,alias:"Alias"
+,search:"Search"
 });
