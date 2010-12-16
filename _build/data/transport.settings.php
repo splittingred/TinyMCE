@@ -113,5 +113,50 @@ $settings['tiny.theme_advanced_blockformats']->fromArray(array(
     'area' => 'tinymce',
 ),'',true,true);
 
+$settings['tiny.skin']= $modx->newObject('modSystemSetting');
+$settings['tiny.skin']->fromArray(array(
+    'key' => 'tiny.skin',
+    'value' => 'cirkuit',
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
+$settings['tiny.skin_variant']= $modx->newObject('modSystemSetting');
+$settings['tiny.skin_variant']->fromArray(array(
+    'key' => 'tiny.skin_variant',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
+$settings['tiny.object_resizing']= $modx->newObject('modSystemSetting');
+$settings['tiny.object_resizing']->fromArray(array(
+    'key' => 'tiny.object_resizing',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
+$settings['tiny.table_inline_editing']= $modx->newObject('modSystemSetting');
+$settings['tiny.table_inline_editing']->fromArray(array(
+    'key' => 'tiny.table_inline_editing',
+    'value' => true,
+    'xtype' => 'combo-boolean',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
+$settings['tiny.template_selected_content_classes']= $modx->newObject('modSystemSetting');
+$settings['tiny.template_selected_content_classes']->fromArray(array(
+    'key' => 'tiny.template_selected_content_classes',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'tinymce',
+),'',true,true);
+
 
 return $settings;

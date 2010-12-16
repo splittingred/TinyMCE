@@ -50,9 +50,9 @@ class TinyMCE {
             'force_br_newlines' => false,
             'forced_root_block' => false,
             'formats' => array(
-		'alignleft' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyleft'),
-		'alignright' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyright'),
-		'alignfull' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyfull'),
+                'alignleft' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyleft'),
+                'alignright' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyright'),
+                'alignfull' => array('selector' => 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', 'classes' => 'justifyfull'),
             ),
             'frontend' => false,
             'height' => '400px',
@@ -103,6 +103,12 @@ class TinyMCE {
             'use_browser' => $this->modx->getOption('use_browser',$this->properties,true),
             'path_options' => $this->modx->getOption('tiny.path_options',$this->properties,''),
             'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
+
+            'skin' => $this->modx->getOption('tiny.skin',$this->properties,''),
+            'skin_variant' => $this->modx->getOption('tiny.skin_variant',$this->properties,''),
+            'object_resizing' => $this->modx->getOption('tiny.object_resizing',$this->properties,true),
+            'table_inline_editing' => $this->modx->getOption('tiny.table_inline_editing',$this->properties,true),
+            'template_selected_content_classes' => $this->modx->getOption('tiny.template_selected_content_classes',$this->properties,''),
         ));
     }
 
@@ -175,7 +181,7 @@ class TinyMCE {
             $this->properties['resource'] = $this->properties['resource']->toArray();
         }
         //unset($this->properties['width'],$this->properties['height']);
-        
+
         $templates = $this->getTemplateList();
 
         /* get formats */
