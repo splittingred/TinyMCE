@@ -43,7 +43,11 @@ switch ($modx->event->name) {
     case 'OnRichTextBrowserInit':
         if ($useEditor && $whichEditor == 'TinyMCE') {
             $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/tiny_mce_popup.js');
-            $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js');
+            if (file_exists($tiny->config['assetsPath'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js')) {
+                $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js');
+            } else {
+                $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/en.js');
+            }
             $modx->regClientStartupScript($tiny->config['assetsUrl'].'tiny.browser.js');
             $modx->event->output('Tiny.browserCallback');
         }

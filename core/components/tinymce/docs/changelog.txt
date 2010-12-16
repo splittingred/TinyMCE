@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.1.2
 ====================================
+- [#33] Fixed missing language reference issue
+- Fixed problem that stripped // in http:// on image selection from MODx.Browser
 - Fixed language issue with modxlink plugin
 
 TinyMCE 4.1.1

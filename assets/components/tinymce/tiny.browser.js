@@ -3,7 +3,6 @@ Tiny.browserCallback = function(data) {
     var FileBrowserDialogue = {
         init : function () {}
         ,selectURL : function (url) {
-            url = url.replace('//','/');
             var win = tinyMCEPopup.getWindowArg('window');
         
             /* insert information now */
