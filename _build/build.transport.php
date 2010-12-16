@@ -100,15 +100,21 @@ $builder->putVehicle($vehicle);
 
 /* load system settings */
 $settings = include $sources['data'].'transport.settings.php';
-$attributes= array(
-    xPDOTransport::UNIQUE_KEY => 'key',
-    xPDOTransport::PRESERVE_KEYS => true,
-    xPDOTransport::UPDATE_OBJECT => false,
-);
-foreach ($settings as $setting) {
-    $vehicle = $builder->createVehicle($setting,$attributes);
-    $builder->putVehicle($vehicle);
+if (is_array($settings) && !empty($settings)) {
+    $attributes= array(
+        xPDOTransport::UNIQUE_KEY => 'key',
+        xPDOTransport::PRESERVE_KEYS => true,
+        xPDOTransport::UPDATE_OBJECT => false,
+    );
+    foreach ($settings as $setting) {
+        $vehicle = $builder->createVehicle($setting,$attributes);
+        $builder->putVehicle($vehicle);
+    }
+    $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($settings).' System Settings.'); flush();
+} else {
+    $modx->log(xPDO::LOG_LEVEL_ERROR,'Could not package System Settings.');
 }
+unset($settings,$setting);
 
 /* now pack in the license file, readme and setup options */
 $modx->log(xPDO::LOG_LEVEL_INFO,'Setting Package Attributes...'); flush();
