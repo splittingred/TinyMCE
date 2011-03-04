@@ -140,7 +140,6 @@ class TinyMCE {
         if ($this->properties['theme'] == 'editor' || $this->properties['theme'] == 'custom') {
             $this->properties['theme'] = 'advanced';
         }
-        
         $this->properties['document_base_url'] = $this->config['assetsUrl'];
 
         /* Set relative URL options */
@@ -174,7 +173,12 @@ class TinyMCE {
             break;
         }
 
+        $richtextResource = true;
         if (!empty($this->properties['resource'])) {
+            if (!$this->properties['resource']->get('richtext')) {
+                unset($this->properties['elements']);
+                $richtextResource = false; /* workaround for modx ui bug with rte tvs */
+            }
             $this->properties['resource'] = $this->properties['resource']->toArray();
         }
         //unset($this->properties['width'],$this->properties['height']);
@@ -183,7 +187,6 @@ class TinyMCE {
 
         /* get formats */
         //$this->properties['formats'] = $this->getFormats();
-
         /* get JS */
         unset($this->properties['resource']);
         ob_start();

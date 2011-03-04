@@ -2,6 +2,11 @@
 This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+TinyMCE 4.2.0
+====================================
+- Fix issue with using tinymce with richtext TVs when Resource's richtext is set to false
+- Fix issue with using tinymce in front-end
+
 TinyMCE 4.1.2
 ====================================
 - [#33] Fixed missing language reference issue

@@ -192,7 +192,7 @@ MODx.loadRTE = function(id) {
             s.mode = "specific_textareas";
             s.editor_selector = Tiny.config.selector||"modx-richtext";        
         }
-        tinyMCE.init(s);		
+        tinyMCE.init(s);
 	}
 
     /*Tiny.addContentAbove();*/
