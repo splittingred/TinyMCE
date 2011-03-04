@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.2.0
 ====================================
+- [#41] Add tiny.forced_root_block setting
 - Fix issue with using tinymce with richtext TVs when Resource's richtext is set to false
 - Fix issue with using tinymce in front-end
 
