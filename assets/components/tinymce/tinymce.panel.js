@@ -17,7 +17,7 @@ Tiny.Editor = function(config) {
         ,element_format: 'xhtml'
         ,element_list: ''
         ,entities: ''
-        ,entity_encoding: ''
+        ,entity_encoding: 'named'
         ,file_browser_callback: 'Tiny.loadBrowser'
         ,formats: 'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address'
         ,frontend: false
