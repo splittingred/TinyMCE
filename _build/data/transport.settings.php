@@ -8,7 +8,7 @@ $settings = array();
 $settings['tiny.editor_theme']= $modx->newObject('modSystemSetting');
 $settings['tiny.editor_theme']->fromArray(array(
     'key' => 'tiny.editor_theme',
-    'value' => 'editor',
+    'value' => 'advanced',
     'xtype' => 'textfield',
     'namespace' => 'tinymce',
     'area' => 'tinymce',
@@ -98,7 +98,7 @@ $settings['tiny.use_uncompressed_library']->fromArray(array(
 $settings['tiny.path_options']= $modx->newObject('modSystemSetting');
 $settings['tiny.path_options']->fromArray(array(
     'key' => 'tiny.path_options',
-    'value' => false,
+    'value' => '',
     'xtype' => 'textfield',
     'namespace' => 'tinymce',
     'area' => 'tinymce',

@@ -85,17 +85,17 @@ class TinyMCE {
         $this->properties = array_merge($this->properties,array(
             'theme_advanced_blockformats' => $this->modx->getOption('tiny.theme_advanced_blockformats',$this->properties,'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address'),
             'theme_advanced_font_sizes' => $this->modx->getOption('tiny.theme_advanced_font_sizes',$this->properties,'80%,90%,100%,120%,140%,160%,180%,220%,260%,320%,400%,500%,700%'),
-            'buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,''),
-            'buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,''),
+            'buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help'),
+            'buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops'),
             'buttons3' => $this->modx->getOption('tiny.custom_buttons3',$this->properties,''),
             'buttons4' => $this->modx->getOption('tiny.custom_buttons4',$this->properties,''),
             'buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
             'css_path' => $this->modx->getOption('editor_css_path',$this->properties,''),
-            'plugins' => $this->modx->getOption('tiny.custom_plugins',$this->properties,''),
+            'plugins' => $this->modx->getOption('tiny.custom_plugins',$this->properties,'style,advimage,advlink,modxlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media'),
             'theme' => $this->modx->getOption('tiny.editor_theme',$this->properties,'advanced'),
             'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',$this->properties,''),
-            'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,''),
-            'theme_advanced_buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,''),
+            'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help'),
+            'theme_advanced_buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops'),
             'theme_advanced_buttons3' => $this->modx->getOption('tiny.custom_buttons3',$this->properties,''),
             'theme_advanced_buttons4' => $this->modx->getOption('tiny.custom_buttons4',$this->properties,''),
             'theme_advanced_buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
@@ -104,7 +104,7 @@ class TinyMCE {
             'path_options' => $this->modx->getOption('tiny.path_options',$this->properties,''),
             'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
 
-            'skin' => $this->modx->getOption('tiny.skin',$this->properties,''),
+            'skin' => $this->modx->getOption('tiny.skin',$this->properties,'cirkuit'),
             'skin_variant' => $this->modx->getOption('tiny.skin_variant',$this->properties,''),
             'object_resizing' => $this->modx->getOption('tiny.object_resizing',$this->properties,true),
             'table_inline_editing' => $this->modx->getOption('tiny.table_inline_editing',$this->properties,true),
@@ -114,16 +114,16 @@ class TinyMCE {
 
     public function initialize() {
         if (!$this->jsLoaded) {
-            $scriptfile = ((!$this->properties['frontend'] && $this->properties['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
+            $scriptFile = ((!$this->properties['frontend'] && $this->properties['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
             if ($this->modx->getOption('tiny.use_uncompressed_library',null,false)) {
-                $scriptfile = 'tiny_mce_src.js';
+                $scriptFile = 'tiny_mce_src.js';
             }
-            $this->modx->regClientStartupScript($this->config['assetsUrl'].'jscripts/tiny_mce/'.$scriptfile);
-            $this->modx->regClientStartupScript($this->config['assetsUrl'].'xconfig.js');
-            $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
             $this->modx->lexicon->load('tinymce:default');
             $lang = $this->modx->lexicon->fetch('tiny.',true);
-            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">Tiny.lang = '.$this->modx->toJSON($lang).';</script>');
+            $this->modx->regClientStartupScript($this->config['assetsUrl'].'jscripts/tiny_mce/'.$scriptFile);
+            $this->modx->regClientStartupScript($this->config['assetsUrl'].'xconfig.js');
+            $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
+            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nTiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
             $this->jsLoaded = true;
         }
@@ -136,14 +136,11 @@ class TinyMCE {
      * @param array $config An array of configuration parameters.
      */
     public function getScript() {
-        $theme = $this->properties['theme'];
-        if ($theme == 'editor' || $theme == 'custom') {
-            $tinyTheme = 'advanced';
-            $theme = 'advanced';
-        } else {
-            $tinyTheme = $theme;
+        /* backwards compat */
+        if ($this->properties['theme'] == 'editor' || $this->properties['theme'] == 'custom') {
+            $this->properties['theme'] = 'advanced';
         }
-        $this->properties['theme'] = $theme;
+        
         $this->properties['document_base_url'] = $this->config['assetsUrl'];
 
         /* Set relative URL options */
