@@ -152,8 +152,8 @@ $settings['tiny.font_size_style_values']->fromArray(array(
 $settings['tiny.forced_root_block']= $modx->newObject('modSystemSetting');
 $settings['tiny.forced_root_block']->fromArray(array(
     'key' => 'tiny.forced_root_block',
-    'value' => true,
-    'xtype' => 'combo-boolean',
+    'value' => 'p',
+    'xtype' => 'textfield',
     'namespace' => 'tinymce',
     'area' => 'cleanup-output',
 ),'',true,true);

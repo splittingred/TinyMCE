@@ -4,6 +4,7 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.2.0
 ====================================
+- [#44] Fix issue with invalid forced_root_block value that causes TinyMCE to hang on empty resources
 - [#42] Fix issue with passed-in values that caused TinyMCE to not load correctly
 - Update TinyMCE to 3.3.9.3
 - [#21] Add a bunch of system settings for controlling TinyMCE output and cleanup

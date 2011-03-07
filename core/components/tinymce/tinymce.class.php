@@ -83,7 +83,7 @@ class TinyMCE {
             'fix_table_elements' => $this->modx->getOption('tiny.fix_table_elements',$this->properties,false),
             'font_size_classes' => $this->modx->getOption('tiny.font_size_classes',$this->properties,''),
             'font_size_style_values' => $this->modx->getOption('tiny.font_size_style_values',$this->properties,'xx-small,x-small,small,medium,large,x-large,xx-large'),
-            'forced_root_block' => $this->modx->getOption('tiny.forced_root_block',$this->properties,false),
+            'forced_root_block' => $this->modx->getOption('tiny.forced_root_block',$this->properties,'p'),
             'indentation' => $this->modx->getOption('tiny.indentation',$this->properties,'30px'),
             'invalid_elements' => $this->modx->getOption('tiny.invalid_elements',$this->properties,''),
             'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),

@@ -15,7 +15,7 @@ set_time_limit(0);
 define('PKG_NAME','TinyMCE');
 define('PKG_NAMESPACE','tinymce');
 define('PKG_VERSION','4.2.0');
-define('PKG_RELEASE','rc2');
+define('PKG_RELEASE','pl');
 
 /* define sources */
 $root = dirname(dirname(__FILE__)).'/';
@@ -95,6 +95,9 @@ $vehicle->resolve('file',array(
 ));
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'resolve.whicheditor.php',
+));
+$vehicle->resolve('php',array(
+    'source' => $sources['resolvers'] . 'resolve.fix_setting.php',
 ));
 $builder->putVehicle($vehicle);
 
