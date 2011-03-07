@@ -97,7 +97,6 @@ class TinyMCE {
             'skin' => $this->modx->getOption('tiny.skin',$this->properties,'cirkuit'),
             'skin_variant' => $this->modx->getOption('tiny.skin_variant',$this->properties,''),
             'table_inline_editing' => $this->modx->getOption('tiny.table_inline_editing',$this->properties,false),
-            'template_selected_content_classes' => $this->modx->getOption('tiny.template_selected_content_classes',$this->properties,''),
             'theme' => $this->modx->getOption('tiny.editor_theme',$this->properties,'advanced'),
             'theme_advanced_blockformats' => $this->modx->getOption('tiny.theme_advanced_blockformats',$this->properties,'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address'),
             'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help'),
@@ -109,6 +108,13 @@ class TinyMCE {
             'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',$this->properties,''),
             'use_browser' => $this->modx->getOption('use_browser',$this->properties,true),
         ));
+
+        /* add properties that only have a value, due to TinyMCE bug with empty value here */
+        $tp = $this->modx->getOption('tiny.template_selected_content_classes',$this->properties,'');
+        if (!empty($tp)) {
+            $this->properties['template_selected_content_classes'] = $tp;
+        }
+        
     }
 
     public function initialize() {
