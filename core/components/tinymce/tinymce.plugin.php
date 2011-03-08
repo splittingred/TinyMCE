@@ -25,7 +25,7 @@ $whichEditor = $modx->getOption('which_editor',null,'');
 switch ($modx->event->name) {
     case 'OnRichTextEditorInit':
         if ($useEditor && $whichEditor == 'TinyMCE') {
-            if (isset($forfrontend) || $modx->isFrontend()) {
+            if (isset($forfrontend) || $modx->context->get('key') != 'mgr') {
                 $def = $modx->getOption('cultureKey',null,$modx->getOption('manager_language',null,'en'));
                 $tiny->properties['language'] = $modx->getOption('fe_editor_lang',array(),$def);
                 $tiny->properties['frontend'] = true;

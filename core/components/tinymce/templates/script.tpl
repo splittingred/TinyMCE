@@ -1,5 +1,5 @@
 <script type="text/javascript">
-// <![CDATA[
+//<![CDATA[
 Ext.onReady(function() {
     Tiny.config = <?php echo $this->modx->toJSON($this->properties); ?>;
     Tiny.config.setup = function(ed) {

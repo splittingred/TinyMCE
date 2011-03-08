@@ -167,8 +167,9 @@ var Tiny = {
         });   
     }
     ,onExecCommand: function(ed,el,cmd,ui,v) {
-        Ext.getCmp('modx-panel-resource').markDirty();
-	return false;
+        var pr = Ext.getCmp('modx-panel-resource');
+        if (pr) { pr.markDirty(); }
+        return false;
     }
 };
 

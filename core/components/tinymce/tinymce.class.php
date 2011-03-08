@@ -125,11 +125,18 @@ class TinyMCE {
             }
             $this->modx->lexicon->load('tinymce:default');
             $lang = $this->modx->lexicon->fetch('tiny.',true);
+            $compressJs = $this->modx->getOption('tiny.compress_js',null,true);
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'jscripts/tiny_mce/'.$scriptFile);
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'xconfig.js');
-            $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
+            if ($compressJs) {
+                $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.min.js');
+            } else {
+                $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
+            }
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nTiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
-            $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
+            if (!$compressJs) {
+                $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
+            }
             $this->jsLoaded = true;
         }
         return $this->getScript();
