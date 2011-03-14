@@ -27,7 +27,7 @@
 
 			t.url = url;
 			t.editor = ed;
-			t.rpcUrl = ed.getParam("spellchecker_rpc_url", "{backend}");
+			t.rpcUrl = ed.getParam("spellchecker_rpc_url", this.url+'/rpc.php');
 
 			if (t.rpcUrl == '{backend}') {
 				// Sniff if the browser supports native spellchecking (Don't know of a better way)
@@ -216,6 +216,7 @@
 				}
 			});
 
+			ed.getBody().innerHTML = ed.getBody().innerHTML; // Normalize text nodes
 			se.moveToBookmark(b);
 		},
 
