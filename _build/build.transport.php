@@ -14,7 +14,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','TinyMCE');
 define('PKG_NAMESPACE','tinymce');
-define('PKG_VERSION','4.2.1');
+define('PKG_VERSION','4.2.2');
 define('PKG_RELEASE','pl');
 
 /* define sources */
