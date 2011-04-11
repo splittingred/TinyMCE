@@ -159,7 +159,11 @@ var Tiny = {
             ,text: 'Insert Image'
             ,listeners: {
                 'select': function(data) {
-                    var img = '<img src="'+data.relativeUrl+'" alt="" />';
+                    if (inRevo20) {
+                        img = '<img src="'+data.relativeUrl+'" alt="" />';
+                    } else {
+                        img = '<img src="'+data.fullRelativeUrl+'" alt="" />';
+                    }
                     tinyMCE.execCommand('mceInsertContent',false,img);
                 }
             }
@@ -207,8 +211,6 @@ MODx.loadRTE = function(id) {
         if (!oid) return;
         tinyMCE.execCommand('mceAddControl',false,id);
     }
-
-
 };
 MODx.afterTVLoad = function() {
     Tiny.onTVLoad();

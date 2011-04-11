@@ -21,11 +21,17 @@ Tiny.browserCallback = function(data) {
             win.focus(); win.document.focus();
         }
     };
+    var fileUrl;
+    if (inRevo20) {
+        fileUrl = unescape(data.relativeUrl);
+    } else {
+        fileUrl = data.fullRelativeUrl;
+    }
     tinyMCEPopup.onInit.add(FileBrowserDialogue.init, FileBrowserDialogue);
 
     function OpenFile(fileUrl){
         FileBrowserDialogue.selectURL(fileUrl);
     }
-    var fileUrl = unescape(data.relativeUrl);
+
     OpenFile(fileUrl);
 };

@@ -133,6 +133,9 @@ class TinyMCE {
             } else {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
             }
+            $this->modx->getVersionData();
+            $inRevo20 = (boolean)version_compare($this->modx->version['full_version'],'2.1.0-rc1','<');
+            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">var inRevo20 = '.($inRevo20 ? 1 : 0).';</script>');
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nTiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
             if (!$compressJs) {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
