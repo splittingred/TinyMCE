@@ -8,7 +8,7 @@
 $_lang['tiny.toggle_editor'] = 'Toggle Editor: ';
 
 $_lang['setting_tiny.convert_fonts_to_spans'] = 'Convert Fonts to Spans';
-$_lang['setting_tiny.convert_fonts_to_spans'] = 'If you set this option to true, TinyMCE will convert all font elements to span elements and generate span elements instead of font elements. This option should be used in order to get more W3C compatible code, since font elements are deprecated.';
+$_lang['setting_tiny.convert_fonts_to_spans_desc'] = 'If you set this option to true, TinyMCE will convert all font elements to span elements and generate span elements instead of font elements. This option should be used in order to get more W3C compatible code, since font elements are deprecated.';
 $_lang['setting_tiny.convert_newlines_to_brs'] = 'Convert Newlines to BRs';
 $_lang['setting_tiny.convert_newlines_to_brs_desc'] = 'If you set this option to true, newline characters codes get converted into br elements. This option is set to false by default.';
 $_lang['setting_tiny.css_selectors'] = 'CSS Selectors';
