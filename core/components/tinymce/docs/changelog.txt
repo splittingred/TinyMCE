@@ -2,7 +2,9 @@
 This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
-
+TinyMCE 4.2.4
+====================================
+- Updated TinyMCE to 3.4.2
 - [#53] Languages added/update: German, English, French, Indonesian, Japanese, Dutch, Russian, Ukrainian
 
 TinyMCE 4.2.2
