@@ -5,6 +5,7 @@ development release, and is only shown to give an idea of what's currently in th
 TinyMCE 4.2.4
 ====================================
 - Updated TinyMCE to 3.4.2
+- Fix issue where recursion detected xPDO error was showing in logs on chunk editing
 - [#55] Fix help for element_format and preformatted descriptions in plugin properties
 - [#53] Languages added/update: German, English, French, Indonesian, Japanese, Dutch, Russian, Ukrainian
 
