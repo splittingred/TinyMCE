@@ -84,7 +84,7 @@ $properties = array(
     ),
     array(
         'name' => 'element_format',
-        'desc' => 'This option enables control if elements should be in html or xhtml mode. xhtml is the default state for this option. This means that for example <br /> will be <br> if you set this option to "html".',
+        'desc' => 'This option enables control if elements should be in html or xhtml mode. xhtml is the default state for this option. This means that for example &lt;br /&gt; will be &lt;br&gt; if you set this option to "html".',
         'type' => 'list',
         'options' => array(
             array('name' => 'XHTML','value' => 'xhtml'),
@@ -180,7 +180,7 @@ $properties = array(
     ),
     array(
         'name' => 'preformatted',
-        'desc' => 'If you enable this feature, whitespace such as tabs and spaces will be preserved. Much like the behavior of a <pre> element. This can be handy when integrating TinyMCE with webmail clients. This option is disabled by default.',
+        'desc' => 'If you enable this feature, whitespace such as tabs and spaces will be preserved. Much like the behavior of a &lt;pre&gt; element. This can be handy when integrating TinyMCE with webmail clients. This option is disabled by default.',
         'type' => 'combo-boolean',
         'options' => '',
         'value' => true,
