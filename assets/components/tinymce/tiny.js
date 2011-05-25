@@ -1,5 +1,6 @@
 var Tiny = {
     button: {}
+    ,contentBelowAdded: false
     ,onLoad: function(ed) {
         var el = Ext.get(ed.id+'_ifr');
         new MODx.load({
@@ -86,7 +87,7 @@ var Tiny = {
      * Prevents MODx tags from becoming &amp;=`value`
      */
     ,onCleanup: function(type,value) {
-	switch (type) {
+	    switch (type) {
             case "get_from_editor":
             case "insert_to_editor":
                 var regexp = /(\[\[[^\]]*)&amp;([^\[]*\]\])/g;
@@ -101,10 +102,11 @@ var Tiny = {
             case "submit_content_dom":
                 //value.innerHTML = value.innerHTML.replace('&amp;','&');
             break;
-	}
+	    }
         return value;
     }
     ,addContentBelow: function() {
+        if (Tiny.contentBelowAdded) return false;
         var below = Ext.get('modx-content-below');
         if (!below) return false;
         below.createChild({
@@ -145,6 +147,8 @@ var Tiny = {
                 Ext.state.Manager.set(MODx.siteId+'-tiny',false);
             }
         },this);
+        Tiny.contentBelowAdded = true;
+        return true;
     }
 
     ,addContentAbove: function() {
