@@ -18,12 +18,14 @@ class TinyMCE {
         $assetsUrl = $this->modx->getOption('tiny.assets_url',$config,$this->modx->getOption('assets_url',null,MODX_ASSETS_URL).'components/tinymce/');
         $assetsPath = $this->modx->getOption('tiny.assets_path',$config,$this->modx->getOption('assets_path',null,MODX_ASSETS_PATH).'components/tinymce/');
         $corePath = $this->modx->getOption('tiny.core_path',$config,$this->modx->getOption('core_path',null,MODX_CORE_PATH).'components/tinymce/');
+        $baseUrl = $this->modx->getOption('tiny.base_url',$config,$this->modx->getOption('assets_url',null,MODX_ASSETS_URL).'components/tinymce/');
 
         $this->config = array_merge(array(
             'assetsPath' => $assetsPath,
             'assetsUrl' => $assetsUrl,
             'path' => $assetsPath,
             'corePath' => $corePath,
+            'baseUrl' => $baseUrl
         ),$config);
     }
 
@@ -155,7 +157,7 @@ class TinyMCE {
         if ($this->properties['theme'] == 'editor' || $this->properties['theme'] == 'custom') {
             $this->properties['theme'] = 'advanced';
         }
-        $this->properties['document_base_url'] = $this->config['assetsUrl'];
+        $this->properties['document_base_url'] = $this->config['baseUrl'];
 
         /* Set relative URL options */
         switch ($this->properties['path_options']) {
