@@ -70,7 +70,7 @@ var Tiny = {
     
     ,loadBrowser: function(fld, url, type, win) {
         tinyMCE.activeEditor.windowManager.open({
-            file: Tiny.config.browserUrl+'&ctx='+(MODx.ctx || 'web')
+            file: Tiny.config.browserUrl+'&ctx='+(MODx.ctx || 'web')+'&wctx='+(MODx.ctx || 'web')
             ,width: screen.width * 0.7
             ,height: screen.height * 0.7
             ,resizable: 'yes'
