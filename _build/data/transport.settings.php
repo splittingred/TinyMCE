@@ -5,6 +5,15 @@
  */
 $settings = array();
 
+$settings['tiny.base_url']= $modx->newObject('modSystemSetting');
+$settings['tiny.base_url']->fromArray(array(
+    'key' => 'tiny.base_url',
+    'value' => '',
+    'xtype' => 'textfield',
+    'namespace' => 'tinymce',
+    'area' => 'general',
+),'',true,true);
+
 $settings['tiny.convert_fonts_to_spans']= $modx->newObject('modSystemSetting');
 $settings['tiny.convert_fonts_to_spans']->fromArray(array(
     'key' => 'tiny.convert_fonts_to_spans',

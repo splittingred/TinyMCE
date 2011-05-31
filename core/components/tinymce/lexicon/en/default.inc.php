@@ -7,6 +7,8 @@
  */
 $_lang['tiny.toggle_editor'] = 'Toggle Editor: ';
 
+$_lang['setting_tiny.base_url'] = 'TinyMCE Document Base URL';
+$_lang['setting_tiny.base_url_desc'] = 'Allows the setting of a base URL property to override the document_base_url TinyMCE settings. Useful for rootrelative environments.';
 $_lang['setting_tiny.convert_fonts_to_spans'] = 'Convert Fonts to Spans';
 $_lang['setting_tiny.convert_fonts_to_spans_desc'] = 'If you set this option to true, TinyMCE will convert all font elements to span elements and generate span elements instead of font elements. This option should be used in order to get more W3C compatible code, since font elements are deprecated.';
 $_lang['setting_tiny.convert_newlines_to_brs'] = 'Convert Newlines to BRs';
