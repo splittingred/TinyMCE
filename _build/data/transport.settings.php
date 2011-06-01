@@ -275,6 +275,16 @@ $settings['tiny.template_list']->fromArray(array(
     'area' => 'general',
 ),'',true,true);
 
+
+$settings['tiny.template_list_snippet']= $modx->newObject('modSystemSetting');
+$settings['tiny.template_list_snippet']->fromArray(array(
+    'key' => 'tiny.template_list_snippet',
+    'value' => '',
+    'xtype' => 'textarea',
+    'namespace' => 'tinymce',
+    'area' => 'general',
+),'',true,true);
+
 $settings['tiny.template_selected_content_classes']= $modx->newObject('modSystemSetting');
 $settings['tiny.template_selected_content_classes']->fromArray(array(
     'key' => 'tiny.template_selected_content_classes',
