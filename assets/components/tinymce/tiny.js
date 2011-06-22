@@ -199,7 +199,7 @@ MODx.loadRTE = function(id) {
         }
         if (Tiny.config.frontend||Tiny.config.selector){
             s.mode = "specific_textareas";
-            s.editor_selector = Tiny.config.selector||"modx-richtext";        
+            s.editor_selector = Tiny.config.selector||"modx-richtext";
         }
         tinyMCE.init(s);
 	}

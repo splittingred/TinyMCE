@@ -49,10 +49,6 @@ switch ($modx->event->name) {
             } else {
                 $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/en.js');
             }
-            $modx->regClientStartupScript($tiny->config['assetsUrl'].'tiny.browser.js');
-            $modx->getVersionData();
-            $inRevo20 = (boolean)version_compare($modx->version['full_version'],'2.1.0-rc1','<');
-            $modx->regClientStartupHTMLBlock('<script type="text/javascript">var inRevo20 = '.($inRevo20 ? 1 : 0).';</script>');
             $modx->event->output('Tiny.browserCallback');
         }
         return '';
