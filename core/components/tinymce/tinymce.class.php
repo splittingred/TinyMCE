@@ -236,7 +236,13 @@ class TinyMCE {
     public function getTemplateList() {
         $list = array();
 
-        $templateList = $this->modx->getOption('tiny.template_list',$this->properties,'');
+        $templateListSnippet = $this->modx->getOption('tiny.template_list_snippet',$this->properties,'');
+        if (!empty($templateListSnippet)) {
+          $templateList = $this->modx->runSnippet($templateListSnippet);
+        } else {
+          $templateList = $this->modx->getOption('tiny.template_list',$this->properties,'');
+        }
+
         if (empty($templateList)) return $list;
 
         $templateList = explode(',',$templateList);

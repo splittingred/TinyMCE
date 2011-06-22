@@ -4,6 +4,8 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.3.0
 ====================================
+- [#64] Add tiny.template_list_snippet setting for grabbing template list from a Snippet
+- [#66] Fix issues with Revolution 2.2.0 code
 - [#63] Add tiny.base_url setting for managing the document_base_url tinymce setting
 
 TinyMCE 4.2.4
