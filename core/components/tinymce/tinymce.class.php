@@ -11,6 +11,7 @@ class TinyMCE {
      * The TinyMCE constructor.
      *
      * @param modX $modx A reference to the modX constructor.
+     * @param array $config An array of configuration properties
      */
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
@@ -30,6 +31,12 @@ class TinyMCE {
         ),$config);
     }
 
+    /**
+     * Set the properties for this instance
+     * 
+     * @param array $properties
+     * @return void
+     */
     public function setProperties(array $properties = array()) {
         $browserAction = $this->_getBrowserAction();
         $this->properties = array_merge(array(
@@ -120,6 +127,10 @@ class TinyMCE {
         
     }
 
+    /**
+     * Initialize TinyMCE
+     * @return string
+     */
     public function initialize() {
         if (!$this->jsLoaded) {
             $scriptFile = ((!$this->properties['frontend'] && $this->properties['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
@@ -128,7 +139,10 @@ class TinyMCE {
             }
             $this->modx->lexicon->load('tinymce:default');
             $lang = $this->modx->lexicon->fetch('tiny.',true);
-            $compressJs = $this->modx->getOption('tiny.compress_js',null,true);
+            $compressJs = $this->modx->getOption('tiny.compress_js',null,false);
+            $this->modx->getVersionData();
+            $inRevo20 = (boolean)version_compare($this->modx->version['full_version'],'2.1.0-rc1','<');
+
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'jscripts/tiny_mce/'.$scriptFile);
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'xconfig.js');
             if ($compressJs) {
@@ -136,13 +150,12 @@ class TinyMCE {
             } else {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
             }
-            $this->modx->getVersionData();
-            $inRevo20 = (boolean)version_compare($this->modx->version['full_version'],'2.1.0-rc1','<');
-            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">var inRevo20 = '.($inRevo20 ? 1 : 0).';</script>');
-            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nTiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
+            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nvar inRevo20 = ".($inRevo20 ? 1 : 0).";Tiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
             if (!$compressJs) {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
             }
+
+
             $this->jsLoaded = true;
         }
         return $this->getScript();
@@ -150,8 +163,8 @@ class TinyMCE {
 
     /**
      * Renders the TinyMCE script code.
-     * @access public
-     * @param array $config An array of configuration parameters.
+     *
+     * @return string
      */
     public function getScript() {
         /* backwards compat */
@@ -199,8 +212,6 @@ class TinyMCE {
             }
             $this->properties['resource'] = $this->properties['resource']->toArray();
         }
-        //unset($this->properties['width'],$this->properties['height']);
-
         $templates = $this->getTemplateList();
 
         /* get formats */
@@ -212,17 +223,26 @@ class TinyMCE {
         $script = ob_get_contents();
         ob_end_clean();
 
+        /* will need to do $this->modx->controller->addHtml() for Revo 2.2+ */
         $this->modx->regClientStartupHTMLBlock($script);
         return '';
     }
 
     /**
      * Allows for custom templates
+     *
+     * @return array
      */
     public function getTemplateList() {
         $list = array();
 
-        $templateList = $this->modx->getOption('tiny.template_list',$this->properties,'');
+        $templateListSnippet = $this->modx->getOption('tiny.template_list_snippet',$this->properties,'');
+        if (!empty($templateListSnippet)) {
+          $templateList = $this->modx->runSnippet($templateListSnippet);
+        } else {
+          $templateList = $this->modx->getOption('tiny.template_list',$this->properties,'');
+        }
+
         if (empty($templateList)) return $list;
 
         $templateList = explode(',',$templateList);
@@ -240,6 +260,7 @@ class TinyMCE {
 
     /**
      * Gets the MODx modAction for the rte browser.
+     * @return modAction
      */
     private function _getBrowserAction() {
         return $this->modx->getObject('modAction',array('controller' => 'browser'));
@@ -250,6 +271,8 @@ class TinyMCE {
      *
      * TODO: Figure out proprietary storage format to have this work. Currently
      * ignored.
+     *
+     * @return string
      */
     public function getFormats() {
         $formats = explode(',',$this->properties['formats']);
