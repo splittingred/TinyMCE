@@ -5,6 +5,8 @@
  * @package tinymce
  * @language de
  */
+include_once(dirname(dirname(__FILE__)).'/en/default.inc.php'); // fallback for missing defaults or new additions
+
 $_lang['tiny.toggle_editor'] = 'Editor ein- und ausschalten: ';
 $_lang['setting_tiny.css_selectors'] = 'CSS-Selektoren';
 $_lang['setting_tiny.css_selectors_desc'] = 'Hier können Sie eine Liste von Selektoren eingeben, die im Editor verfügbar sein sollen. Geben Sie sie folgendermaßen ein:<br />"angezeigterName=selektorName;angezeigterName2=selektorName2"<br />Wenn Sie zum Beispiel die Selektoren <b>.mono</b> und <b>.smallText</b> in Ihrer CSS-Datei haben, können Sie sie hier so hinzufügen:<br />"Monospace-Text=mono;Kleiner Text=smallText"<br />Beachten Sie, dass hinter dem letzten Eintrag kein Semikolon stehen sollte.';

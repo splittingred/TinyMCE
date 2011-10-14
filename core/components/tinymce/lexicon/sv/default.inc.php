@@ -8,6 +8,7 @@
  * Version:        2.0.9
  * MODx version:   0.9.5
 */
+include_once(dirname(dirname(__FILE__)).'/en/default.inc.php'); // fallback for missing defaults or new additions
 
 $_lang['tinymce_editor_theme_title'] = "Theme:";
 $_lang['tinymce_editor_theme_message'] = "Here you can select which theme or skin to use with the editor.";
