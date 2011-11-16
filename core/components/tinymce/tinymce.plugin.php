@@ -43,16 +43,19 @@ switch ($modx->event->name) {
         break;
     case 'OnRichTextBrowserInit':
         if ($useEditor && $whichEditor == 'TinyMCE') {
-            $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/tiny_mce_popup.js');
-            if (file_exists($tiny->config['assetsPath'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js')) {
-                $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js');
-            } else {
-                $modx->regClientStartupScript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/en.js');
-            }
-            $modx->regClientStartupScript($tiny->config['assetsUrl'].'tiny.browser.js');
-            $modx->getVersionData();
             $inRevo20 = (boolean)version_compare($modx->version['full_version'],'2.1.0-rc1','<');
-            $modx->regClientStartupHTMLBlock('<script type="text/javascript">var inRevo20 = '.($inRevo20 ? 1 : 0).';</script>');
+            $modx->getVersionData();
+            $source = $modx->getOption('default_media_source',null,1);
+            
+            $modx->controller->addHtml('<script type="text/javascript">var inRevo20 = '.($inRevo20 ? 1 : 0).';MODx.source = "'.$source.'";</script>');
+            
+            $modx->controller->addJavascript($tiny->config['assetsUrl'].'jscripts/tiny_mce/tiny_mce_popup.js');
+            if (file_exists($tiny->config['assetsPath'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js')) {
+                $modx->controller->addJavascript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/'.$tiny->properties['language'].'.js');
+            } else {
+                $modx->controller->addJavascript($tiny->config['assetsUrl'].'jscripts/tiny_mce/langs/en.js');
+            }
+            $modx->controller->addJavascript($tiny->config['assetsUrl'].'tiny.browser.js');
             $modx->event->output('Tiny.browserCallback');
         }
         return '';

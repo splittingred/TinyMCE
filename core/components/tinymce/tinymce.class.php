@@ -73,7 +73,7 @@ class TinyMCE {
             'theme_advanced_statusbar_location' => 'bottom',
             'theme_advanced_toolbar_align' => 'left',
             'theme_advanced_toolbar_location' => 'top',
-            'width' => '95%',
+            'width' => '100%',
         ),$properties);
 
         /* now do user/context/system setting overrides - these must override properties */
@@ -150,7 +150,9 @@ class TinyMCE {
             } else {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
             }
-            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nvar inRevo20 = ".($inRevo20 ? 1 : 0).";Tiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
+
+            $source = $this->modx->getOption('default_media_source',null,1);
+            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nvar inRevo20 = ".($inRevo20 ? 1 : 0).";MODx.source = '".$source."';Tiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
             if (!$compressJs) {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
             }
