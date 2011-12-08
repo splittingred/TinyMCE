@@ -8,6 +8,8 @@
  * @author modxcms.cz
  * @updated 2010-12-27
  */
+include_once(dirname(dirname(__FILE__)).'/en/default.inc.php'); // fallback for missing defaults or new additions
+
 $_lang['tiny.toggle_editor'] = 'Použít WYSIWYG: ';
 $_lang['setting_tiny.css_selectors'] = 'CSS selektory';
 $_lang['setting_tiny.css_selectors_desc'] = 'Seznam selektorů dostupný ve WYSIWYG editoru. Zadávejte je v následujícím tvaru:<br />"zobrazenýNázev=nazevSelektoru;zobrazenýNázev2=nazevSelektoru2"<br />Chceme-li mít např. selektory pro třídy <b>.mono</b> a <b>.malyText</b>, které máme v CSS souboru, zadáme je tedy takto:<br />"Neproporcionální text=mono;Malý text=malyText"<br />Pamatujte, že za posledním záznamem nesmí být středník.';

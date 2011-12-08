@@ -9,7 +9,7 @@
  * MODx version:   0.9.2
 */
 
-include_once(dirname(__FILE__).'/english.inc.php'); // fallback for missing defaults or new additions
+include_once(dirname(dirname(__FILE__)).'/en/default.inc.php'); // fallback for missing defaults or new additions
 
 $_lang['tinymce_editor_theme_title'] = "テーマ:";
 $_lang['tinymce_editor_theme_message'] = "テーマを選択し、ツールバーアイコンのセットおよびエディタのデザインを変更できます。";

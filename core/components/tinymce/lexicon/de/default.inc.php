@@ -8,6 +8,8 @@
  * @language de
  * MODX Revolution TinyMCE package translated to German by Jan-Christoph Ihrens (enigmatic_user, enigma@lunamail.de)
  */
+include_once(dirname(dirname(__FILE__)).'/en/default.inc.php'); // fallback for missing defaults or new additions
+
 $_lang['tiny.toggle_editor'] = 'Editor ein- und ausschalten: ';
 
 $_lang['setting_tiny.base_url'] = 'TinyMCE-Dokument-Basis-URL';
