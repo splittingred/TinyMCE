@@ -4,6 +4,9 @@ development release, and is only shown to give an idea of what's currently in th
 
 TinyMCE 4.3.2
 ====================================
+- Update Czech/German translation
+- [#74] Fix inclusion of english as fallback for language
+- [#80] Make context menu use MODxLink plugin
 - Upgrade TinyMCE to 3.4.7
 
 TinyMCE 4.3.1
