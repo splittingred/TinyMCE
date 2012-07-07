@@ -41,7 +41,7 @@ class TinyMCE {
         $browserAction = $this->_getBrowserAction();
         $this->properties = array_merge(array(
             'accessibility_warnings' => false,
-            'browserUrl' => $browserAction ? $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'index.php?a='.$browserAction->get('id') : null,
+            'browserUrl' => $browserAction ? $this->modx->getOption('manager_url',null,MODX_MANAGER_URL).'index.php?a='.$browserAction : null,
             'cleanup' => true,
             'cleanup_on_startup' => false,
             'compressor' => '',
@@ -265,7 +265,14 @@ class TinyMCE {
      * @return modAction
      */
     private function _getBrowserAction() {
-        return $this->modx->getObject('modAction',array('controller' => 'browser'));
+        if (intval($_REQUEST['a']) > 0 || empty($_REQUEST['a'])) {
+            /** @var modAction $actionObj */
+            $actionObj = $this->modx->getObject('modAction',array('controller' => 'browser'));
+            $action = $actionObj ? $actionObj->get('id') : 1;
+        } else {
+            $action = 'browser';
+        }
+        return $action;
     }
 
     /**

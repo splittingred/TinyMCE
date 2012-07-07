@@ -69,8 +69,11 @@ var Tiny = {
     }
     
     ,loadBrowser: function(fld, url, type, win) {
+        var f = Tiny.config.browserUrl+'&ctx='+(MODx.ctx || 'web')+'&wctx='+(MODx.ctx || 'web')+'&source='+MODx.source;
+        if (MODx.request.id) { f = f+'&id='+MODx.request.id; }
+        f = f+'&referringAction='+MODx.request.a;
         tinyMCE.activeEditor.windowManager.open({
-            file: Tiny.config.browserUrl+'&ctx='+(MODx.ctx || 'web')+'&wctx='+(MODx.ctx || 'web')+'&source='+MODx.source
+            file: f
             ,width: screen.width * 0.7
             ,height: screen.height * 0.7
             ,resizable: 'yes'
