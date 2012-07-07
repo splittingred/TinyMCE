@@ -7,6 +7,10 @@ class TinyMCE {
     public $properties = array();
     public $jsLoaded = false;
 
+    /** @var modContext $context */
+    public $context;
+
+
     /**
      * The TinyMCE constructor.
      *
@@ -29,6 +33,7 @@ class TinyMCE {
             'corePath' => $corePath,
             'baseUrl' => $baseUrl,
         ),$config);
+        $this->getEditingContext();
     }
 
     /**
@@ -45,7 +50,7 @@ class TinyMCE {
             'cleanup' => true,
             'cleanup_on_startup' => false,
             'compressor' => '',
-            'content_css' => $this->modx->getOption('editor_css_path'),
+            'content_css' => $this->context->getOption('editor_css_path'),
             'element_list' => '',
             'entities' => '',
             'execcommand_callback' => 'Tiny.onExecCommand',
@@ -78,49 +83,49 @@ class TinyMCE {
 
         /* now do user/context/system setting overrides - these must override properties */
         $this->properties = array_merge($this->properties,array(
-            'buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help'),
-            'buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops'),
-            'buttons3' => $this->modx->getOption('tiny.custom_buttons3',$this->properties,''),
-            'buttons4' => $this->modx->getOption('tiny.custom_buttons4',$this->properties,''),
-            'buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
-            'convert_fonts_to_spans' => $this->modx->getOption('tiny.convert_fonts_to_spans',$this->properties,true),
-            'convert_newlines_to_brs' => $this->modx->getOption('tiny.convert_newlines_to_brs',$this->properties,false),
-            'css_path' => $this->modx->getOption('editor_css_path',$this->properties,''),
-            'directionality' => $this->modx->getOption('manager_direction',$this->properties,'ltr'),
-            'element_format' => $this->modx->getOption('tiny.element_format',$this->properties,'xhtml'),
-            'entity_encoding' => $this->modx->getOption('tiny.element_format',$this->properties,'named'),
-            'fix_nesting' => $this->modx->getOption('tiny.fix_nesting',$this->properties,false),
-            'fix_table_elements' => $this->modx->getOption('tiny.fix_table_elements',$this->properties,false),
-            'font_size_classes' => $this->modx->getOption('tiny.font_size_classes',$this->properties,''),
-            'font_size_style_values' => $this->modx->getOption('tiny.font_size_style_values',$this->properties,'xx-small,x-small,small,medium,large,x-large,xx-large'),
-            'forced_root_block' => $this->modx->getOption('tiny.forced_root_block',$this->properties,'p'),
-            'indentation' => $this->modx->getOption('tiny.indentation',$this->properties,'30px'),
-            'invalid_elements' => $this->modx->getOption('tiny.invalid_elements',$this->properties,''),
-            'language' => $this->modx->getOption('manager_language',null,$this->modx->getOption('cultureKey',null,'en')),
-            'nowrap' => $this->modx->getOption('tiny.nowrap',$this->properties,false),
-            'object_resizing' => $this->modx->getOption('tiny.object_resizing',$this->properties,true),
-            'path_options' => $this->modx->getOption('tiny.path_options',$this->properties,''),
-            'plugins' => $this->modx->getOption('tiny.custom_plugins',$this->properties,'style,advimage,advlink,modxlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media'),
-            'remove_linebreaks' => $this->modx->getOption('tiny.remove_linebreaks',$this->properties,false),
-            'remove_redundant_brs' => $this->modx->getOption('tiny.remove_redundant_brs',$this->properties,true),
-            'removeformat_selector' => $this->modx->getOption('tiny.removeformat_selector',$this->properties,'b,strong,em,i,span,ins'),
-            'skin' => $this->modx->getOption('tiny.skin',$this->properties,'cirkuit'),
-            'skin_variant' => $this->modx->getOption('tiny.skin_variant',$this->properties,''),
-            'table_inline_editing' => $this->modx->getOption('tiny.table_inline_editing',$this->properties,false),
-            'theme' => $this->modx->getOption('tiny.editor_theme',$this->properties,'advanced'),
-            'theme_advanced_blockformats' => $this->modx->getOption('tiny.theme_advanced_blockformats',$this->properties,'p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address'),
-            'theme_advanced_buttons1' => $this->modx->getOption('tiny.custom_buttons1',$this->properties,'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help'),
-            'theme_advanced_buttons2' => $this->modx->getOption('tiny.custom_buttons2',$this->properties,'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops'),
-            'theme_advanced_buttons3' => $this->modx->getOption('tiny.custom_buttons3',$this->properties,''),
-            'theme_advanced_buttons4' => $this->modx->getOption('tiny.custom_buttons4',$this->properties,''),
-            'theme_advanced_buttons5' => $this->modx->getOption('tiny.custom_buttons5',$this->properties,''),
-            'theme_advanced_font_sizes' => $this->modx->getOption('tiny.theme_advanced_font_sizes',$this->properties,'80%,90%,100%,120%,140%,160%,180%,220%,260%,320%,400%,500%,700%'),
-            'theme_advanced_styles' => $this->modx->getOption('tiny.css_selectors',$this->properties,''),
-            'use_browser' => $this->modx->getOption('use_browser',$this->properties,true),
+            'buttons1' => $this->context->getOption('tiny.custom_buttons1','undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help',$this->properties),
+            'buttons2' => $this->context->getOption('tiny.custom_buttons2','bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops',$this->properties),
+            'buttons3' => $this->context->getOption('tiny.custom_buttons3','',$this->properties),
+            'buttons4' => $this->context->getOption('tiny.custom_buttons4','',$this->properties),
+            'buttons5' => $this->context->getOption('tiny.custom_buttons5','',$this->properties),
+            'convert_fonts_to_spans' => $this->context->getOption('tiny.convert_fonts_to_spans',true,$this->properties),
+            'convert_newlines_to_brs' => $this->context->getOption('tiny.convert_newlines_to_brs',false,$this->properties),
+            'css_path' => $this->context->getOption('editor_css_path','',$this->properties),
+            'directionality' => $this->context->getOption('manager_direction','ltr',$this->properties),
+            'element_format' => $this->context->getOption('tiny.element_format','xhtml',$this->properties),
+            'entity_encoding' => $this->context->getOption('tiny.element_format','named',$this->properties),
+            'fix_nesting' => $this->context->getOption('tiny.fix_nesting',false,$this->properties),
+            'fix_table_elements' => $this->context->getOption('tiny.fix_table_elements',false,$this->properties),
+            'font_size_classes' => $this->context->getOption('tiny.font_size_classes','',$this->properties),
+            'font_size_style_values' => $this->context->getOption('tiny.font_size_style_values','xx-small,x-small,small,medium,large,x-large,xx-large',$this->properties),
+            'forced_root_block' => $this->context->getOption('tiny.forced_root_block','p',$this->properties),
+            'indentation' => $this->context->getOption('tiny.indentation','30px',$this->properties),
+            'invalid_elements' => $this->context->getOption('tiny.invalid_elements','',$this->properties),
+            'language' => $this->context->getOption('manager_language',$this->context->getOption('cultureKey','en',$this->properties),$this->properties),
+            'nowrap' => $this->context->getOption('tiny.nowrap',false,$this->properties),
+            'object_resizing' => $this->context->getOption('tiny.object_resizing',true,$this->properties),
+            'path_options' => $this->context->getOption('tiny.path_options','',$this->properties),
+            'plugins' => $this->context->getOption('tiny.custom_plugins','style,advimage,advlink,modxlink,searchreplace,print,contextmenu,paste,fullscreen,noneditable,nonbreaking,xhtmlxtras,visualchars,media',$this->properties),
+            'remove_linebreaks' => $this->context->getOption('tiny.remove_linebreaks',false,$this->properties),
+            'remove_redundant_brs' => $this->context->getOption('tiny.remove_redundant_brs',true,$this->properties),
+            'removeformat_selector' => $this->context->getOption('tiny.removeformat_selector','b,strong,em,i,span,ins',$this->properties),
+            'skin' => $this->context->getOption('tiny.skin','cirkuit',$this->properties),
+            'skin_variant' => $this->context->getOption('tiny.skin_variant','',$this->properties),
+            'table_inline_editing' => $this->context->getOption('tiny.table_inline_editing',false,$this->properties),
+            'theme' => $this->context->getOption('tiny.editor_theme','advanced',$this->properties),
+            'theme_advanced_blockformats' => $this->context->getOption('tiny.theme_advanced_blockformats','p,h1,h2,h3,h4,h5,h6,div,blockquote,code,pre,address',$this->properties),
+            'theme_advanced_buttons1' => $this->context->getOption('tiny.custom_buttons1','undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help',$this->properties),
+            'theme_advanced_buttons2' => $this->context->getOption('tiny.custom_buttons2','bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,styleselect,formatselect,separator,styleprops',$this->properties),
+            'theme_advanced_buttons3' => $this->context->getOption('tiny.custom_buttons3','',$this->properties),
+            'theme_advanced_buttons4' => $this->context->getOption('tiny.custom_buttons4','',$this->properties),
+            'theme_advanced_buttons5' => $this->context->getOption('tiny.custom_buttons5','',$this->properties),
+            'theme_advanced_font_sizes' => $this->context->getOption('tiny.theme_advanced_font_sizes','80%,90%,100%,120%,140%,160%,180%,220%,260%,320%,400%,500%,700%',$this->properties),
+            'theme_advanced_styles' => $this->context->getOption('tiny.css_selectors','',$this->properties),
+            'use_browser' => $this->context->getOption('use_browser',true,$this->properties),
         ));
 
         /* add properties that only have a value, due to TinyMCE bug with empty value here */
-        $tp = $this->modx->getOption('tiny.template_selected_content_classes',$this->properties,'');
+        $tp = $this->context->getOption('tiny.template_selected_content_classes','',$this->properties);
         if (!empty($tp)) {
             $this->properties['template_selected_content_classes'] = $tp;
         }
@@ -134,12 +139,12 @@ class TinyMCE {
     public function initialize() {
         if (!$this->jsLoaded) {
             $scriptFile = ((!$this->properties['frontend'] && $this->properties['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
-            if ($this->modx->getOption('tiny.use_uncompressed_library',null,false)) {
+            if ($this->context->getOption('tiny.use_uncompressed_library',false)) {
                 $scriptFile = 'tiny_mce_src.js';
             }
             $this->modx->lexicon->load('tinymce:default');
             $lang = $this->modx->lexicon->fetch('tiny.',true);
-            $compressJs = $this->modx->getOption('tiny.compress_js',null,false);
+            $compressJs = $this->context->getOption('tiny.compress_js',false);
             $this->modx->getVersionData();
             $inRevo20 = (boolean)version_compare($this->modx->version['full_version'],'2.1.0-rc1','<');
 
@@ -151,7 +156,7 @@ class TinyMCE {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
             }
 
-            $source = $this->modx->getOption('default_media_source',null,1);
+            $source = $this->context->getOption('default_media_source',1);
             $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nvar inRevo20 = ".($inRevo20 ? 1 : 0).";MODx.source = '".$source."';Tiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
             if (!$compressJs) {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
@@ -161,6 +166,23 @@ class TinyMCE {
             $this->jsLoaded = true;
         }
         return $this->getScript();
+    }
+
+    public function getEditingContext() {
+        if ($this->modx->context->get('key') == 'mgr') {
+            /** @var modResource $resource */
+            $resource = !empty($this->config['resource']) ? $this->config['resource'] : '';
+            if ($resource and $resource instanceof modResource) {
+                $this->context = $this->modx->getObject('modContext',$resource->get('context_key'));
+                if ($this->context) {
+                    $this->context->prepare();
+                }
+            }
+        }
+        if (empty($this->context)) {
+            $this->context =& $this->modx->context;
+        }
+        return $this->context;
     }
 
     /**
@@ -183,14 +205,8 @@ class TinyMCE {
                 $this->properties['remove_script_host'] = true;
 
                 $baseUrl = $this->modx->context->getOption('base_url',MODX_BASE_URL);
-                $resource = !empty($this->properties['resource']) ? $this->properties['resource'] : '';
-                if ($resource) {
-                    $ctx = $resource->get('context_key');
-                    $ctx = $this->modx->getObject('modContext',$ctx);
-                    if ($ctx) {
-                        $ctx->prepare();
-                        $baseUrl = $ctx->getOption('base_url',$baseUrl);
-                    }
+                if (!empty($this->config['resource']) && $this->context) {
+                    $baseUrl = $this->context->getOption('base_url',$baseUrl);
                 }
                 $this->properties['document_base_url'] = $baseUrl;
             break;
@@ -207,12 +223,12 @@ class TinyMCE {
         }
 
         $richtextResource = true;
-        if (!empty($this->properties['resource'])) {
-            if (!$this->properties['resource']->get('richtext')) {
+        if (!empty($this->config['resource'])) {
+            if (!$this->config['resource']->get('richtext')) {
                 unset($this->properties['elements']);
                 $richtextResource = false; /* workaround for modx ui bug with rte tvs */
             }
-            $this->properties['resource'] = $this->properties['resource']->toArray();
+            $this->config['resource'] = $this->config['resource']->toArray();
         }
         $templates = $this->getTemplateList();
 
@@ -238,11 +254,11 @@ class TinyMCE {
     public function getTemplateList() {
         $list = array();
 
-        $templateListSnippet = $this->modx->getOption('tiny.template_list_snippet',$this->properties,'');
+        $templateListSnippet = $this->context->getOption('tiny.template_list_snippet','',$this->properties);
         if (!empty($templateListSnippet)) {
           $templateList = $this->modx->runSnippet($templateListSnippet);
         } else {
-          $templateList = $this->modx->getOption('tiny.template_list',$this->properties,'');
+          $templateList = $this->context->getOption('tiny.template_list','',$this->properties);
         }
 
         if (empty($templateList)) return $list;

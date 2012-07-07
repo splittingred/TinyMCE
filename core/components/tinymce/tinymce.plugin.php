@@ -8,6 +8,9 @@
  * @author Jeff Whitfield <jeff@collabpad.com>
  * @author Shaun McCormick <shaun@collabpad.com>
  *
+ * @var modX $modx
+ * @var array $scriptProperties
+ *
  * @package tinymce
  * @subpackage build
  */
@@ -18,8 +21,8 @@ if ($modx->event->name == 'OnRichTextEditorRegister') {
 require_once $modx->getOption('tiny.core_path',null,$modx->getOption('core_path').'components/tinymce/').'tinymce.class.php';
 $tiny = new TinyMCE($modx,$scriptProperties);
 
-$useEditor = $modx->getOption('use_editor',null,false);
-$whichEditor = $modx->getOption('which_editor',null,'');
+$useEditor = $tiny->context->getOption('use_editor',false);
+$whichEditor = $tiny->context->getOption('which_editor','');
 
 /* Handle event */
 switch ($modx->event->name) {
@@ -27,7 +30,7 @@ switch ($modx->event->name) {
         if ($useEditor && $whichEditor == 'TinyMCE') {
             unset($scriptProperties['chunk']);
             if (isset($forfrontend) || $modx->context->get('key') != 'mgr') {
-                $def = $modx->getOption('cultureKey',null,$modx->getOption('manager_language',null,'en'));
+                $def = $tiny->context->getOption('cultureKey',$tiny->context->getOption('manager_language','en'));
                 $tiny->properties['language'] = $modx->getOption('fe_editor_lang',array(),$def);
                 $tiny->properties['frontend'] = true;
                 unset($def);
@@ -45,7 +48,7 @@ switch ($modx->event->name) {
         if ($useEditor && $whichEditor == 'TinyMCE') {
             $inRevo20 = (boolean)version_compare($modx->version['full_version'],'2.1.0-rc1','<');
             $modx->getVersionData();
-            $source = $modx->getOption('default_media_source',null,1);
+            $source = $tiny->context->getOption('default_media_source',null,1);
             
             $modx->controller->addHtml('<script type="text/javascript">var inRevo20 = '.($inRevo20 ? 1 : 0).';MODx.source = "'.$source.'";</script>');
             
