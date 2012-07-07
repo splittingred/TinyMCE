@@ -2,6 +2,11 @@
 This file shows the changes in recent releases of TinyMCE for MODx. The most current release is usually the 
 development release, and is only shown to give an idea of what's currently in the pipeline.
 
+TinyMCE 4.3.3
+====================================
+- Change popup windows to more convenient modals
+- Update TinyMCE to 3.5.4.1
+
 TinyMCE 4.3.2
 ====================================
 - Update Czech/German translation
