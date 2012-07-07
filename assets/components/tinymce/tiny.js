@@ -3,7 +3,7 @@ var Tiny = {
     ,contentBelowAdded: false
     ,onLoad: function(ed) {
         var el = Ext.get(ed.id+'_ifr');
-        new MODx.load({
+        MODx.load({
             xtype: 'modx-treedrop'
             ,target: el
             ,targetEl: el.dom
@@ -19,7 +19,7 @@ var Tiny = {
     ,onTVLoad: function() {
         var els = Ext.query('.modx-richtext');
         var ed;
-        Ext.each(els,function(el,i) {
+        Ext.each(els,function(el) {
             el = Ext.get(el);
             if (!el) {return;}
             if (Ext.isEmpty(Tiny.loadedTVs)) {Tiny.loadedTVs = [];}
@@ -29,30 +29,28 @@ var Tiny = {
             ed = tinyMCE.get(el.dom.id);
             if (ed) {
                 ed.execCommand('mceResize',false,'60%');
-                //ed.onChange.add(this.onChange);
             }
             Tiny.loadedTVs.push(el);
         },this);
     }
     ,onTVUnload: function() {
         var els = Ext.query('.modx-richtext');
-        var ed;
-        Ext.each(els,function(el,i) {
+        Ext.each(els,function(el) {
             el = Ext.get(el);
             Tiny.loadedTVs.remove(el);
             tinyMCE.execCommand('mceRemoveControl', false, el.dom.id);
         },this);
     }
-    
+
     ,toggle: function(e,t) {
         t = t.id.replace(/-toggle/,'');
-        ed = tinyMCE.get(t);
+        var ed = tinyMCE.get(t);
         if (ed) {
             ed.isHidden() ? ed.show() : ed.hide();
         }
     }
-    
-    ,onChange: function(ed,e) {        
+
+    ,onChange: function(ed) {
         if (!Ext.isEmpty(tinyMCE)) {
             ed.save();
             try {
@@ -67,7 +65,7 @@ var Tiny = {
         var pr = Ext.getCmp('modx-panel-resource');
         if (pr) pr.markDirty();
     }
-    
+
     ,loadBrowser: function(fld, url, type, win) {
         var f = Tiny.config.browserUrl+'&ctx='+(MODx.ctx || 'web')+'&wctx='+(MODx.ctx || 'web')+'&source='+MODx.source;
         if (MODx.request.id) { f = f+'&id='+MODx.request.id; }
@@ -129,7 +127,7 @@ var Tiny = {
             ,style: 'float: left; margin-right: 5px;'
         });
         var z = Ext.state.Manager.get(MODx.siteId+'-tiny');
-        var chk = z === false || z === 'false' ? false : true;
+        var chk = !(z === false || z === 'false');
         tbl.createChild({
             tag: 'input'
             ,type: 'checkbox'
@@ -176,9 +174,9 @@ var Tiny = {
                 }
             }
             ,renderTo: 'tiny-content-above'
-        });   
+        });
     }
-    ,onExecCommand: function(ed,el,cmd,ui,v) {
+    ,onExecCommand: function() {
         var pr = Ext.getCmp('modx-panel-resource');
         if (pr) { pr.markDirty(); }
         return false;
@@ -234,7 +232,7 @@ MODx.unloadTVRTE = function() {
 Tiny.button.Image = function(config) {
     config = config || {};
     Ext.applyIf(config,{
-        
+
     });
     Tiny.button.Image.superclass.constructor.call(this,config);
     this.config = config;
