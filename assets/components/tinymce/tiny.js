@@ -76,6 +76,7 @@ var Tiny = {
             ,resizable: 'yes'
             ,inline: 'yes'
             ,close_previous: 'no'
+            ,popup_css : false
         }, {
             window: win
             ,input: fld
@@ -197,6 +198,8 @@ MODx.loadRTE = function(id) {
         if (z !== false) {
             delete s.elements;
         }
+        s.dialog_type = 'modal';
+        s.plugins = Tiny.config.plugins+',inlinepopups';
         if (Tiny.config.frontend||Tiny.config.selector){
             s.mode = "specific_textareas";
             s.editor_selector = Tiny.config.selector||"modx-richtext";

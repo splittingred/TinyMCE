@@ -183,7 +183,7 @@ class TinyMCE {
                 $this->properties['remove_script_host'] = true;
 
                 $baseUrl = $this->modx->context->getOption('base_url',MODX_BASE_URL);
-                $resource = $this->properties['resource'];
+                $resource = !empty($this->properties['resource']) ? $this->properties['resource'] : '';
                 if ($resource) {
                     $ctx = $resource->get('context_key');
                     $ctx = $this->modx->getObject('modContext',$ctx);
