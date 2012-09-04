@@ -139,7 +139,7 @@ class TinyMCE {
     public function initialize() {
         if (!$this->jsLoaded) {
             $scriptFile = ((!$this->properties['frontend'] && $this->properties['compressor'] == 'enabled') ? 'tiny_mce_gzip.php' : 'tiny_mce.js');
-            if ($this->context->getOption('tiny.use_uncompressed_library',false)) {
+            if ($this->context->getOption('tiny.use_uncompressed_library',true)) {
                 $scriptFile = 'tiny_mce_src.js';
             }
             $this->modx->lexicon->load('tinymce:default');
@@ -150,15 +150,17 @@ class TinyMCE {
 
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'jscripts/tiny_mce/'.$scriptFile);
             $this->modx->regClientStartupScript($this->config['assetsUrl'].'xconfig.js');
-            if ($compressJs) {
-                $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.min.js');
-            } else {
-                $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
+            if(!$this->properties['frontend']) {                
+                if ($compressJs) {
+                    $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.min.js');
+                } else {
+                    $this->modx->regClientStartupScript($this->config['assetsUrl'].'tiny.js');
+                }
             }
 
             $source = $this->context->getOption('default_media_source',1);
-            $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nvar inRevo20 = ".($inRevo20 ? 1 : 0).";MODx.source = '".$source."';Tiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
-            if (!$compressJs) {
+            if (!$this->properties['frontend']) $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">' . "\n//<![CDATA[" .  "\nvar inRevo20 = ".($inRevo20 ? 1 : 0).";MODx.source = '".$source."';Tiny.lang = "  . $this->modx->toJSON($lang). ';' . "\n//]]>" . "\n</script>");
+            if (!$compressJs && !$this->properties['frontend']) {
                 $this->modx->regClientStartupScript($this->config['assetsUrl'].'tinymce.panel.js');
             }
 
@@ -236,10 +238,14 @@ class TinyMCE {
         //$this->properties['formats'] = $this->getFormats();
         /* get JS */
         unset($this->properties['resource']);
-        ob_start();
-        include_once dirname(__FILE__).'/templates/script.tpl';
-        $script = ob_get_contents();
-        ob_end_clean();
+            ob_start();
+            if (!$this->properties['frontend']) {
+                include_once dirname(__FILE__).'/templates/script.tpl';
+            } else {
+                include_once dirname(__FILE__).'/templates/fe_script.tpl';
+            }
+            $script = ob_get_contents();
+            ob_end_clean();
 
         /* will need to do $this->modx->controller->addHtml() for Revo 2.2+ */
         $this->modx->regClientStartupHTMLBlock($script);
