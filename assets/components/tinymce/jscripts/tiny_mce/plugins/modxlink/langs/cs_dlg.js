@@ -49,7 +49,7 @@ accesskey:"Kl\u00E1vesov\u00E1 zkratka",
 ltr:"Zleva doprava",
 rtl:"Zprava doleva",
 link_list:"Seznam odkaz\u016F"
-,pagetitle: 'Pagetitle'
-,alias: 'Alias'
-,search: 'Search'
+,pagetitle: 'N\u00E1zev'
+,alias: 'URL alias'
+,search: 'Hledat'
 });
